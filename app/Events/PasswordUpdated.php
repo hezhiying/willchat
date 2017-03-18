@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\User;
+use App\User;
 use Illuminate\Queue\SerializesModels;
 
 class PasswordUpdated extends Event
