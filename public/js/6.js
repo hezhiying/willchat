@@ -174,15 +174,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.search
     }
-  }, [_vm._v("搜索")]), _vm._v(" "), _c('el-button', {
-    attrs: {
-      "type": "primary",
-      "icon": "upload"
-    },
-    on: {
-      "click": _vm.syncWechatFans
-    }
-  }, [_vm._v("同步粉丝数据")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("搜索")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
     staticStyle: {
       "width": "100%"
     },
@@ -192,51 +184,28 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('el-table-column', {
     attrs: {
-      "label": "头像"
-    },
-    inlineTemplate: {
-      render: function() {
-        var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-          return _c('img', {
-            staticClass: "avatar",
-            attrs: {
-              "src": _vm.row.headimgurl,
-              "alt": ""
-            }
-          })
-        
-      },
-      staticRenderFns: []
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
       "prop": "nickname",
-      "label": "昵称"
+      "label": "触发关键词"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
       "prop": "sex",
-      "label": "性别"
+      "label": "回复内容"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
       "prop": "location",
-      "label": "地区"
+      "label": "添加时间"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
       "prop": "tagid_list",
-      "label": "标签"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "subscribe_time",
-      "label": "关注时间"
+      "label": "修改时间"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
       "prop": "remark",
-      "label": "备注"
+      "label": "命中次数"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
@@ -255,7 +224,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.charge(_vm.row.id)
               }
             }
-          }, [_vm._v("test")])], 1)
+          }, [_vm._v("修改")]), _vm._v(" "), _c('el-button', {
+            attrs: {
+              "size": "small",
+              "type": "danger"
+            },
+            nativeOn: {
+              "click": function($event) {
+                _vm.charge(_vm.row.id)
+              }
+            }
+          }, [_vm._v("删除")])], 1)
         
       },
       staticRenderFns: []

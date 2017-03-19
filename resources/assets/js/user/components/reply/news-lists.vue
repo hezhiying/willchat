@@ -15,30 +15,25 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="search" @click="search">搜索</el-button>
-          <el-button type="primary" icon="upload" @click="syncWechatFans">同步粉丝数据</el-button>
         </el-form-item>
       </el-form>
     </div>
 
     <el-table :data="fans.data" border style="width: 100%">
-      <el-table-column label="头像" inline-template>
-        <img class="avatar" :src="row.headimgurl" alt=""/>
+      <el-table-column prop="nickname" label="触发关键词">
       </el-table-column>
-      <el-table-column prop="nickname" label="昵称">
+      <el-table-column prop="sex" label="回复内容">
       </el-table-column>
-      <el-table-column prop="sex" label="性别">
+      <el-table-column prop="location" label="添加时间">
       </el-table-column>
-      <el-table-column prop="location" label="地区">
+      <el-table-column prop="tagid_list" label="修改时间">
       </el-table-column>
-      <el-table-column prop="tagid_list" label="标签">
-      </el-table-column>
-      <el-table-column prop="subscribe_time" label="关注时间">
-      </el-table-column>
-      <el-table-column prop="remark" label="备注">
+      <el-table-column prop="remark" label="命中次数">
       </el-table-column>
       <el-table-column label="操作" inline-template>
         <div>
-          <el-button size="small" type="primary" @click.native="charge(row.id)">test</el-button>
+          <el-button size="small" type="primary" @click.native="charge(row.id)">修改</el-button>
+          <el-button size="small" type="danger" @click.native="charge(row.id)">删除</el-button>
         </div>
       </el-table-column>
     </el-table>

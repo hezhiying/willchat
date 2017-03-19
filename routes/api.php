@@ -50,6 +50,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api'], function () {
 
          // 菜单管理
         Route::get('/menu/lists', 'MenuController@lists');
+        Route::post('/menu/store', 'MenuController@store');
+        Route::post('/menu/sync', 'MenuController@sync');
 
          // 帮助文档
         Route::get('/document/lists', 'PostController@lists');

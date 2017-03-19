@@ -136,6 +136,42 @@ const routes = [
     }
   },
   {
+    path: '/material/image',
+    component: (resolve) => {
+      require.ensure([], () => resolve(require('./components/material/image-lists.vue')));
+    },
+    meta: {
+      topmenuVisible: true,
+      sidebarVisible: true,
+      requiresAuth: false,
+      title: '粉丝列表'
+    }
+  },
+  {
+    path: '/material/video',
+    component: (resolve) => {
+      require.ensure([], () => resolve(require('./components/material/video-lists.vue')));
+    },
+    meta: {
+      topmenuVisible: true,
+      sidebarVisible: true,
+      requiresAuth: false,
+      title: '粉丝列表'
+    }
+  },
+  {
+    path: '/material/voice',
+    component: (resolve) => {
+      require.ensure([], () => resolve(require('./components/material/voice-lists.vue')));
+    },
+    meta: {
+      topmenuVisible: true,
+      sidebarVisible: true,
+      requiresAuth: false,
+      title: '粉丝列表'
+    }
+  },
+  {
     path: '/document/lists',
     component: (resolve) => {
       require.ensure([], () => resolve(require('./components/document/index.vue')));

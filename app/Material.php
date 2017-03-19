@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Material extends Model
 {
     use SoftDeletes;
+
     /**
      * 单图文类型.
      */

@@ -6,39 +6,28 @@
           <el-input v-model="searchForm.keyword" placeholder="按昵称搜索" @keyup.enter.native="loadData"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-select v-model="searchForm.sex" placeholder="性别筛选" @change="loadData">
-            <el-option label="全部" value="all"></el-option>
-            <el-option label="男" value="0"></el-option>
-            <el-option label="女" value="1"></el-option>
-            <el-option label="其它" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
           <el-button type="primary" icon="search" @click="search">搜索</el-button>
-          <el-button type="primary" icon="upload" @click="syncWechatFans">同步粉丝数据</el-button>
+          <el-button type="primary" icon="plus" @click="dialogFormVisible = true">上传视频素材</el-button>
+          <el-button type="primary" icon="upload" @click="syncvideo">同步视频素材</el-button>
         </el-form-item>
       </el-form>
     </div>
 
     <el-table :data="fans.data" border style="width: 100%">
-      <el-table-column label="头像" inline-template>
-        <img class="avatar" :src="row.headimgurl" alt=""/>
+      <!-- <el-table-column type="selection" width="55"></el-table-column>-->
+      <el-table-column prop="media_id" label="MEDIA_ID" align="center" width="400">
       </el-table-column>
-      <el-table-column prop="nickname" label="昵称">
+      <el-table-column prop="name" label="标题" align="center">
       </el-table-column>
-      <el-table-column prop="sex" label="性别">
+      <el-table-column prop="description" label="描述" align="center">
       </el-table-column>
-      <el-table-column prop="location" label="地区">
+      <el-table-column prop="created_at" label="创建时间" align="center" width="170">
       </el-table-column>
-      <el-table-column prop="tagid_list" label="标签">
+      <el-table-column prop="updated_at" label="更新时间" align="center" width="170">
       </el-table-column>
-      <el-table-column prop="subscribe_time" label="关注时间">
-      </el-table-column>
-      <el-table-column prop="remark" label="备注">
-      </el-table-column>
-      <el-table-column label="操作" inline-template>
+      <el-table-column label="操作" inline-template align="center" width="120">
         <div>
-          <el-button size="small" type="primary" @click.native="charge(row.id)">test</el-button>
+          <el-button size="small" type="danger" @click.native="deleteMaterial(row)">删除</el-button>
         </div>
       </el-table-column>
     </el-table>
@@ -54,7 +43,7 @@
     </div>
   </div>
 </template>
-。
+
 <script>
   export default {
     data () {

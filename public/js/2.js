@@ -1,25 +1,25 @@
 webpackJsonp([2],{
 
-/***/ 200:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(267)
+__webpack_require__(286)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(214),
+  __webpack_require__(283),
   /* template */
-  __webpack_require__(253),
+  __webpack_require__(285),
   /* scopeId */
-  "data-v-6729d4bc",
+  "data-v-751029b2",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\auth\\login.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\material\\voice-lists.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] login.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] voice-lists.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28,9 +28,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6729d4bc", Component.options)
+    hotAPI.createRecord("data-v-751029b2", Component.options)
   } else {
-    hotAPI.reload("data-v-6729d4bc", Component.options)
+    hotAPI.reload("data-v-751029b2", Component.options)
   }
 })()}
 
@@ -39,7 +39,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 214:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48,147 +48,222 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _config = __webpack_require__(29);
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 exports.default = {
   data: function data() {
     return {
-      formData: {
+      fans: [],
+      searchForm: {
         name: '',
-        password: ''
+        sex: 'all'
       }
     };
+  },
+  mounted: function mounted() {
+    this.loadData();
   },
 
 
   methods: {
-    login: function login() {
+    loadData: function loadData() {
       var _this = this;
 
-      this.axios.post('login', this.formData).then(function (response) {
-        localStorage.setItem(_config2.default.jwtTokenName, response.data.token);
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-        _this.$router.push('/');
-      }).catch(function (error) {
-        _this.$message({
-          message: error.response.data,
-          type: 'error'
-        });
+      this.axios.get('fans/lists', {
+        params: {
+          keyword: this.searchForm.keyword,
+          sex: this.searchForm.sex,
+          page: page
+        }
+      }).then(function (response) {
+        _this.fans = response.data.fans;
       });
+    },
+    syncWechatFans: function syncWechatFans() {
+      console.log('sync');
+    },
+    search: function search() {
+      this.loadData(1);
+    },
+    handleCurrentChange: function handleCurrentChange(page) {
+      this.loadData(page);
     }
   }
 };
 
 /***/ }),
 
-/***/ 238:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n#login[data-v-6729d4bc] {\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url("+__webpack_require__(243)+");\n  background-size: cover;\n}\n#login .login-form[data-v-6729d4bc] {\n    display: block;\n    width: 360px;\n    background-color: #e0e6ed;\n    padding: 40px;\n    border-radius: 10px;\n}\n#login .login-form .title[data-v-6729d4bc] {\n      font-size: 2rem;\n      line-height: 2rem;\n      color: #4e4e4e;\n      text-align: center;\n      font-family: 'Microsoft Yahei';\n      font-weight: 400;\n}\n#login .login-form .el-input[data-v-6729d4bc] {\n      display: block;\n      margin: 1rem 0;\n}\n#login .login-form .btn-submit[data-v-6729d4bc] {\n      display: block;\n      overflow: hidden;\n      width: 100%;\n      margin-top: 3rem;\n}\n", ""]);
+exports.push([module.i, "\n.avatar[data-v-751029b2] {\n  display: block;\n  overflow: hidden;\n  margin: 10px 0;\n  width: 80px;\n  height: 80px;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 243:
-/***/ (function(module, exports) {
-
-module.exports = "/js/images/login-bg.jpg?90666d610bd3dd8f34a42d472f9b52f4";
-
-/***/ }),
-
-/***/ 253:
+/***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    attrs: {
-      "id": "login"
-    }
+    staticClass: "right-main"
   }, [_c('div', {
-    staticClass: "login-form"
-  }, [_c('h1', {
-    staticClass: "title"
-  }, [_vm._v("WillChat")]), _vm._v(" "), _c('el-input', {
+    staticClass: "table-tools"
+  }, [_c('el-form', {
+    staticClass: "demo-form-inline",
     attrs: {
-      "type": "text",
-      "placeholder": "请输入用户名"
+      "inline": true,
+      "model": _vm.searchForm
+    }
+  }, [_c('el-form-item', [_c('el-input', {
+    attrs: {
+      "placeholder": "按昵称搜索"
     },
     nativeOn: {
       "keyup": function($event) {
         if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-        _vm.login($event)
+        _vm.loadData($event)
       }
     },
     model: {
-      value: (_vm.formData.name),
+      value: (_vm.searchForm.keyword),
       callback: function($$v) {
-        _vm.formData.name = $$v
+        _vm.searchForm.keyword = $$v
       },
-      expression: "formData.name"
+      expression: "searchForm.keyword"
     }
-  }), _vm._v(" "), _c('el-input', {
-    attrs: {
-      "type": "password",
-      "placeholder": "请输入登录密码"
-    },
-    nativeOn: {
-      "keyup": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-        _vm.login($event)
-      }
-    },
-    model: {
-      value: (_vm.formData.password),
-      callback: function($$v) {
-        _vm.formData.password = $$v
-      },
-      expression: "formData.password"
-    }
-  }), _vm._v(" "), _c('el-button', {
-    staticClass: "btn-submit",
+  })], 1), _vm._v(" "), _c('el-form-item', [_c('el-button', {
     attrs: {
       "type": "primary",
-      "disabled": false
+      "icon": "search"
     },
-    nativeOn: {
+    on: {
+      "click": _vm.search
+    }
+  }, [_vm._v("搜索")]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "primary",
+      "icon": "plus"
+    },
+    on: {
       "click": function($event) {
-        _vm.login($event)
+        _vm.dialogFormVisible = true
       }
     }
-  }, [_vm._v("登录")])], 1)])
+  }, [_vm._v("上传视频素材")]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "primary",
+      "icon": "upload"
+    },
+    on: {
+      "click": _vm.syncvideo
+    }
+  }, [_vm._v("同步视频素材")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
+    staticStyle: {
+      "width": "100%"
+    },
+    attrs: {
+      "data": _vm.fans.data,
+      "border": ""
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "media_id",
+      "label": "MEDIA_ID",
+      "align": "center",
+      "width": "400"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "name",
+      "label": "标题",
+      "align": "center"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "description",
+      "label": "描述",
+      "align": "center"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "created_at",
+      "label": "创建时间",
+      "align": "center",
+      "width": "170"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "updated_at",
+      "label": "更新时间",
+      "align": "center",
+      "width": "170"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "label": "操作",
+      "align": "center",
+      "width": "120"
+    },
+    inlineTemplate: {
+      render: function() {
+        var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+          return _c('div', [_c('el-button', {
+            attrs: {
+              "size": "small",
+              "type": "danger"
+            },
+            nativeOn: {
+              "click": function($event) {
+                _vm.deleteMaterial(_vm.row)
+              }
+            }
+          }, [_vm._v("删除")])], 1)
+        
+      },
+      staticRenderFns: []
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "paginator"
+  }, [_c('el-pagination', {
+    attrs: {
+      "current-page": _vm.fans.current_page,
+      "page-size": _vm.fans.per_page,
+      "layout": "total, prev, pager, next, jumper",
+      "total": _vm.fans.tatal
+    },
+    on: {
+      "current-change": _vm.handleCurrentChange
+    }
+  })], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6729d4bc", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-751029b2", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 267:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(238);
+var content = __webpack_require__(284);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("1ba8ce96", content, false);
+var update = __webpack_require__(48)("babc0302", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6729d4bc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6729d4bc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-751029b2&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./voice-lists.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-751029b2&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./voice-lists.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

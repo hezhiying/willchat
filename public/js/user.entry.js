@@ -1271,7 +1271,7 @@ Object.defineProperty(exports, "__esModule", {
 var routes = [{
   path: '/',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(1).then((function () {
+    __webpack_require__.e/* require.ensure */(18).then((function () {
       return resolve(__webpack_require__(201));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1284,7 +1284,7 @@ var routes = [{
 }, {
   path: '/account/add',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(0).then((function () {
+    __webpack_require__.e/* require.ensure */(17).then((function () {
       return resolve(__webpack_require__(84));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1297,7 +1297,7 @@ var routes = [{
 }, {
   path: '/account/edit/:id',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(0/* duplicate */).then((function () {
+    __webpack_require__.e/* require.ensure */(17/* duplicate */).then((function () {
       return resolve(__webpack_require__(84));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1310,7 +1310,7 @@ var routes = [{
 }, {
   path: '/login',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(2).then((function () {
+    __webpack_require__.e/* require.ensure */(19).then((function () {
       return resolve(__webpack_require__(200));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1326,7 +1326,7 @@ var routes = [{
 }, {
   path: '/menu/index',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(9).then((function () {
+    __webpack_require__.e/* require.ensure */(26).then((function () {
       return resolve(__webpack_require__(206));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1339,7 +1339,7 @@ var routes = [{
 }, {
   path: '/fans/index',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(10).then((function () {
+    __webpack_require__.e/* require.ensure */(27).then((function () {
       return resolve(__webpack_require__(205));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1352,7 +1352,7 @@ var routes = [{
 }, {
   path: '/qrcode/index',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(8).then((function () {
+    __webpack_require__.e/* require.ensure */(25).then((function () {
       return resolve(__webpack_require__(207));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1365,7 +1365,7 @@ var routes = [{
 }, {
   path: '/reply/text',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(4).then((function () {
+    __webpack_require__.e/* require.ensure */(21).then((function () {
       return resolve(__webpack_require__(211));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1378,7 +1378,7 @@ var routes = [{
 }, {
   path: '/reply/news',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(6).then((function () {
+    __webpack_require__.e/* require.ensure */(23).then((function () {
       return resolve(__webpack_require__(209));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1391,7 +1391,7 @@ var routes = [{
 }, {
   path: '/reply/subscribe',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(5).then((function () {
+    __webpack_require__.e/* require.ensure */(22).then((function () {
       return resolve(__webpack_require__(210));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1404,8 +1404,47 @@ var routes = [{
 }, {
   path: '/reply/default',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(7).then((function () {
+    __webpack_require__.e/* require.ensure */(24).then((function () {
       return resolve(__webpack_require__(208));
+    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+  },
+  meta: {
+    topmenuVisible: true,
+    sidebarVisible: true,
+    requiresAuth: false,
+    title: '粉丝列表'
+  }
+}, {
+  path: '/material/image',
+  component: function component(resolve) {
+    __webpack_require__.e/* require.ensure */(0/* empty */).then((function () {
+      return resolve(__webpack_require__(272));
+    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+  },
+  meta: {
+    topmenuVisible: true,
+    sidebarVisible: true,
+    requiresAuth: false,
+    title: '粉丝列表'
+  }
+}, {
+  path: '/material/video',
+  component: function component(resolve) {
+    __webpack_require__.e/* require.ensure */(1/* empty */).then((function () {
+      return resolve(__webpack_require__(277));
+    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+  },
+  meta: {
+    topmenuVisible: true,
+    sidebarVisible: true,
+    requiresAuth: false,
+    title: '粉丝列表'
+  }
+}, {
+  path: '/material/voice',
+  component: function component(resolve) {
+    __webpack_require__.e/* require.ensure */(2/* empty */).then((function () {
+      return resolve(__webpack_require__(282));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1417,7 +1456,7 @@ var routes = [{
 }, {
   path: '/document/lists',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(13).then((function () {
+    __webpack_require__.e/* require.ensure */(30).then((function () {
       return resolve(__webpack_require__(202));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1430,7 +1469,7 @@ var routes = [{
 }, {
   path: '/document/show/:id',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(12).then((function () {
+    __webpack_require__.e/* require.ensure */(29).then((function () {
       return resolve(__webpack_require__(203));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1443,7 +1482,7 @@ var routes = [{
 }, {
   path: '/profile',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(3).then((function () {
+    __webpack_require__.e/* require.ensure */(20).then((function () {
       return resolve(__webpack_require__(212));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1456,7 +1495,7 @@ var routes = [{
 }, {
   path: '*',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(11).then((function () {
+    __webpack_require__.e/* require.ensure */(28).then((function () {
       return resolve(__webpack_require__(204));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1952,13 +1991,13 @@ var MenuConfig = [{
   icon: 'message',
   subItems: [{
     title: '图片',
-    route: '/'
+    route: '/material/image'
   }, {
     title: '语音',
-    route: '/'
+    route: '/material/voice'
   }, {
     title: '视频',
-    route: '/'
+    route: '/material/video'
   }]
 }, {
   title: '高级群发',

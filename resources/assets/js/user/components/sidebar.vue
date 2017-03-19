@@ -89,15 +89,15 @@
       subItems: [
         {
           title: '图片',
-          route: '/'
+          route: '/material/image'
         },
         {
           title: '语音',
-          route: '/'
+          route: '/material/voice'
         },
         {
           title: '视频',
-          route: '/'
+          route: '/material/video'
         },
       ]
     },
