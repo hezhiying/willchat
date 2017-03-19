@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 use App\Account;
 use EasyWeChat\Foundation\Application as EasywechatApplication;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class SyncWechatMenu implements ShouldQueue
 {
@@ -49,10 +49,7 @@ class SyncWechatMenu implements ShouldQueue
             ]);
 
             $menu = $wechat->menu->all();
-
-
         } catch (\Exception $e) {
-
         }
     }
 }

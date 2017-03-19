@@ -4,10 +4,9 @@ namespace App\Services;
 
 use App\Account as AccountModel;
 use App\Repositories\ReplyRepository;
-use EasyWeChat\Foundation\Application as EasywechatApplication;
 
 /**
- * Class WillChat
+ * Class WillChat.
  */
 class WillChat
 {

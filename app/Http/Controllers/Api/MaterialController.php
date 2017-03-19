@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Repositories\MaterialRepository;
-use Illuminate\Http\Request;
 
 class MaterialController extends BaseController
 {
