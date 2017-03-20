@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Repositories\UserRepository;
+use Auth;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Validator;
-use Auth;
 
 class AuthController extends BaseController
 {
-
     /**
      * @var UserRepository
      */
@@ -28,7 +27,6 @@ class AuthController extends BaseController
 
         $this->userRepository = $userRepository;
     }
-
 
     /**
      * 登录授权.
