@@ -32,18 +32,18 @@ class QrcodeController extends BaseController
     public function lists(Request $request)
     {
         $keyword = $request->input('keyword');
-        $sex = $request->input('sex', 'all');
+        $type = $request->input('type', 'all');
 
-        $qrcodes = $this->qrcodeRepository->scopeQuery(function ($query) use ($keyword, $sex) {
+        $qrcodes = $this->qrcodeRepository->scopeQuery(function ($query) use ($keyword, $type) {
             $query->where('account_id', $this->currentAccountId);
 
-//            if ($keyword) {
-//                $query->where('nickname', 'like', "%{$keyword}%");
-//            }
-//
-//            if ($sex !== 'all') {
-//                $query->where('sex', $sex);
-//            }
+            if ($keyword) {
+                $query->where('nickname', 'like', "%{$keyword}%");
+            }
+
+            if ($type !== 'all') {
+                $query->where('type', $type);
+            }
 
             return $query;
         })->orderBy('updated_at', 'DESC')->orderBy('id', 'DESC')->paginate();

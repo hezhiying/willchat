@@ -2,14 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Post;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
-    public function __construct()
+    /**
+     * @var PostRepository
+     */
+    private $postRepository;
+
+    /**
+     * PostController constructor.
+     *
+     * @param PostRepository $postRepository
+     */
+    public function __construct(PostRepository $postRepository)
     {
         parent::__construct();
+
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -21,7 +33,7 @@ class PostController extends BaseController
      */
     public function lists(Request $request)
     {
-        $posts = Post::paginate();
+        $posts = $this->postRepository->paginate();
 
         return response()->json(compact('posts'));
     }
@@ -35,7 +47,7 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        $post = $this->postRepository->find($id);
 
         return response()->json(compact('post'));
     }

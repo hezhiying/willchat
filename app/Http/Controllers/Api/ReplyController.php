@@ -70,6 +70,18 @@ class ReplyController extends BaseController
     /**
      * @param Request $request
      *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getLists(Request $request)
+    {
+        $replies = $this->replyRepository->getLists($this->currentAccountId, $request->query('type', 'text'));
+
+        return response()->json(compact('replies'));
+    }
+
+    /**
+     * @param Request $request
+     *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function store(Request $request)

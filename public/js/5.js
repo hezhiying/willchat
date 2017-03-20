@@ -69,7 +69,7 @@ exports.default = {
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-      this.axios.get('fans/lists', {
+      this.axios.get('reply/lists?type=text', {
         params: {
           keyword: this.searchForm.keyword,
           sex: this.searchForm.sex,
@@ -78,9 +78,6 @@ exports.default = {
       }).then(function (response) {
         _this.fans = response.data.fans;
       });
-    },
-    syncWechatFans: function syncWechatFans() {
-      console.log('sync');
     },
     search: function search() {
       this.loadData(1);
@@ -97,7 +94,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.avatar[data-v-00cf82cc] {\n  display: block;\n  overflow: hidden;\n  margin: 10px 0;\n  width: 80px;\n  height: 80px;\n}\n", ""]);
+exports.push([module.i, "", ""]);
 
 /***/ }),
 

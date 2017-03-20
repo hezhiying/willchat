@@ -44,6 +44,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api'], function () {
         Route::get('/reply/default', 'ReplyController@getDefaultReply');
         Route::get('/reply/subscribe', 'ReplyController@getSubscribeReply');
         Route::post('/reply/store', 'ReplyController@store');
+        Route::get('/reply/lists', 'ReplyController@getLists');
 
         // 二维码管理
         Route::get('/qrcode/lists', 'QrcodeController@lists');

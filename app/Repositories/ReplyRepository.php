@@ -48,7 +48,7 @@ class ReplyRepository extends BaseRepository
     {
         $where = [
             'account_id' => $accountId,
-            'type'       => Reply::TYPE_SUBSCRIBE,
+            'type' => Reply::TYPE_SUBSCRIBE,
         ];
 
         return $this->findWhere($where)->first();
@@ -65,9 +65,25 @@ class ReplyRepository extends BaseRepository
     {
         $where = [
             'account_id' => $accountId,
-            'type'       => Reply::TYPE_DEFAULT,
+            'type' => Reply::TYPE_DEFAULT,
         ];
 
         return $this->findWhere($where)->first();
+    }
+
+    /**
+     * @param $accountId
+     * @param $type
+     */
+    public function getLists($accountId, $type)
+    {
+        $where = [
+            'account_id' => $accountId,
+            'type' => Reply::TYPE_SUBSCRIBE,
+        ];
+
+        $this->scopeQuery(function ($query) use ($where) {
+            return $query->where($where);
+        })->paginate();
     }
 }

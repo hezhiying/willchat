@@ -22,7 +22,9 @@ class Reply extends Model
     /**
      * 类型关键词回复.
      */
-    const TYPE_KEYWORDS = 'keywords';
+    const TYPE_TEXT = 'text';
+
+    const TYPE_NEWS = 'news';
 
     const TRIGGER_TYPE_EQUAL = 'equal';
 

@@ -68,7 +68,7 @@
 
     methods: {
       loadData (page = 1) {
-        this.axios.get('fans/lists', {
+        this.axios.get('reply/lists?type=text', {
           params: {
             keyword: this.searchForm.keyword,
             sex: this.searchForm.sex,
@@ -77,11 +77,6 @@
         }).then((response) => {
           this.fans = response.data.fans;
         });
-      },
-
-      syncWechatFans () {
-        // TODO: 同步粉丝数据
-        console.log('sync');
       },
 
       // 搜索
@@ -97,11 +92,4 @@
 </script>
 
 <style scoped lang="scss">
-  .avatar {
-    display: block;
-    overflow: hidden;
-    margin: 10px 0;
-    width: 80px;
-    height: 80px;
-  }
 </style>
