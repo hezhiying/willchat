@@ -1,25 +1,25 @@
 webpackJsonp([2],{
 
-/***/ 201:
+/***/ 200:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(275)
+__webpack_require__(284)
 
 var Component = __webpack_require__(47)(
   /* script */
   __webpack_require__(218),
   /* template */
-  __webpack_require__(258),
+  __webpack_require__(266),
   /* scopeId */
-  "data-v-25790b38",
+  "data-v-6729d4bc",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\dashboard.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\auth\\login.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] dashboard.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] login.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28,9 +28,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-25790b38", Component.options)
+    hotAPI.createRecord("data-v-6729d4bc", Component.options)
   } else {
-    hotAPI.reload("data-v-25790b38", Component.options)
+    hotAPI.reload("data-v-6729d4bc", Component.options)
   }
 })()}
 
@@ -48,129 +48,148 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _config = __webpack_require__(29);
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
   data: function data() {
     return {
-      accounts: []
+      formData: {
+        name: '',
+        password: ''
+      }
     };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.axios.get('account/lists').then(function (response) {
-      _this.accounts = response.data.accounts;
-    }).catch(function (error) {
-      console.log(error);
-    });
   },
 
 
   methods: {
-    toManage: function toManage(id) {
-      window.localStorage.setItem('willchat_account_id', id);
+    login: function login() {
+      var _this = this;
 
-      this.$router.push('manage/' + id);
-    },
-    toEdit: function toEdit(id) {
-      this.$router.push('account/edit/' + id);
+      this.axios.post('login', this.formData).then(function (response) {
+        localStorage.setItem(_config2.default.jwtTokenKey, response.data.token);
+        localStorage.setItem(_config2.default.userKey, response.data.user);
+
+        _this.$router.push('/');
+      }).catch(function (error) {
+        _this.$message({
+          message: error.response.data,
+          type: 'error'
+        });
+      });
     }
   }
 };
 
 /***/ }),
 
-/***/ 238:
+/***/ 245:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.setting-icon[data-v-25790b38] {\n  color: #777;\n  cursor: pointer;\n}\n.plus-card[data-v-25790b38] {\n  display: block;\n  overflow: hidden;\n  background-color: #fff;\n  height: 100%;\n  position: relative;\n}\n.plus-card i[data-v-25790b38] {\n    position: absolute;\n    font-size: 3rem;\n    color: lightgray;\n    top: 50%;\n    left: 50%;\n    margin-top: -1.5rem;\n    margin-left: -1.5rem;\n}\n", ""]);
+exports.push([module.i, "\n#login[data-v-6729d4bc] {\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url("+__webpack_require__(255)+");\n  background-size: cover;\n}\n#login .login-form[data-v-6729d4bc] {\n    display: block;\n    width: 360px;\n    background-color: #e0e6ed;\n    padding: 40px;\n    border-radius: 10px;\n}\n#login .login-form .title[data-v-6729d4bc] {\n      font-size: 2rem;\n      line-height: 2rem;\n      color: #4e4e4e;\n      text-align: center;\n      font-family: 'Microsoft Yahei';\n      font-weight: 400;\n}\n#login .login-form .el-input[data-v-6729d4bc] {\n      display: block;\n      margin: 1rem 0;\n}\n#login .login-form .btn-submit[data-v-6729d4bc] {\n      display: block;\n      overflow: hidden;\n      width: 100%;\n      margin-top: 3rem;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 258:
+/***/ 255:
+/***/ (function(module, exports) {
+
+module.exports = "/js/images/login-bg.jpg?90666d610bd3dd8f34a42d472f9b52f4";
+
+/***/ }),
+
+/***/ 266:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "main main-with-padding"
-  }, [_c('el-row', {
     attrs: {
-      "gutter": 20,
-      "type": "flex",
-      "justify": "center"
+      "id": "login"
     }
-  }, [_vm._l((_vm.accounts), function(account) {
-    return (_vm.accounts.length > 0) ? _c('el-col', {
-      attrs: {
-        "span": 6
+  }, [_c('div', {
+    staticClass: "login-form"
+  }, [_c('h1', {
+    staticClass: "title"
+  }, [_vm._v("WillChat")]), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "type": "text",
+      "placeholder": "请输入用户名"
+    },
+    nativeOn: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.login($event)
       }
-    }, [_c('el-card', {
-      staticClass: "box-card",
-      nativeOn: {
-        "click": function($event) {
-          _vm.toManage(account.id)
-        }
-      }
-    }, [_c('div', {
-      staticClass: "clearfix",
-      slot: "header"
-    }, [_c('span', {
-      staticStyle: {
-        "line-height": "36px"
-      }
-    }, [_vm._v(_vm._s(account.name))]), _vm._v(" "), _c('i', {
-      staticClass: "setting-icon el-icon-setting",
-      staticStyle: {
-        "float": "right"
+    },
+    model: {
+      value: (_vm.formData.name),
+      callback: function($$v) {
+        _vm.formData.name = $$v
       },
-      on: {
-        "click": function($event) {
-          $event.stopPropagation();
-          $event.preventDefault();
-          _vm.toEdit(account.id)
-        }
+      expression: "formData.name"
+    }
+  }), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "type": "password",
+      "placeholder": "请输入登录密码"
+    },
+    nativeOn: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.login($event)
       }
-    })]), _vm._v(" "), _c('div', [_vm._v("\n            " + _vm._s(account.name) + "\n            " + _vm._s(account.type) + "\n            " + _vm._s(account.created_at) + "\n          ")])])], 1) : _vm._e()
-  }), _vm._v(" "), _c('el-col', {
-    attrs: {
-      "span": 6
+    },
+    model: {
+      value: (_vm.formData.password),
+      callback: function($$v) {
+        _vm.formData.password = $$v
+      },
+      expression: "formData.password"
     }
-  }, [_c('router-link', {
-    staticClass: "plus-card el-card",
+  }), _vm._v(" "), _c('el-button', {
+    staticClass: "btn-submit",
     attrs: {
-      "to": "/account/add"
+      "type": "primary",
+      "disabled": false
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.login($event)
+      }
     }
-  }, [_c('i', {
-    staticClass: "el-icon-plus"
-  })])], 1)], 2)], 1)
+  }, [_vm._v("登录")])], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-25790b38", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-6729d4bc", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 275:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(238);
+var content = __webpack_require__(245);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("32450f59", content, false);
+var update = __webpack_require__(48)("1ba8ce96", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-25790b38&scoped=true!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./dashboard.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-25790b38&scoped=true!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./dashboard.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6729d4bc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6729d4bc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

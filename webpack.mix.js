@@ -42,7 +42,7 @@ mix.webpackConfig({
   output: {
     path: path.resolve(__dirname, 'public/js'),
     publicPath: '/js/',
-    filename: '[name].entry.js',
+    filename: '[name].js',
     chunkFilename: process.env.NODE_ENV === 'production' ? '[name].[chunkhash].js' :'[name].js'
   },
   plugins: [

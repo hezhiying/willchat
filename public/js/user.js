@@ -1,4 +1,4 @@
-webpackJsonp([17],[
+webpackJsonp([18],[
 /* 0 */,
 /* 1 */,
 /* 2 */,
@@ -31,13 +31,6 @@ if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 /* 6 */,
 /* 7 */,
 /* 8 */
-/***/ (function(module, exports) {
-
-var core = module.exports = {version: '2.4.0'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(19);
@@ -45,6 +38,13 @@ module.exports = function(it){
   if(!isObject(it))throw TypeError(it + ' is not an object!');
   return it;
 };
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+var core = module.exports = {version: '2.4.0'};
+if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ }),
 /* 10 */
@@ -188,7 +188,7 @@ module.exports = function(it){
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var anObject       = __webpack_require__(9)
+var anObject       = __webpack_require__(8)
   , IE8_DOM_DEFINE = __webpack_require__(138)
   , toPrimitive    = __webpack_require__(159)
   , dP             = Object.defineProperty;
@@ -228,7 +228,8 @@ var debug = process.env.NODE_ENV !== 'production';
 var Config = {
   apiRoot: '/api/user',
   timeout: debug ? 10000 : 15000,
-  jwtTokenName: 'willchat_jwt_token'
+  jwtTokenKey: 'willchat_jwt_token',
+  userKey: 'willchat_user'
 };
 
 exports.default = Config;
@@ -270,7 +271,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 var global    = __webpack_require__(5)
-  , core      = __webpack_require__(8)
+  , core      = __webpack_require__(9)
   , ctx       = __webpack_require__(17)
   , hide      = __webpack_require__(10)
   , PROTOTYPE = 'prototype';
@@ -1271,7 +1272,7 @@ Object.defineProperty(exports, "__esModule", {
 var routes = [{
   path: '/',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(2).then((function () {
+    __webpack_require__.e/* require.ensure */(17).then((function () {
       return resolve(__webpack_require__(201));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1310,7 +1311,7 @@ var routes = [{
 }, {
   path: '/login',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(3).then((function () {
+    __webpack_require__.e/* require.ensure */(2).then((function () {
       return resolve(__webpack_require__(200));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1482,6 +1483,19 @@ var routes = [{
 }, {
   path: '/profile',
   component: function component(resolve) {
+    __webpack_require__.e/* require.ensure */(3).then((function () {
+      return resolve(__webpack_require__(216));
+    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+  },
+  meta: {
+    topmenuVisible: true,
+    sidebarVisible: false,
+    requiresAuth: false,
+    title: '用户信息'
+  }
+}, {
+  path: '/avatar',
+  component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(4).then((function () {
       return resolve(__webpack_require__(215));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -1490,7 +1504,7 @@ var routes = [{
     topmenuVisible: true,
     sidebarVisible: false,
     requiresAuth: false,
-    title: '用户信息'
+    title: '头像设置'
   }
 }, {
   path: '*',
@@ -1667,7 +1681,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\sidebar.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\sidebar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] sidebar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -1705,7 +1719,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\topmenu.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\topmenu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] topmenu.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2071,7 +2085,7 @@ exports.default = {
       this.$router.push('/manage/' + accountId);
     },
     logout: function logout() {
-      window.localStorage.removeItem(_config2.default.jwtTokenName);
+      window.localStorage.removeItem(_config2.default.jwtTokenKey);
 
       this.$router.replace('/login');
     }
@@ -2089,7 +2103,7 @@ module.exports = { "default": __webpack_require__(132), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(162);
-module.exports = __webpack_require__(8).Object.assign;
+module.exports = __webpack_require__(9).Object.assign;
 
 /***/ }),
 /* 133 */
@@ -2099,7 +2113,7 @@ __webpack_require__(163);
 __webpack_require__(165);
 __webpack_require__(166);
 __webpack_require__(164);
-module.exports = __webpack_require__(8).Promise;
+module.exports = __webpack_require__(9).Promise;
 
 /***/ }),
 /* 134 */
@@ -2150,7 +2164,7 @@ module.exports = function(IS_INCLUDES){
 var ctx         = __webpack_require__(17)
   , call        = __webpack_require__(141)
   , isArrayIter = __webpack_require__(140)
-  , anObject    = __webpack_require__(9)
+  , anObject    = __webpack_require__(8)
   , toLength    = __webpack_require__(65)
   , getIterFn   = __webpack_require__(160)
   , BREAK       = {}
@@ -2220,7 +2234,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // call something on iterator step with safe closing on error
-var anObject = __webpack_require__(9);
+var anObject = __webpack_require__(8);
 module.exports = function(iterator, fn, value, entries){
   try {
     return entries ? fn(anObject(value)[0], value[1]) : fn(value);
@@ -2402,7 +2416,7 @@ module.exports = !$assign || __webpack_require__(34)(function(){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject    = __webpack_require__(9)
+var anObject    = __webpack_require__(8)
   , dPs         = __webpack_require__(148)
   , enumBugKeys = __webpack_require__(56)
   , IE_PROTO    = __webpack_require__(36)('IE_PROTO')
@@ -2449,7 +2463,7 @@ module.exports = Object.create || function create(O, Properties){
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP       = __webpack_require__(20)
-  , anObject = __webpack_require__(9)
+  , anObject = __webpack_require__(8)
   , getKeys  = __webpack_require__(61);
 
 module.exports = __webpack_require__(14) ? Object.defineProperties : function defineProperties(O, Properties){
@@ -2539,7 +2553,7 @@ module.exports = __webpack_require__(10);
 "use strict";
 
 var global      = __webpack_require__(5)
-  , core        = __webpack_require__(8)
+  , core        = __webpack_require__(9)
   , dP          = __webpack_require__(20)
   , DESCRIPTORS = __webpack_require__(14)
   , SPECIES     = __webpack_require__(4)('species');
@@ -2557,7 +2571,7 @@ module.exports = function(KEY){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
-var anObject  = __webpack_require__(9)
+var anObject  = __webpack_require__(8)
   , aFunction = __webpack_require__(30)
   , SPECIES   = __webpack_require__(4)('species');
 module.exports = function(O, D){
@@ -2623,7 +2637,7 @@ module.exports = function(it, S){
 var classof   = __webpack_require__(55)
   , ITERATOR  = __webpack_require__(4)('iterator')
   , Iterators = __webpack_require__(15);
-module.exports = __webpack_require__(8).getIteratorMethod = function(it){
+module.exports = __webpack_require__(9).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
     || it['@@iterator']
     || Iterators[classof(it)];
@@ -2921,7 +2935,7 @@ if(!USE_NATIVE){
 $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
 __webpack_require__(35)($Promise, PROMISE);
 __webpack_require__(155)(PROMISE);
-Wrapper = __webpack_require__(8)[PROMISE];
+Wrapper = __webpack_require__(9)[PROMISE];
 
 // statics
 $export($export.S + $export.F * !USE_NATIVE, PROMISE, {
@@ -3383,7 +3397,7 @@ router.beforeEach(function (to, from, next) {
 
   if (to.matched.some(function (record) {
     return record.meta.requiresAuth;
-  }) && !window.localStorage.getItem(_config2.default.jwtTokenName)) {
+  }) && !window.localStorage.getItem(_config2.default.jwtTokenKey)) {
     next({
       path: '/login',
       query: { redirect: to.fullPath }
@@ -3400,7 +3414,7 @@ router.afterEach(function (to, from) {
 _axios2.default.interceptors.request.use(function (config) {
   _index2.default.commit('UPDATE_LOADING', true);
 
-  var token = window.localStorage.getItem(_config2.default.jwtTokenName);
+  var token = window.localStorage.getItem(_config2.default.jwtTokenKey);
   config.headers.Authorization = 'bearer ' + token;
 
   var accountId = window.localStorage.getItem('willchat_account_id');
@@ -3418,7 +3432,7 @@ _axios2.default.interceptors.response.use(function (response) {
 
   var newToken = response.headers.authorization;
   if (newToken) {
-    window.localStorage.setItem(_config2.default.jwtTokenName, newToken.replace(/^bearer\s?/i, ''));
+    window.localStorage.setItem(_config2.default.jwtTokenKey, newToken.replace(/^bearer\s?/i, ''));
   }
 
   return response;
@@ -3427,7 +3441,7 @@ _axios2.default.interceptors.response.use(function (response) {
 
   if (error.response) {
     if (error.response.status === 401) {
-      window.localStorage.removeItem(_config2.default.jwtTokenName);
+      window.localStorage.removeItem(_config2.default.jwtTokenKey);
 
       router.push('/login');
     } else if (error.response.status === 403) {

@@ -25,7 +25,8 @@
     methods: {
       login () {
         this.axios.post('login', this.formData).then((response) => {
-          localStorage.setItem(userConfig.jwtTokenName, response.data.token);
+          localStorage.setItem(userConfig.jwtTokenKey, response.data.token);
+          localStorage.setItem(userConfig.userKey, response.data.user);
 
           this.$router.push('/');
         }).catch((error) => {

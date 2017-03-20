@@ -2,14 +2,34 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Validator;
+use Auth;
 
 class AuthController extends BaseController
 {
+
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * AuthController constructor.
+     *
+     * @param UserRepository $userRepository
+     */
+    public function __construct(UserRepository $userRepository)
+    {
+        parent::__construct();
+
+        $this->userRepository = $userRepository;
+    }
+
+
     /**
      * 登录授权.
      *
@@ -30,8 +50,10 @@ class AuthController extends BaseController
             return response('could not create token', 500);
         }
 
+        $user = Auth::user();
+
         // 返回生成的 token
-        return response()->json(compact('token'));
+        return response()->json(compact('token', 'user'));
     }
 
     /**
@@ -58,7 +80,7 @@ class AuthController extends BaseController
         }
 
         try {
-            $newUser = User::create($data);
+            $newUser = $this->userRepository->create($data);
 
             $token = JWTAuth::fromUser($newUser);
 
@@ -127,10 +149,8 @@ class AuthController extends BaseController
 
         $user['password'] = bcrypt($data['password']);
 
-        $user = $user->save();
+        $this->userRepository->update($user->toArray(), $user->id);
 
-        $token = JWTAuth::fromUser($user);
-
-        return response()->json(compact('token'));
+        return response('success', 200);
     }
 }

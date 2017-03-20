@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
   store.commit('UPDATE_TOPMENU_VISIBLE', to.matched.some(record => record.meta.topmenuVisible));
   store.commit('UPDATE_SIDEBAR_VISIBLE', to.matched.some(record => record.meta.sidebarVisible));
 
-  if (to.matched.some(record => record.meta.requiresAuth) && !window.localStorage.getItem(userConfig.jwtTokenName)) {
+  if (to.matched.some(record => record.meta.requiresAuth) && !window.localStorage.getItem(userConfig.jwtTokenKey)) {
     // 需要登录后访问的页面，redirect 参数用于登录完成后跳转
     next({
       path: '/login',
@@ -50,7 +50,7 @@ router.afterEach((to, from) => {
 axios.interceptors.request.use((config) => {
   store.commit('UPDATE_LOADING', true);
 
-  let token = window.localStorage.getItem(userConfig.jwtTokenName);
+  let token = window.localStorage.getItem(userConfig.jwtTokenKey);
   config.headers.Authorization = 'bearer ' + token;
 
   // 如果当前选中了公众号，则在请求中加入对数
@@ -70,7 +70,7 @@ axios.interceptors.response.use((response) => {
 
   const newToken = response.headers.authorization;
   if (newToken) {
-    window.localStorage.setItem(userConfig.jwtTokenName, newToken.replace(/^bearer\s?/i, ''));
+    window.localStorage.setItem(userConfig.jwtTokenKey, newToken.replace(/^bearer\s?/i, ''));
   }
 
   return response;
@@ -79,7 +79,7 @@ axios.interceptors.response.use((response) => {
 
   if (error.response) {
     if (error.response.status === 401) {
-      window.localStorage.removeItem(userConfig.jwtTokenName);
+      window.localStorage.removeItem(userConfig.jwtTokenKey);
 
       router.push('/login');
     } else if (error.response.status === 403) {

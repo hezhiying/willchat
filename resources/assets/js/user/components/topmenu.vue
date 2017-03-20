@@ -50,7 +50,7 @@
       },
 
       logout () {
-        window.localStorage.removeItem(userConfig.jwtTokenName);
+        window.localStorage.removeItem(userConfig.jwtTokenKey);
 
         this.$router.replace('/login');
       }

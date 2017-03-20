@@ -208,6 +208,18 @@ const routes = [
     }
   },
   {
+    path: '/avatar',
+    component: (resolve) => {
+      require.ensure([], () => resolve(require('./components/user/avatar.vue')));
+    },
+    meta: {
+      topmenuVisible: true,
+      sidebarVisible: false,
+      requiresAuth: false,
+      title: '头像设置'
+    }
+  },
+  {
     path: '*',
     component: (resolve) => {
       require.ensure([], () => resolve(require('./components/errors/404.vue')));

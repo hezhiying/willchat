@@ -8,7 +8,7 @@
       </el-col>
       <el-col :span="24">
         <div class="user-profile">
-          <div class="header"></div>
+          <div class="header">123412</div>
         </div>
       </el-col>
     </el-row>
@@ -24,17 +24,9 @@
     },
 
     mounted () {
-//      this.axios.get('user/profile').then((response) => {
-//        this.user = response.data.user;
-//      });
     },
 
     methods: {
-      toManage (id) {
-        window.localStorage.setItem('willchat_account_id', id);
-
-        this.$router.push(`manage/${id}`);
-      }
     }
   }
 </script>

@@ -1,6 +1,45 @@
 webpackJsonp([17],{
 
-/***/ 213:
+/***/ 201:
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(277)
+
+var Component = __webpack_require__(47)(
+  /* script */
+  __webpack_require__(219),
+  /* template */
+  __webpack_require__(259),
+  /* scopeId */
+  "data-v-25790b38",
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\dashboard.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] dashboard.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-25790b38", Component.options)
+  } else {
+    hotAPI.reload("data-v-25790b38", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 219:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12,226 +51,126 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   data: function data() {
     return {
-      account: {
-        id: '',
-        name: '',
-        type: '订阅号',
-        app_id: '',
-        app_secret: '',
-        aes_key: '',
-        merchant_id: '',
-        merchant_key: '',
-        cert_path: '',
-        key_path: '',
-        remark: ''
-      }
+      accounts: []
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    var accountId = this.$route.params.id;
-
-    if (accountId) {
-      this.axios.get('account/show/' + accountId).then(function (response) {
-        _this.account = response.data.account;
-      });
-    }
+    this.axios.get('account/lists').then(function (response) {
+      _this.accounts = response.data.accounts;
+    }).catch(function (error) {
+      console.log(error);
+    });
   },
 
-
-  computed: {},
 
   methods: {
-    store: function store() {
-      var _this2 = this;
+    toManage: function toManage(id) {
+      window.localStorage.setItem('willchat_account_id', id);
 
-      this.axios.post('account/store', this.account).then(function (response) {
-        _this2.$message({
-          message: '添加成功',
-          type: 'success'
-        });
-
-        setTimeout(function () {
-          _this2.$router.push('/');
-        }, 1000);
-      });
-    }
-  },
-
-  watch: {
-    'formData.province': function formDataProvince(val, oldVal) {
-      this.formData.city = this.cityList[0];
+      this.$router.push('manage/' + id);
     },
-
-    'formData.city': function formDataCity(val, oldVal) {
-      this.formData.area = this.areaList[0];
+    toEdit: function toEdit(id) {
+      this.$router.push('account/edit/' + id);
     }
   }
 };
 
 /***/ }),
 
-/***/ 242:
+/***/ 238:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.setting-icon[data-v-25790b38] {\n  color: #777;\n  cursor: pointer;\n}\n.plus-card[data-v-25790b38] {\n  display: block;\n  overflow: hidden;\n  background-color: #fff;\n  height: 100%;\n  position: relative;\n}\n.plus-card i[data-v-25790b38] {\n    position: absolute;\n    font-size: 3rem;\n    color: lightgray;\n    top: 50%;\n    left: 50%;\n    margin-top: -1.5rem;\n    margin-left: -1.5rem;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 257:
+/***/ 259:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main main-with-padding"
-  }, [_c('el-form', {
-    ref: "form",
+  }, [_c('el-row', {
     attrs: {
-      "model": _vm.account,
-      "label-width": "150px"
+      "gutter": 20,
+      "type": "flex",
+      "justify": "center"
     }
-  }, [_c('el-form-item', {
-    attrs: {
-      "label": "公众号名称"
-    }
-  }, [_c('el-input', {
-    model: {
-      value: (_vm.account.name),
-      callback: function($$v) {
-        _vm.account.name = $$v
-      },
-      expression: "account.name"
-    }
-  })], 1), _vm._v(" "), _c('el-form-item', {
-    attrs: {
-      "label": "类型"
-    }
-  }, [_c('el-select', {
-    attrs: {
-      "placeholder": ""
-    },
-    model: {
-      value: (_vm.account.type),
-      callback: function($$v) {
-        _vm.account.type = $$v
-      },
-      expression: "account.type"
-    }
-  }, [_c('el-option', {
-    attrs: {
-      "label": "订阅号",
-      "value": "1"
-    }
-  }), _vm._v(" "), _c('el-option', {
-    attrs: {
-      "label": "认证订阅号",
-      "value": "2"
-    }
-  }), _vm._v(" "), _c('el-option', {
-    attrs: {
-      "label": "服务号",
-      "value": "3"
-    }
-  }), _vm._v(" "), _c('el-option', {
-    attrs: {
-      "label": "认证服务号",
-      "value": "4"
-    }
-  })], 1)], 1), _vm._v(" "), _c('el-form-item', {
-    attrs: {
-      "label": "AppId"
-    }
-  }, [_c('el-input', {
-    model: {
-      value: (_vm.account.app_id),
-      callback: function($$v) {
-        _vm.account.app_id = $$v
-      },
-      expression: "account.app_id"
-    }
-  })], 1), _vm._v(" "), _c('el-form-item', {
-    attrs: {
-      "label": "AppSecret"
-    }
-  }, [_c('el-input', {
-    model: {
-      value: (_vm.account.app_secret),
-      callback: function($$v) {
-        _vm.account.app_secret = $$v
-      },
-      expression: "account.app_secret"
-    }
-  })], 1), _vm._v(" "), _c('el-form-item', {
-    attrs: {
-      "label": "AesKey"
-    }
-  }, [_c('el-input', {
-    model: {
-      value: (_vm.account.aes_key),
-      callback: function($$v) {
-        _vm.account.aes_key = $$v
-      },
-      expression: "account.aes_key"
-    }
-  })], 1), _vm._v(" "), _c('el-form-item', {
-    attrs: {
-      "label": "备注"
-    }
-  }, [_c('el-input', {
-    attrs: {
-      "type": "textarea"
-    },
-    model: {
-      value: (_vm.account.remark),
-      callback: function($$v) {
-        _vm.account.remark = $$v
-      },
-      expression: "account.remark"
-    }
-  })], 1), _vm._v(" "), _c('el-form-item', [_c('el-button', {
-    attrs: {
-      "type": "primary"
-    },
-    on: {
-      "click": _vm.store
-    }
-  }, [_vm._v("保存")]), _vm._v(" "), _c('el-button', {
-    nativeOn: {
-      "click": function($event) {
-        _vm.$router.back()
+  }, [_vm._l((_vm.accounts), function(account) {
+    return (_vm.accounts.length > 0) ? _c('el-col', {
+      attrs: {
+        "span": 6
       }
+    }, [_c('el-card', {
+      staticClass: "box-card",
+      nativeOn: {
+        "click": function($event) {
+          _vm.toManage(account.id)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "clearfix",
+      slot: "header"
+    }, [_c('span', {
+      staticStyle: {
+        "line-height": "36px"
+      }
+    }, [_vm._v(_vm._s(account.name))]), _vm._v(" "), _c('i', {
+      staticClass: "setting-icon el-icon-setting",
+      staticStyle: {
+        "float": "right"
+      },
+      on: {
+        "click": function($event) {
+          $event.stopPropagation();
+          $event.preventDefault();
+          _vm.toEdit(account.id)
+        }
+      }
+    })]), _vm._v(" "), _c('div', [_vm._v("\n            " + _vm._s(account.name) + "\n            " + _vm._s(account.type) + "\n            " + _vm._s(account.created_at) + "\n          ")])])], 1) : _vm._e()
+  }), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 6
     }
-  }, [_vm._v("取消")])], 1)], 1)], 1)
+  }, [_c('router-link', {
+    staticClass: "plus-card el-card",
+    attrs: {
+      "to": "/account/add"
+    }
+  }, [_c('i', {
+    staticClass: "el-icon-plus"
+  })])], 1)], 2)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-c42af674", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-25790b38", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 271:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(242);
+var content = __webpack_require__(238);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("c2e3ca44", content, false);
+var update = __webpack_require__(48)("32450f59", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-c42af674&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-c42af674&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-25790b38&scoped=true!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./dashboard.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-25790b38&scoped=true!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./dashboard.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -239,45 +178,6 @@ if(false) {
  // When the module is disposed, remove the <style> tags
  module.hot.dispose(function() { update(); });
 }
-
-/***/ }),
-
-/***/ 84:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(271)
-
-var Component = __webpack_require__(47)(
-  /* script */
-  __webpack_require__(213),
-  /* template */
-  __webpack_require__(257),
-  /* scopeId */
-  "data-v-c42af674",
-  /* cssModules */
-  null
-)
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\account\\form.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] form.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c42af674", Component.options)
-  } else {
-    hotAPI.reload("data-v-c42af674", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
 
 /***/ })
 
