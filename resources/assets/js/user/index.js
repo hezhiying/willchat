@@ -5,7 +5,7 @@ import { Loading } from 'element-ui';
 import 'normalize.css/normalize.css';
 import 'element-ui/lib/theme-default/index.css';
 import '../../sass/user.scss';
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import store from './store/index';
@@ -116,11 +116,14 @@ const app = new Vue({
   computed: {
     ...mapState({
       user: state => state.user,
-      accounts: state => state.accounts,
       isLoading: state => state.isLoading,
       topmenuVisible: state => state.topmenuVisible,
       sidebarVisible: state => state.sidebarVisible
-    })
+    }),
+
+    ...mapGetters([
+      'accounts'
+    ])
   },
 
   data: {

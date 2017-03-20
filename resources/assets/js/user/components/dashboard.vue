@@ -32,11 +32,11 @@
     mounted () {
       this.axios.get('account/lists').then((response) => {
         this.accounts = response.data.accounts;
-        window.localStorage.setItem('willchat_accounts', JSON.stringify(response.data.accounts));
-
-        let temp = window.localStorage.getItem('willchat_accounts');
-
-        this.$store.commit('UPDATE_ACCOUNTS', JSON.parse(temp));
+//        window.localStorage.setItem('willchat_accounts', JSON.stringify(response.data.accounts));
+//
+//        let temp = window.localStorage.getItem('willchat_accounts');
+//
+//        this.$store.commit('UPDATE_ACCOUNTS', JSON.parse(temp));
       }).catch((error) => {
         console.log(error);
       })

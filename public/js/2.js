@@ -1,25 +1,25 @@
 webpackJsonp([2],{
 
-/***/ 282:
+/***/ 201:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(286)
+__webpack_require__(275)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(283),
+  __webpack_require__(218),
   /* template */
-  __webpack_require__(285),
+  __webpack_require__(258),
   /* scopeId */
-  "data-v-751029b2",
+  "data-v-25790b38",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\material\\voice-lists.vue"
+Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\dashboard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] voice-lists.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] dashboard.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28,9 +28,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-751029b2", Component.options)
+    hotAPI.createRecord("data-v-25790b38", Component.options)
   } else {
-    hotAPI.reload("data-v-751029b2", Component.options)
+    hotAPI.reload("data-v-25790b38", Component.options)
   }
 })()}
 
@@ -39,7 +39,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 283:
+/***/ 218:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51,219 +51,126 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   data: function data() {
     return {
-      fans: [],
-      searchForm: {
-        name: '',
-        sex: 'all'
-      }
+      accounts: []
     };
   },
   mounted: function mounted() {
-    this.loadData();
+    var _this = this;
+
+    this.axios.get('account/lists').then(function (response) {
+      _this.accounts = response.data.accounts;
+    }).catch(function (error) {
+      console.log(error);
+    });
   },
 
 
   methods: {
-    loadData: function loadData() {
-      var _this = this;
+    toManage: function toManage(id) {
+      window.localStorage.setItem('willchat_account_id', id);
 
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-      this.axios.get('fans/lists', {
-        params: {
-          keyword: this.searchForm.keyword,
-          sex: this.searchForm.sex,
-          page: page
-        }
-      }).then(function (response) {
-        _this.fans = response.data.fans;
-      });
+      this.$router.push('manage/' + id);
     },
-    syncWechatFans: function syncWechatFans() {
-      console.log('sync');
-    },
-    search: function search() {
-      this.loadData(1);
-    },
-    handleCurrentChange: function handleCurrentChange(page) {
-      this.loadData(page);
+    toEdit: function toEdit(id) {
+      this.$router.push('account/edit/' + id);
     }
   }
 };
 
 /***/ }),
 
-/***/ 284:
+/***/ 238:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.avatar[data-v-751029b2] {\n  display: block;\n  overflow: hidden;\n  margin: 10px 0;\n  width: 80px;\n  height: 80px;\n}\n", ""]);
+exports.push([module.i, "\n.setting-icon[data-v-25790b38] {\n  color: #777;\n  cursor: pointer;\n}\n.plus-card[data-v-25790b38] {\n  display: block;\n  overflow: hidden;\n  background-color: #fff;\n  height: 100%;\n  position: relative;\n}\n.plus-card i[data-v-25790b38] {\n    position: absolute;\n    font-size: 3rem;\n    color: lightgray;\n    top: 50%;\n    left: 50%;\n    margin-top: -1.5rem;\n    margin-left: -1.5rem;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 285:
+/***/ 258:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "right-main"
-  }, [_c('div', {
-    staticClass: "table-tools"
-  }, [_c('el-form', {
-    staticClass: "demo-form-inline",
+    staticClass: "main main-with-padding"
+  }, [_c('el-row', {
     attrs: {
-      "inline": true,
-      "model": _vm.searchForm
+      "gutter": 20,
+      "type": "flex",
+      "justify": "center"
     }
-  }, [_c('el-form-item', [_c('el-input', {
-    attrs: {
-      "placeholder": "按昵称搜索"
-    },
-    nativeOn: {
-      "keyup": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-        _vm.loadData($event)
+  }, [_vm._l((_vm.accounts), function(account) {
+    return (_vm.accounts.length > 0) ? _c('el-col', {
+      attrs: {
+        "span": 6
       }
-    },
-    model: {
-      value: (_vm.searchForm.keyword),
-      callback: function($$v) {
-        _vm.searchForm.keyword = $$v
-      },
-      expression: "searchForm.keyword"
-    }
-  })], 1), _vm._v(" "), _c('el-form-item', [_c('el-button', {
-    attrs: {
-      "type": "primary",
-      "icon": "search"
-    },
-    on: {
-      "click": _vm.search
-    }
-  }, [_vm._v("搜索")]), _vm._v(" "), _c('el-button', {
-    attrs: {
-      "type": "primary",
-      "icon": "plus"
-    },
-    on: {
-      "click": function($event) {
-        _vm.dialogFormVisible = true
+    }, [_c('el-card', {
+      staticClass: "box-card",
+      nativeOn: {
+        "click": function($event) {
+          _vm.toManage(account.id)
+        }
       }
-    }
-  }, [_vm._v("上传视频素材")]), _vm._v(" "), _c('el-button', {
-    attrs: {
-      "type": "primary",
-      "icon": "upload"
-    },
-    on: {
-      "click": _vm.syncvideo
-    }
-  }, [_vm._v("同步视频素材")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
-    staticStyle: {
-      "width": "100%"
-    },
-    attrs: {
-      "data": _vm.fans.data,
-      "border": ""
-    }
-  }, [_c('el-table-column', {
-    attrs: {
-      "prop": "media_id",
-      "label": "MEDIA_ID",
-      "align": "center",
-      "width": "400"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "name",
-      "label": "标题",
-      "align": "center"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "description",
-      "label": "描述",
-      "align": "center"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "created_at",
-      "label": "创建时间",
-      "align": "center",
-      "width": "170"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "updated_at",
-      "label": "更新时间",
-      "align": "center",
-      "width": "170"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "label": "操作",
-      "align": "center",
-      "width": "120"
-    },
-    inlineTemplate: {
-      render: function() {
-        var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-          return _c('div', [_c('el-button', {
-            attrs: {
-              "size": "small",
-              "type": "danger"
-            },
-            nativeOn: {
-              "click": function($event) {
-                _vm.deleteMaterial(_vm.row)
-              }
-            }
-          }, [_vm._v("删除")])], 1)
-        
+    }, [_c('div', {
+      staticClass: "clearfix",
+      slot: "header"
+    }, [_c('span', {
+      staticStyle: {
+        "line-height": "36px"
+      }
+    }, [_vm._v(_vm._s(account.name))]), _vm._v(" "), _c('i', {
+      staticClass: "setting-icon el-icon-setting",
+      staticStyle: {
+        "float": "right"
       },
-      staticRenderFns: []
-    }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "paginator"
-  }, [_c('el-pagination', {
+      on: {
+        "click": function($event) {
+          $event.stopPropagation();
+          $event.preventDefault();
+          _vm.toEdit(account.id)
+        }
+      }
+    })]), _vm._v(" "), _c('div', [_vm._v("\n            " + _vm._s(account.name) + "\n            " + _vm._s(account.type) + "\n            " + _vm._s(account.created_at) + "\n          ")])])], 1) : _vm._e()
+  }), _vm._v(" "), _c('el-col', {
     attrs: {
-      "current-page": _vm.fans.current_page,
-      "page-size": _vm.fans.per_page,
-      "layout": "total, prev, pager, next, jumper",
-      "total": _vm.fans.tatal
-    },
-    on: {
-      "current-change": _vm.handleCurrentChange
+      "span": 6
     }
-  })], 1)], 1)
+  }, [_c('router-link', {
+    staticClass: "plus-card el-card",
+    attrs: {
+      "to": "/account/add"
+    }
+  }, [_c('i', {
+    staticClass: "el-icon-plus"
+  })])], 1)], 2)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-751029b2", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-25790b38", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 286:
+/***/ 275:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(284);
+var content = __webpack_require__(238);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("babc0302", content, false);
+var update = __webpack_require__(48)("32450f59", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-751029b2&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./voice-lists.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-751029b2&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./voice-lists.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-25790b38&scoped=true!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./dashboard.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-25790b38&scoped=true!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./dashboard.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

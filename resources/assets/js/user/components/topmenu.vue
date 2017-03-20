@@ -33,13 +33,13 @@
 
 <script>
   import userConfig from '../config';
-  import {mapState} from 'vuex';
+  import {mapGetters} from 'vuex';
 
   export default {
     computed: {
-      ...mapState({
-        accounts: state => state.accounts
-      })
+      ...mapGetters([
+        'accounts'
+      ])
     },
 
     methods: {

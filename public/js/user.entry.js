@@ -1,4 +1,4 @@
-webpackJsonp([14],[
+webpackJsonp([17],[
 /* 0 */,
 /* 1 */,
 /* 2 */,
@@ -1271,7 +1271,7 @@ Object.defineProperty(exports, "__esModule", {
 var routes = [{
   path: '/',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(18).then((function () {
+    __webpack_require__.e/* require.ensure */(2).then((function () {
       return resolve(__webpack_require__(201));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1284,7 +1284,7 @@ var routes = [{
 }, {
   path: '/account/add',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(17).then((function () {
+    __webpack_require__.e/* require.ensure */(0).then((function () {
       return resolve(__webpack_require__(84));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1297,7 +1297,7 @@ var routes = [{
 }, {
   path: '/account/edit/:id',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(17/* duplicate */).then((function () {
+    __webpack_require__.e/* require.ensure */(0/* duplicate */).then((function () {
       return resolve(__webpack_require__(84));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1310,7 +1310,7 @@ var routes = [{
 }, {
   path: '/login',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(19).then((function () {
+    __webpack_require__.e/* require.ensure */(3).then((function () {
       return resolve(__webpack_require__(200));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1326,8 +1326,8 @@ var routes = [{
 }, {
   path: '/menu/index',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(26).then((function () {
-      return resolve(__webpack_require__(206));
+    __webpack_require__.e/* require.ensure */(1).then((function () {
+      return resolve(__webpack_require__(209));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1339,7 +1339,7 @@ var routes = [{
 }, {
   path: '/fans/index',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(27).then((function () {
+    __webpack_require__.e/* require.ensure */(13).then((function () {
       return resolve(__webpack_require__(205));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1352,8 +1352,8 @@ var routes = [{
 }, {
   path: '/qrcode/index',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(25).then((function () {
-      return resolve(__webpack_require__(207));
+    __webpack_require__.e/* require.ensure */(9).then((function () {
+      return resolve(__webpack_require__(210));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1365,8 +1365,8 @@ var routes = [{
 }, {
   path: '/reply/text',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(21).then((function () {
-      return resolve(__webpack_require__(211));
+    __webpack_require__.e/* require.ensure */(5).then((function () {
+      return resolve(__webpack_require__(214));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1378,8 +1378,8 @@ var routes = [{
 }, {
   path: '/reply/news',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(23).then((function () {
-      return resolve(__webpack_require__(209));
+    __webpack_require__.e/* require.ensure */(7).then((function () {
+      return resolve(__webpack_require__(212));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1391,8 +1391,8 @@ var routes = [{
 }, {
   path: '/reply/subscribe',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(22).then((function () {
-      return resolve(__webpack_require__(210));
+    __webpack_require__.e/* require.ensure */(6).then((function () {
+      return resolve(__webpack_require__(213));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1404,8 +1404,8 @@ var routes = [{
 }, {
   path: '/reply/default',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(24).then((function () {
-      return resolve(__webpack_require__(208));
+    __webpack_require__.e/* require.ensure */(8).then((function () {
+      return resolve(__webpack_require__(211));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1417,8 +1417,8 @@ var routes = [{
 }, {
   path: '/material/image',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(0/* empty */).then((function () {
-      return resolve(__webpack_require__(272));
+    __webpack_require__.e/* require.ensure */(12).then((function () {
+      return resolve(__webpack_require__(206));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1430,8 +1430,8 @@ var routes = [{
 }, {
   path: '/material/video',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(1/* empty */).then((function () {
-      return resolve(__webpack_require__(277));
+    __webpack_require__.e/* require.ensure */(11).then((function () {
+      return resolve(__webpack_require__(207));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1443,8 +1443,8 @@ var routes = [{
 }, {
   path: '/material/voice',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(2/* empty */).then((function () {
-      return resolve(__webpack_require__(282));
+    __webpack_require__.e/* require.ensure */(10).then((function () {
+      return resolve(__webpack_require__(208));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1456,7 +1456,7 @@ var routes = [{
 }, {
   path: '/document/lists',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(30).then((function () {
+    __webpack_require__.e/* require.ensure */(16).then((function () {
       return resolve(__webpack_require__(202));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1469,7 +1469,7 @@ var routes = [{
 }, {
   path: '/document/show/:id',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(29).then((function () {
+    __webpack_require__.e/* require.ensure */(15).then((function () {
       return resolve(__webpack_require__(203));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1482,8 +1482,8 @@ var routes = [{
 }, {
   path: '/profile',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(20).then((function () {
-      return resolve(__webpack_require__(212));
+    __webpack_require__.e/* require.ensure */(4).then((function () {
+      return resolve(__webpack_require__(215));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1495,7 +1495,7 @@ var routes = [{
 }, {
   path: '*',
   component: function component(resolve) {
-    __webpack_require__.e/* require.ensure */(28).then((function () {
+    __webpack_require__.e/* require.ensure */(14).then((function () {
       return resolve(__webpack_require__(204));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
@@ -1536,17 +1536,15 @@ var _mutations2 = _interopRequireDefault(_mutations);
 
 var _actions = __webpack_require__(124);
 
-var actions = _interopRequireWildcard(_actions);
+var _actions2 = _interopRequireDefault(_actions);
 
 var _getters = __webpack_require__(125);
 
-var getters = _interopRequireWildcard(_getters);
+var _getters2 = _interopRequireDefault(_getters);
 
 var _checkout = __webpack_require__(126);
 
 var _checkout2 = _interopRequireDefault(_checkout);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1558,6 +1556,7 @@ exports.default = new _vuex2.default.Store({
   state: _state2.default,
   mutations: _mutations2.default,
 
+  getters: _getters2.default,
   modules: {
     checkout: _checkout2.default
   },
@@ -1668,7 +1667,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\sidebar.vue"
+Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\sidebar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] sidebar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -1706,7 +1705,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\topmenu.vue"
+Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\topmenu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] topmenu.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -1779,6 +1778,19 @@ module.exports = Component.exports
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getters = {
+  accounts: function accounts(state) {
+    var temp = window.localStorage.getItem('willchat_accounts');
+
+    return JSON.parse(temp);
+  }
+};
+
+exports.default = getters;
 
 /***/ }),
 /* 126 */
@@ -2050,11 +2062,7 @@ var _vuex = __webpack_require__(12);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
-    accounts: function accounts(state) {
-      return state.accounts;
-    }
-  })),
+  computed: (0, _extends3.default)({}, (0, _vuex.mapGetters)(['accounts'])),
 
   methods: {
     changeAccount: function changeAccount(accountId) {
@@ -3452,9 +3460,6 @@ var app = new _vue2.default({
     user: function user(state) {
       return state.user;
     },
-    accounts: function accounts(state) {
-      return state.accounts;
-    },
     isLoading: function isLoading(state) {
       return state.isLoading;
     },
@@ -3464,7 +3469,7 @@ var app = new _vue2.default({
     sidebarVisible: function sidebarVisible(state) {
       return state.sidebarVisible;
     }
-  })),
+  }), (0, _vuex.mapGetters)(['accounts'])),
 
   data: {
     loadingInstance: null
