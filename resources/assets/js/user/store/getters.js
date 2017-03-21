@@ -1,8 +1,16 @@
+import userConfig from '../config';
+
 const getters = {
   accounts: (state) => {
-    let temp = window.localStorage.getItem('willchat_accounts');
+    let temp = window.localStorage.getItem(userConfig.accountsKey);
 
-    return JSON.parse(temp);
+    return temp ? JSON.parse(temp) : [];
+  },
+
+  user: (state) => {
+    let temp = window.localStorage.getItem(userConfig.userKey);
+
+    return temp ? JSON.parse(temp) : {};
   }
 };
 

@@ -10,24 +10,20 @@
       </el-submenu>
       <el-menu-item index="/document/lists">帮助中心</el-menu-item>
       <div id="right-part">
-        <div class="avatar"></div>
+        <router-link to="/profile">
+          <img src="" alt="" class="avatar"/>
+        </router-link>
         <el-dropdown id="dropdown-menu">
-                <span class="el-dropdown-link">
-                    admin
-                </span>
+            <span class="el-dropdown-link nickname">
+                {{ user.name }}
+            </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="$router.push('/profile')">用户信息</el-dropdown-item>
             <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
-
     </el-menu>
-
-    <div>
-      {{ }}
-
-    </div>
   </div>
 </template>
 
@@ -38,7 +34,8 @@
   export default {
     computed: {
       ...mapGetters([
-        'accounts'
+        'accounts',
+        'user'
       ])
     },
 
@@ -79,6 +76,7 @@
       background: red;
       border-radius: 50%;
       margin: 10px 10px 0 20px;
+      outline: none;
     }
 
     #dropdown-menu {

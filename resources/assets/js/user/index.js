@@ -115,14 +115,14 @@ const app = new Vue({
 
   computed: {
     ...mapState({
-      user: state => state.user,
       isLoading: state => state.isLoading,
       topmenuVisible: state => state.topmenuVisible,
       sidebarVisible: state => state.sidebarVisible
     }),
 
     ...mapGetters([
-      'accounts'
+      'accounts',
+      'user'
     ])
   },
 

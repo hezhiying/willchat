@@ -22,6 +22,8 @@
 </template>
 
 <script>
+  import userConfig from '../config';
+
   export default {
     data () {
       return {
@@ -32,11 +34,7 @@
     mounted () {
       this.axios.get('account/lists').then((response) => {
         this.accounts = response.data.accounts;
-//        window.localStorage.setItem('willchat_accounts', JSON.stringify(response.data.accounts));
-//
-//        let temp = window.localStorage.getItem('willchat_accounts');
-//
-//        this.$store.commit('UPDATE_ACCOUNTS', JSON.parse(temp));
+        window.localStorage.setItem(userConfig.accountsKey, JSON.stringify(response.data.accounts));
       }).catch((error) => {
         console.log(error);
       })
