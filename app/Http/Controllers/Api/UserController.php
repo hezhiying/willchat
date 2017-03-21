@@ -23,6 +23,20 @@ class UserController extends BaseController
     }
 
     /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function updateUser(Request $request)
+    {
+        $data = $request->only(['nickname', 'qq', 'mobile']);
+
+        $this->userRepository->update($data, Auth::id());
+
+        return response('保存成功', 200);
+    }
+
+    /**
      * 设置头像.
      *
      * @param Request $request

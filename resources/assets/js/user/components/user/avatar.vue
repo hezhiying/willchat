@@ -9,15 +9,12 @@
                 :headers="headers"
                 name="avatar"
                 :show-file-list="false"
+                :auto-upload="true"
                 :on-success="handleAvatarScucess"
                 :before-upload="beforeAvatarUpload">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
-
-        <router-link to="/user/avatar">
-
-        </router-link>
       </el-col>
     </el-row>
   </div>
@@ -70,16 +67,24 @@
 </script>
 
 <style scoped lang="scss">
-  .avatar-uploader .el-upload {
+  .avatar-uploader {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    background-color: #fff;
+    text-align: center;
+    
+    .el-upload {
+      background-color: grey;
+
+      &:hover {
+        border-color: #20a0ff;
+      }
+    }
   }
-  .avatar-uploader .el-upload:hover {
-    border-color: #20a0ff;
-  }
+  
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
@@ -88,9 +93,10 @@
     line-height: 178px;
     text-align: center;
   }
+
   .avatar {
-    width: 178px;
-    height: 178px;
+    width: 230px;
+    height: 230px;
     display: block;
   }
 </style>

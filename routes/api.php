@@ -30,6 +30,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api'], function () {
         Route::post('/update-password', 'AuthController@updatePassword');
         Route::get('/current-user', 'AuthController@getAuthenticatedUser');
         Route::post('/avatar-upload', 'UserController@uploadAvatar');
+        Route::post('/user/profile', 'UserController@updateUser');
 
          // 公众号管理接口
         Route::get('/account/lists', 'AccountController@lists');

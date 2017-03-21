@@ -4,7 +4,7 @@ import state from './state';
 import mutations from './mutations';
 // import actions from './actions';
 import getters from './getters';
-import checkout from './modules/checkout';
+// import checkout from './modules/checkout';
 
 Vue.use(Vuex);
 
@@ -16,7 +16,7 @@ export default new Vuex.Store({
   // actions,
   getters,
   modules: {
-    checkout
+    // checkout
   },
   strict: debug
 });

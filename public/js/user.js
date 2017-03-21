@@ -1553,10 +1553,6 @@ var _getters = __webpack_require__(124);
 
 var _getters2 = _interopRequireDefault(_getters);
 
-var _checkout = __webpack_require__(125);
-
-var _checkout2 = _interopRequireDefault(_checkout);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vuex2.default);
@@ -1568,9 +1564,7 @@ exports.default = new _vuex2.default.Store({
   mutations: _mutations2.default,
 
   getters: _getters2.default,
-  modules: {
-    checkout: _checkout2.default
-  },
+  modules: {},
   strict: debug
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
@@ -1810,100 +1804,7 @@ var getters = {
 exports.default = getters;
 
 /***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var state = {
-  order: {
-    name: '',
-    mobile: '',
-    province: '',
-    city: '',
-    area: '',
-    address: '',
-    friend_name: '',
-    friend_mobile: '',
-    friend_province: '',
-    friend_city: '',
-    friend_area: '',
-    friend_address: '',
-    wishes: '',
-    amount: 1,
-    remark: ''
-  },
-  step: 1,
-  totalStep: 3
-};
-
-var getters = {
-  isFirstStep: function isFirstStep(state) {
-    return state.step === 1;
-  },
-  isLastStep: function isLastStep(state) {
-    return state.step === state.totalStep;
-  },
-  nextBtnText: function nextBtnText(state) {
-    return state.step === state.totalStep ? '去结算' : '下一步';
-  },
-  pca: function pca(state) {
-    var pca = state.order.province + state.order.city + state.order.area;
-    return pca ? pca : '请选择';
-  },
-  friend_pca: function friend_pca(state) {
-    var pca = state.order.friend_province + state.order.friend_city + state.order.friend_area;
-    return pca ? pca : '请选择';
-  },
-  canGoNext: function canGoNext(state) {
-    if (state.step === 1) {
-      if (state.order.name && state.order.mobile && state.order.province && state.order.city && state.order.area && state.order.address) {
-        return true;
-      } else {
-        return false;
-      }
-    } else if (state.step === 2) {
-      if (state.order.friend_name && state.order.friend_mobile && state.order.friend_province && state.order.friend_city && state.order.friend_area && state.order.friend_address) {
-        return true;
-      } else {
-        return false;
-      }
-    } else if (state.step === 3) {
-      if (state.order.amount) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-};
-
-var actions = {};
-
-var mutations = {
-  UPDATE_ORDER: function UPDATE_ORDER(state, value) {
-    state.order[value.key] = value.value;
-  },
-  UPDATE_STEP: function UPDATE_STEP(state, value) {
-    state.step = value;
-  },
-  UPDATE_CAN_GO_NEXT: function UPDATE_CAN_GO_NEXT(state, value) {
-    state.canGoNext = value;
-  }
-};
-
-exports.default = {
-  state: state,
-  getters: getters,
-  actions: actions,
-  mutations: mutations
-};
-
-/***/ }),
+/* 125 */,
 /* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
