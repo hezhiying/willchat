@@ -9,7 +9,7 @@ __webpack_require__(285)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(217),
+  __webpack_require__(219),
   /* template */
   __webpack_require__(267),
   /* scopeId */
@@ -39,7 +39,25 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ 216:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(217), __esModule: true };
+
+/***/ }),
+
 /***/ 217:
+/***/ (function(module, exports, __webpack_require__) {
+
+var core  = __webpack_require__(8)
+  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+  return $JSON.stringify.apply($JSON, arguments);
+};
+
+/***/ }),
+
+/***/ 219:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49,7 +67,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = __webpack_require__(234);
+var _stringify = __webpack_require__(216);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -75,8 +93,6 @@ exports.default = {
       var _this = this;
 
       this.axios.post('login', this.formData).then(function (response) {
-        console.log(response.data);
-
         localStorage.setItem(_config2.default.jwtTokenKey, response.data.token);
         localStorage.setItem(_config2.default.userKey, (0, _stringify2.default)(response.data.user));
 
@@ -89,24 +105,6 @@ exports.default = {
       });
     }
   }
-};
-
-/***/ }),
-
-/***/ 234:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(235), __esModule: true };
-
-/***/ }),
-
-/***/ 235:
-/***/ (function(module, exports, __webpack_require__) {
-
-var core  = __webpack_require__(8)
-  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-  return $JSON.stringify.apply($JSON, arguments);
 };
 
 /***/ }),

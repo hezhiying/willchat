@@ -11,7 +11,7 @@
       <el-menu-item index="/document/lists">帮助中心</el-menu-item>
       <div id="right-part">
         <router-link to="/profile">
-          <img src="" alt="" class="avatar"/>
+          <img :src="user.avatar" alt="" class="avatar"/>
         </router-link>
         <el-dropdown id="dropdown-menu">
             <span class="el-dropdown-link nickname">

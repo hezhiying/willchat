@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Repositories\UserRepository;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -9,9 +10,16 @@ use Image;
 
 class UserController extends BaseController
 {
-    public function __construct()
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
         parent::__construct();
+
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -22,7 +30,7 @@ class UserController extends BaseController
     public function uploadAvatar(Request $request)
     {
         if (!$user = Auth::user()) {
-            return $this->response->error('Unauthorized.', 401);
+            return response('Unauthorized.', 401);
         }
 
         $data = $request->all();
@@ -32,15 +40,18 @@ class UserController extends BaseController
         if ($file->isValid()) {
             $avatarUrl = "/uploads/avatar/avatar-{$user->id}.jpg";
 
-            Image::make($file)->resize($data['width'], $data['height'])->crop($data['cropWidth'], $data['cropHeight'], $data['cropX'], $data['cropY'])->save(public_path($avatarUrl));
+//            Image::make($file)->resize($data['width'], $data['height'])->crop($data['cropWidth'], $data['cropHeight'], $data['cropX'], $data['cropY'])->save(public_path($avatarUrl));
+            Image::make($file)->save(public_path($avatarUrl));
 
-            $user->avatar = $avatarUrl;
+            $this->userRepository->update(['avatar' => $avatarUrl], $user->id);
 
-            $user->save();
+            $token = \JWTAuth::refresh(true);
 
-            return response()->json(['status' => 1, 'info' => '保存成功']);
+            return response()->json(['status' => 1, 'info' => '保存成功', 'token' => $token]);
         } else {
-            return response()->json(['status' => 0, 'info' => '文件无效']);
+            $token = \JWTAuth::refresh(true);
+
+            return response()->json(['status' => 0, 'info' => '文件无效', 'token' => $token]);
         }
     }
 }

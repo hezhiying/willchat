@@ -30,7 +30,7 @@
     data () {
       return {
         imageUrl: '',
-        headers: ''
+        headers: {}
       };
     },
 
@@ -42,6 +42,14 @@
 
     methods: {
       handleAvatarScucess (res, file) {
+        let token = res.token;
+
+        localStorage.setItem(userConfig.jwtTokenKey, token);
+
+        this.headers = {
+          Authorization: 'bearer ' + token
+        };
+
         this.imageUrl = URL.createObjectURL(file.raw);
       },
 

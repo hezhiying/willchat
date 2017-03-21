@@ -1,25 +1,25 @@
 webpackJsonp([4],{
 
-/***/ 214:
+/***/ 215:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(290)
+__webpack_require__(283)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(232),
+  __webpack_require__(235),
   /* template */
-  __webpack_require__(272),
+  __webpack_require__(265),
   /* scopeId */
-  "data-v-af32bd26",
+  "data-v-59f6fd45",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\user\\avatar.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\user\\profile.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] avatar.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] profile.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28,9 +28,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-af32bd26", Component.options)
+    hotAPI.createRecord("data-v-59f6fd45", Component.options)
   } else {
-    hotAPI.reload("data-v-af32bd26", Component.options)
+    hotAPI.reload("data-v-59f6fd45", Component.options)
   }
 })()}
 
@@ -39,7 +39,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 232:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48,57 +48,35 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _config = __webpack_require__(16);
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 exports.default = {
   data: function data() {
     return {
-      imageUrl: '',
-      headers: ''
+      user: {}
     };
   },
-  mounted: function mounted() {
-    this.headers = {
-      Authorization: 'bearer ' + window.localStorage.getItem(_config2.default.jwtTokenKey)
-    };
-  },
+  mounted: function mounted() {},
 
 
   methods: {
-    handleAvatarScucess: function handleAvatarScucess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload: function beforeAvatarUpload(file) {
-      var isJPG = file.type === 'image/jpeg';
-      var isLt2M = file.size / 1024 / 1024 < 2;
+    toManage: function toManage(id) {
+      window.localStorage.setItem('willchat_account_id', id);
 
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
+      this.$router.push('manage/' + id);
     }
   }
 };
 
 /***/ }),
 
-/***/ 251:
+/***/ 244:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.avatar-uploader .el-upload[data-v-af32bd26] {\n  border: 1px dashed #d9d9d9;\n  border-radius: 6px;\n  cursor: pointer;\n  position: relative;\n  overflow: hidden;\n}\n.avatar-uploader .el-upload[data-v-af32bd26]:hover {\n  border-color: #20a0ff;\n}\n.avatar-uploader-icon[data-v-af32bd26] {\n  font-size: 28px;\n  color: #8c939d;\n  width: 178px;\n  height: 178px;\n  line-height: 178px;\n  text-align: center;\n}\n.avatar[data-v-af32bd26] {\n  width: 178px;\n  height: 178px;\n  display: block;\n}\n", ""]);
+exports.push([module.i, "\n.avatar[data-v-59f6fd45] {\n  display: block;\n  width: 80%;\n  height: 200px;\n  overflow: hidden;\n  background-color: red;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 272:
+/***/ 265:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -106,65 +84,59 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "main main-with-padding"
   }, [_c('el-row', {
     attrs: {
-      "gutter": 20,
-      "type": "flex",
-      "justify": "center"
+      "gutter": 20
     }
   }, [_c('el-col', {
     attrs: {
       "span": 8
     }
-  }, [_c('el-upload', {
-    staticClass: "avatar-uploader",
+  }, [_c('router-link', {
     attrs: {
-      "multiple": false,
-      "action": "/api/user/avatar-upload",
-      "headers": _vm.headers,
-      "name": "avatar",
-      "show-file-list": false,
-      "on-success": _vm.handleAvatarScucess,
-      "before-upload": _vm.beforeAvatarUpload
+      "to": "/avatar"
     }
-  }, [(_vm.imageUrl) ? _c('img', {
+  }, [_c('img', {
     staticClass: "avatar",
     attrs: {
-      "src": _vm.imageUrl
+      "src": "",
+      "alt": ""
     }
-  }) : _c('i', {
-    staticClass: "el-icon-plus avatar-uploader-icon"
-  })]), _vm._v(" "), _c('router-link', {
+  })])], 1), _vm._v(" "), _c('el-col', {
     attrs: {
-      "to": "/user/avatar"
+      "span": 24
     }
-  })], 1)], 1)], 1)
+  }, [_c('div', {
+    staticClass: "user-profile"
+  }, [_c('div', {
+    staticClass: "header"
+  })])])], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-af32bd26", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-59f6fd45", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 290:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(251);
+var content = __webpack_require__(244);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("08e0e4e8", content, false);
+var update = __webpack_require__(48)("1a14e4e2", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-af32bd26&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./avatar.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-af32bd26&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./avatar.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-59f6fd45&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-59f6fd45&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

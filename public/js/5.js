@@ -1,25 +1,25 @@
 webpackJsonp([5],{
 
-/***/ 213:
+/***/ 214:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(275)
+__webpack_require__(290)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(231),
+  __webpack_require__(234),
   /* template */
-  __webpack_require__(257),
+  __webpack_require__(272),
   /* scopeId */
-  "data-v-00cf82cc",
+  "data-v-af32bd26",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\reply\\text-lists.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\user\\avatar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] text-lists.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] avatar.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28,9 +28,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-00cf82cc", Component.options)
+    hotAPI.createRecord("data-v-af32bd26", Component.options)
   } else {
-    hotAPI.reload("data-v-00cf82cc", Component.options)
+    hotAPI.reload("data-v-af32bd26", Component.options)
   }
 })()}
 
@@ -39,7 +39,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 231:
+/***/ 234:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48,235 +48,131 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _config = __webpack_require__(16);
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
   data: function data() {
     return {
-      fans: [],
-      searchForm: {
-        name: '',
-        sex: 'all'
-      }
+      imageUrl: '',
+      headers: {}
     };
   },
   mounted: function mounted() {
-    this.loadData();
+    this.headers = {
+      Authorization: 'bearer ' + window.localStorage.getItem(_config2.default.jwtTokenKey)
+    };
   },
 
 
   methods: {
-    loadData: function loadData() {
-      var _this = this;
+    handleAvatarScucess: function handleAvatarScucess(res, file) {
+      var token = res.token;
 
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      localStorage.setItem(_config2.default.jwtTokenKey, token);
 
-      this.axios.get('reply/lists?type=text', {
-        params: {
-          keyword: this.searchForm.keyword,
-          sex: this.searchForm.sex,
-          page: page
-        }
-      }).then(function (response) {
-        _this.fans = response.data.fans;
-      });
+      this.headers = {
+        Authorization: 'bearer ' + token
+      };
+
+      this.imageUrl = URL.createObjectURL(file.raw);
     },
-    search: function search() {
-      this.loadData(1);
-    },
-    handleCurrentChange: function handleCurrentChange(page) {
-      this.loadData(page);
+    beforeAvatarUpload: function beforeAvatarUpload(file) {
+      var isJPG = file.type === 'image/jpeg';
+      var isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
     }
   }
 };
 
 /***/ }),
 
-/***/ 236:
+/***/ 251:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.avatar-uploader .el-upload[data-v-af32bd26] {\n  border: 1px dashed #d9d9d9;\n  border-radius: 6px;\n  cursor: pointer;\n  position: relative;\n  overflow: hidden;\n}\n.avatar-uploader .el-upload[data-v-af32bd26]:hover {\n  border-color: #20a0ff;\n}\n.avatar-uploader-icon[data-v-af32bd26] {\n  font-size: 28px;\n  color: #8c939d;\n  width: 178px;\n  height: 178px;\n  line-height: 178px;\n  text-align: center;\n}\n.avatar[data-v-af32bd26] {\n  width: 178px;\n  height: 178px;\n  display: block;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 257:
+/***/ 272:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "right-main"
-  }, [_c('div', {
-    staticClass: "table-tools"
-  }, [_c('el-form', {
-    staticClass: "demo-form-inline",
+    staticClass: "main main-with-padding"
+  }, [_c('el-row', {
     attrs: {
-      "inline": true,
-      "model": _vm.searchForm
+      "gutter": 20,
+      "type": "flex",
+      "justify": "center"
     }
-  }, [_c('el-form-item', [_c('el-input', {
+  }, [_c('el-col', {
     attrs: {
-      "placeholder": "按昵称搜索"
-    },
-    nativeOn: {
-      "keyup": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-        _vm.loadData($event)
-      }
-    },
-    model: {
-      value: (_vm.searchForm.keyword),
-      callback: function($$v) {
-        _vm.searchForm.keyword = $$v
-      },
-      expression: "searchForm.keyword"
+      "span": 8
     }
-  })], 1), _vm._v(" "), _c('el-form-item', [_c('el-select', {
+  }, [_c('el-upload', {
+    staticClass: "avatar-uploader",
     attrs: {
-      "placeholder": "性别筛选"
-    },
-    on: {
-      "change": _vm.loadData
-    },
-    model: {
-      value: (_vm.searchForm.sex),
-      callback: function($$v) {
-        _vm.searchForm.sex = $$v
-      },
-      expression: "searchForm.sex"
+      "multiple": false,
+      "action": "/api/user/avatar-upload",
+      "headers": _vm.headers,
+      "name": "avatar",
+      "show-file-list": false,
+      "on-success": _vm.handleAvatarScucess,
+      "before-upload": _vm.beforeAvatarUpload
     }
-  }, [_c('el-option', {
+  }, [(_vm.imageUrl) ? _c('img', {
+    staticClass: "avatar",
     attrs: {
-      "label": "全部",
-      "value": "all"
+      "src": _vm.imageUrl
     }
-  }), _vm._v(" "), _c('el-option', {
+  }) : _c('i', {
+    staticClass: "el-icon-plus avatar-uploader-icon"
+  })]), _vm._v(" "), _c('router-link', {
     attrs: {
-      "label": "男",
-      "value": "0"
+      "to": "/user/avatar"
     }
-  }), _vm._v(" "), _c('el-option', {
-    attrs: {
-      "label": "女",
-      "value": "1"
-    }
-  }), _vm._v(" "), _c('el-option', {
-    attrs: {
-      "label": "其它",
-      "value": "2"
-    }
-  })], 1)], 1), _vm._v(" "), _c('el-form-item', [_c('el-button', {
-    attrs: {
-      "type": "primary",
-      "icon": "search"
-    },
-    on: {
-      "click": _vm.search
-    }
-  }, [_vm._v("搜索")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
-    staticStyle: {
-      "width": "100%"
-    },
-    attrs: {
-      "data": _vm.fans.data,
-      "border": ""
-    }
-  }, [_c('el-table-column', {
-    attrs: {
-      "prop": "nickname",
-      "label": "触发关键词"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "sex",
-      "label": "回复内容"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "location",
-      "label": "添加时间"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "tagid_list",
-      "label": "修改时间"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "remark",
-      "label": "命中次数"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "label": "操作"
-    },
-    inlineTemplate: {
-      render: function() {
-        var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-          return _c('div', [_c('el-button', {
-            attrs: {
-              "size": "small",
-              "type": "primary"
-            },
-            nativeOn: {
-              "click": function($event) {
-                _vm.charge(_vm.row.id)
-              }
-            }
-          }, [_vm._v("修改")]), _vm._v(" "), _c('el-button', {
-            attrs: {
-              "size": "small",
-              "type": "danger"
-            },
-            nativeOn: {
-              "click": function($event) {
-                _vm.charge(_vm.row.id)
-              }
-            }
-          }, [_vm._v("删除")])], 1)
-        
-      },
-      staticRenderFns: []
-    }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "paginator"
-  }, [_c('el-pagination', {
-    attrs: {
-      "current-page": _vm.fans.current_page,
-      "page-size": _vm.fans.per_page,
-      "layout": "total, prev, pager, next, jumper",
-      "total": _vm.fans.tatal
-    },
-    on: {
-      "current-change": _vm.handleCurrentChange
-    }
-  })], 1)], 1)
+  })], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-00cf82cc", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-af32bd26", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 275:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(236);
+var content = __webpack_require__(251);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("97838146", content, false);
+var update = __webpack_require__(48)("08e0e4e8", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-00cf82cc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./text-lists.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-00cf82cc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./text-lists.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-af32bd26&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./avatar.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-af32bd26&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./avatar.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

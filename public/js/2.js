@@ -9,7 +9,7 @@ __webpack_require__(276)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(226),
+  __webpack_require__(228),
   /* template */
   __webpack_require__(258),
   /* scopeId */
@@ -39,7 +39,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 226:
+/***/ 228:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
