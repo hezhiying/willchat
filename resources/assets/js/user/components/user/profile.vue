@@ -2,7 +2,7 @@
   <div class="main main-with-padding">
     <el-row :gutter="20">
       <el-col :span="8">
-        <router-link to="/user/avatar">
+        <router-link to="/avatar">
           <img src="" class="avatar" alt=""/>
         </router-link>
       </el-col>

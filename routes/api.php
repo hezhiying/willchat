@@ -29,7 +29,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api'], function () {
     Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function () {
         Route::post('/update-password', 'AuthController@updatePassword');
         Route::get('/current-user', 'AuthController@getAuthenticatedUser');
-        Route::post('/user/avatar', 'UserController@avatar');
+        Route::post('/avatar-upload', 'UserController@uploadAvatar');
 
          // 公众号管理接口
         Route::get('/account/lists', 'AccountController@lists');

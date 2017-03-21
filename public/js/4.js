@@ -17,7 +17,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\user\\avatar.vue"
+Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\user\\avatar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] avatar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -48,16 +48,44 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _config = __webpack_require__(29);
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
   data: function data() {
     return {
-      user: {}
+      imageUrl: '',
+      headers: ''
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.headers = {
+      Authorization: 'bearer ' + window.localStorage.getItem(_config2.default.jwtTokenKey)
+    };
+  },
 
 
-  methods: {}
+  methods: {
+    handleAvatarScucess: function handleAvatarScucess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload: function beforeAvatarUpload(file) {
+      var isJPG = file.type === 'image/jpeg';
+      var isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    }
+  }
 };
 
 /***/ }),
@@ -66,7 +94,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.avatar[data-v-af32bd26] {\n  display: block;\n  width: 80%;\n  height: 200px;\n  overflow: hidden;\n  background-color: red;\n}\n", ""]);
+exports.push([module.i, "\n.avatar-uploader .el-upload[data-v-af32bd26] {\n  border: 1px dashed #d9d9d9;\n  border-radius: 6px;\n  cursor: pointer;\n  position: relative;\n  overflow: hidden;\n}\n.avatar-uploader .el-upload[data-v-af32bd26]:hover {\n  border-color: #20a0ff;\n}\n.avatar-uploader-icon[data-v-af32bd26] {\n  font-size: 28px;\n  color: #8c939d;\n  width: 178px;\n  height: 178px;\n  line-height: 178px;\n  text-align: center;\n}\n.avatar[data-v-af32bd26] {\n  width: 178px;\n  height: 178px;\n  display: block;\n}\n", ""]);
 
 /***/ }),
 
@@ -78,31 +106,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "main main-with-padding"
   }, [_c('el-row', {
     attrs: {
-      "gutter": 20
+      "gutter": 20,
+      "type": "flex",
+      "justify": "center"
     }
   }, [_c('el-col', {
     attrs: {
       "span": 8
     }
-  }, [_c('router-link', {
+  }, [_c('el-upload', {
+    staticClass: "avatar-uploader",
+    attrs: {
+      "multiple": false,
+      "action": "/api/user/avatar-upload",
+      "headers": _vm.headers,
+      "name": "avatar",
+      "show-file-list": false,
+      "on-success": _vm.handleAvatarScucess,
+      "before-upload": _vm.beforeAvatarUpload
+    }
+  }, [(_vm.imageUrl) ? _c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "src": _vm.imageUrl
+    }
+  }) : _c('i', {
+    staticClass: "el-icon-plus avatar-uploader-icon"
+  })]), _vm._v(" "), _c('router-link', {
     attrs: {
       "to": "/user/avatar"
     }
-  }, [_c('img', {
-    staticClass: "avatar",
-    attrs: {
-      "src": "",
-      "alt": ""
-    }
-  })])], 1), _vm._v(" "), _c('el-col', {
-    attrs: {
-      "span": 24
-    }
-  }, [_c('div', {
-    staticClass: "user-profile"
-  }, [_c('div', {
-    staticClass: "header"
-  }, [_vm._v("123412")])])])], 1)], 1)
+  })], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

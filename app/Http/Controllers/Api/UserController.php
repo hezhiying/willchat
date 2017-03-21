@@ -19,7 +19,7 @@ class UserController extends BaseController
      *
      * @param Request $request
      */
-    public function avatar(Request $request)
+    public function uploadAvatar(Request $request)
     {
         if (!$user = Auth::user()) {
             return $this->response->error('Unauthorized.', 401);
