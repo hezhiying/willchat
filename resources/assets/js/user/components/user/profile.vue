@@ -3,12 +3,49 @@
     <el-row :gutter="20">
       <el-col :span="8">
         <router-link to="/avatar">
-          <img src="" class="avatar" alt=""/>
+          <img :src="user.avatar" class="avatar" alt=""/>
         </router-link>
       </el-col>
-      <el-col :span="24">
+      <el-col :span="16">
         <div class="user-profile">
-          <div class="header"></div>
+          <el-form label-position="top" label-width="120px" :model="user">
+            <el-row :gutter="20">
+              <el-col :span="12">
+                <el-form-item label="用户名">
+                  <el-input v-model="user.name" readonly></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="昵称">
+                  <el-input v-model="user.nickname"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="Email">
+                  <el-input v-model="user.email" readonly></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="手机">
+                  <el-input v-model="user.mobile"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="QQ">
+                  <el-input v-model="user.qq"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="最后登录时间">
+                  <el-input v-model="user.last_login_at"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row type="flex" justify="center">
+                <el-button type="primary" @click.native="save">保存</el-button>
+                <el-button type="default" @click.native="$router.back()">取消</el-button>
+            </el-row>
+          </el-form>
         </div>
       </el-col>
     </el-row>
@@ -16,24 +53,26 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex';
+
   export default {
     data () {
       return {
-        user: {}
       };
     },
 
-    mounted () {
-//      this.axios.get('user/profile').then((response) => {
-//        this.user = response.data.user;
-//      });
+    computed: {
+      ...mapGetters([
+        'user'
+      ])
     },
 
     methods: {
-      toManage (id) {
-        window.localStorage.setItem('willchat_account_id', id);
+      save () {
+        this.axios.post('/user/profile', this.user).then(response => {
 
-        this.$router.push(`manage/${id}`);
+          this.$root.success('保存成功');
+        });
       }
     }
   }
@@ -42,9 +81,16 @@
 <style scoped lang="scss">
   .avatar {
     display: block;
-    width: 80%;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     overflow: hidden;
-    background-color: red;
+    margin: 0 auto;
+  }
+  
+  .user-profile {
+    display: block;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 20px 25px;
   }
 </style>

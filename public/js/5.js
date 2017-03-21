@@ -102,7 +102,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.avatar-uploader .el-upload[data-v-af32bd26] {\n  border: 1px dashed #d9d9d9;\n  border-radius: 6px;\n  cursor: pointer;\n  position: relative;\n  overflow: hidden;\n}\n.avatar-uploader .el-upload[data-v-af32bd26]:hover {\n  border-color: #20a0ff;\n}\n.avatar-uploader-icon[data-v-af32bd26] {\n  font-size: 28px;\n  color: #8c939d;\n  width: 178px;\n  height: 178px;\n  line-height: 178px;\n  text-align: center;\n}\n.avatar[data-v-af32bd26] {\n  width: 178px;\n  height: 178px;\n  display: block;\n}\n", ""]);
+exports.push([module.i, "\n.avatar-uploader[data-v-af32bd26] {\n  border: 1px dashed #d9d9d9;\n  border-radius: 6px;\n  cursor: pointer;\n  position: relative;\n  overflow: hidden;\n  background-color: #fff;\n  text-align: center;\n}\n.avatar-uploader .el-upload[data-v-af32bd26] {\n    background-color: grey;\n}\n.avatar-uploader .el-upload[data-v-af32bd26]:hover {\n      border-color: #20a0ff;\n}\n.avatar-uploader-icon[data-v-af32bd26] {\n  font-size: 28px;\n  color: #8c939d;\n  width: 178px;\n  height: 178px;\n  line-height: 178px;\n  text-align: center;\n}\n.avatar[data-v-af32bd26] {\n  width: 230px;\n  height: 230px;\n  display: block;\n}\n", ""]);
 
 /***/ }),
 
@@ -130,6 +130,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "headers": _vm.headers,
       "name": "avatar",
       "show-file-list": false,
+      "auto-upload": true,
       "on-success": _vm.handleAvatarScucess,
       "before-upload": _vm.beforeAvatarUpload
     }
@@ -140,11 +141,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }) : _c('i', {
     staticClass: "el-icon-plus avatar-uploader-icon"
-  })]), _vm._v(" "), _c('router-link', {
-    attrs: {
-      "to": "/user/avatar"
-    }
-  })], 1)], 1)], 1)
+  })])], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

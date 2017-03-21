@@ -48,20 +48,31 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends2 = __webpack_require__(46);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _vuex = __webpack_require__(12);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
   data: function data() {
-    return {
-      user: {}
-    };
+    return {};
   },
-  mounted: function mounted() {},
 
+
+  computed: (0, _extends3.default)({}, (0, _vuex.mapGetters)(['user'])),
 
   methods: {
-    toManage: function toManage(id) {
-      window.localStorage.setItem('willchat_account_id', id);
+    save: function save() {
+      var _this = this;
 
-      this.$router.push('manage/' + id);
+      this.axios.post('/user/profile', this.user).then(function (response) {
+
+        _this.$root.success('保存成功');
+      });
     }
   }
 };
@@ -72,7 +83,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.avatar[data-v-59f6fd45] {\n  display: block;\n  width: 80%;\n  height: 200px;\n  overflow: hidden;\n  background-color: red;\n}\n", ""]);
+exports.push([module.i, "\n.avatar[data-v-59f6fd45] {\n  display: block;\n  width: 250px;\n  height: 250px;\n  overflow: hidden;\n  margin: 0 auto;\n}\n.user-profile[data-v-59f6fd45] {\n  display: block;\n  overflow: hidden;\n  background-color: #fff;\n  padding: 20px 25px;\n}\n", ""]);
 
 /***/ }),
 
@@ -97,18 +108,151 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('img', {
     staticClass: "avatar",
     attrs: {
-      "src": "",
+      "src": _vm.user.avatar,
       "alt": ""
     }
   })])], 1), _vm._v(" "), _c('el-col', {
     attrs: {
-      "span": 24
+      "span": 16
     }
   }, [_c('div', {
     staticClass: "user-profile"
-  }, [_c('div', {
-    staticClass: "header"
-  })])])], 1)], 1)
+  }, [_c('el-form', {
+    attrs: {
+      "label-position": "top",
+      "label-width": "120px",
+      "model": _vm.user
+    }
+  }, [_c('el-row', {
+    attrs: {
+      "gutter": 20
+    }
+  }, [_c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "用户名"
+    }
+  }, [_c('el-input', {
+    attrs: {
+      "readonly": ""
+    },
+    model: {
+      value: (_vm.user.name),
+      callback: function($$v) {
+        _vm.user.name = $$v
+      },
+      expression: "user.name"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "昵称"
+    }
+  }, [_c('el-input', {
+    model: {
+      value: (_vm.user.nickname),
+      callback: function($$v) {
+        _vm.user.nickname = $$v
+      },
+      expression: "user.nickname"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "Email"
+    }
+  }, [_c('el-input', {
+    attrs: {
+      "readonly": ""
+    },
+    model: {
+      value: (_vm.user.email),
+      callback: function($$v) {
+        _vm.user.email = $$v
+      },
+      expression: "user.email"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "手机"
+    }
+  }, [_c('el-input', {
+    model: {
+      value: (_vm.user.mobile),
+      callback: function($$v) {
+        _vm.user.mobile = $$v
+      },
+      expression: "user.mobile"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "QQ"
+    }
+  }, [_c('el-input', {
+    model: {
+      value: (_vm.user.qq),
+      callback: function($$v) {
+        _vm.user.qq = $$v
+      },
+      expression: "user.qq"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "最后登录时间"
+    }
+  }, [_c('el-input', {
+    model: {
+      value: (_vm.user.last_login_at),
+      callback: function($$v) {
+        _vm.user.last_login_at = $$v
+      },
+      expression: "user.last_login_at"
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c('el-row', {
+    attrs: {
+      "type": "flex",
+      "justify": "center"
+    }
+  }, [_c('el-button', {
+    attrs: {
+      "type": "primary"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.save($event)
+      }
+    }
+  }, [_vm._v("保存")]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "default"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.$router.back()
+      }
+    }
+  }, [_vm._v("取消")])], 1)], 1)], 1)])], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
