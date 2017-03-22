@@ -1,9 +1,9 @@
+import userConfig from '../config';
 
+const actions = {
+  storeUserToLocal: ({ commit }, user) => {
+    localStorage.setItem(userConfig.userKey, JSON.stringify(user));
+  }
+};
 
-// export const addToCart = ({ commit }, product) => {
-//   if (product.inventory > 0) {
-//     commit(types.ADD_TO_CART, {
-//       id: product.id
-//     })
-//   }
-// }
+export default actions;

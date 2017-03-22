@@ -1,23 +1,23 @@
 webpackJsonp([1],{
 
-/***/ 199:
+/***/ 198:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(285)
+__webpack_require__(284)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(219),
+  __webpack_require__(218),
   /* template */
-  __webpack_require__(267),
+  __webpack_require__(266),
   /* scopeId */
   "data-v-6729d4bc",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\auth\\login.vue"
+Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\auth\\login.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] login.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -39,25 +39,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 216:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(217), __esModule: true };
-
-/***/ }),
-
-/***/ 217:
-/***/ (function(module, exports, __webpack_require__) {
-
-var core  = __webpack_require__(8)
-  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-  return $JSON.stringify.apply($JSON, arguments);
-};
-
-/***/ }),
-
-/***/ 219:
+/***/ 218:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67,13 +49,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = __webpack_require__(216);
+var _extends2 = __webpack_require__(30);
 
-var _stringify2 = _interopRequireDefault(_stringify);
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _config = __webpack_require__(16);
 
 var _config2 = _interopRequireDefault(_config);
+
+var _vuex = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -88,13 +72,14 @@ exports.default = {
   },
 
 
-  methods: {
+  methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['storeUserToLocal']), {
     login: function login() {
       var _this = this;
 
       this.axios.post('login', this.formData).then(function (response) {
         localStorage.setItem(_config2.default.jwtTokenKey, response.data.token);
-        localStorage.setItem(_config2.default.userKey, (0, _stringify2.default)(response.data.user));
+
+        _this.storeUserToLocal(response.data.user);
 
         _this.$router.push('/');
       }).catch(function (error) {
@@ -104,27 +89,27 @@ exports.default = {
         });
       });
     }
-  }
+  })
 };
 
 /***/ }),
 
-/***/ 246:
+/***/ 245:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n#login[data-v-6729d4bc] {\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url("+__webpack_require__(256)+");\n  background-size: cover;\n}\n#login .login-form[data-v-6729d4bc] {\n    display: block;\n    width: 360px;\n    background-color: #e0e6ed;\n    padding: 40px;\n    border-radius: 10px;\n}\n#login .login-form .title[data-v-6729d4bc] {\n      font-size: 2rem;\n      line-height: 2rem;\n      color: #4e4e4e;\n      text-align: center;\n      font-family: 'Microsoft Yahei';\n      font-weight: 400;\n}\n#login .login-form .el-input[data-v-6729d4bc] {\n      display: block;\n      margin: 1rem 0;\n}\n#login .login-form .btn-submit[data-v-6729d4bc] {\n      display: block;\n      overflow: hidden;\n      width: 100%;\n      margin-top: 3rem;\n}\n", ""]);
+exports.push([module.i, "\n#login[data-v-6729d4bc] {\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url("+__webpack_require__(255)+");\n  background-size: cover;\n}\n#login .login-form[data-v-6729d4bc] {\n    display: block;\n    width: 360px;\n    background-color: #e0e6ed;\n    padding: 40px;\n    border-radius: 10px;\n}\n#login .login-form .title[data-v-6729d4bc] {\n      font-size: 2rem;\n      line-height: 2rem;\n      color: #4e4e4e;\n      text-align: center;\n      font-family: 'Microsoft Yahei';\n      font-weight: 400;\n}\n#login .login-form .el-input[data-v-6729d4bc] {\n      display: block;\n      margin: 1rem 0;\n}\n#login .login-form .btn-submit[data-v-6729d4bc] {\n      display: block;\n      overflow: hidden;\n      width: 100%;\n      margin-top: 3rem;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 256:
+/***/ 255:
 /***/ (function(module, exports) {
 
 module.exports = "/js/images/login-bg.jpg?90666d610bd3dd8f34a42d472f9b52f4";
 
 /***/ }),
 
-/***/ 267:
+/***/ 266:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -195,13 +180,13 @@ if (false) {
 
 /***/ }),
 
-/***/ 285:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(246);
+var content = __webpack_require__(245);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM

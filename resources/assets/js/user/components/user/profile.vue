@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
+  import {mapGetters, mapActions} from 'vuex';
 
   export default {
     data () {
@@ -68,8 +68,13 @@
     },
 
     methods: {
+      ...mapActions([
+        'storeUserToLocal'
+      ]),
+
       save () {
         this.axios.post('/user/profile', this.user).then(response => {
+          this.storeUserToLocal(response.data.user);
 
           this.$root.success('保存成功');
         });

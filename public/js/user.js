@@ -122,7 +122,7 @@ module.exports = function() {
 /***/ (function(module, exports, __webpack_require__) {
 
 // Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(34)(function(){
+module.exports = !__webpack_require__(35)(function(){
   return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 });
 
@@ -170,7 +170,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // optional / simple context binding
-var aFunction = __webpack_require__(30);
+var aFunction = __webpack_require__(31);
 module.exports = function(fn, that, length){
   aFunction(fn);
   if(that === undefined)return fn;
@@ -238,6 +238,35 @@ exports.f = __webpack_require__(14) ? Object.defineProperty : function definePro
 /* 28 */,
 /* 29 */,
 /* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _assign = __webpack_require__(130);
+
+var _assign2 = _interopRequireDefault(_assign);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _assign2.default || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = function(it){
@@ -246,7 +275,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 // 7.2.1 RequireObjectCoercible(argument)
@@ -256,7 +285,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(20)
@@ -268,7 +297,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global    = __webpack_require__(5)
@@ -334,7 +363,7 @@ $export.R = 128; // real proto method for `library`
 module.exports = $export;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = function(exec){
@@ -346,7 +375,7 @@ module.exports = function(exec){
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(21).f
@@ -358,7 +387,7 @@ module.exports = function(it, tag, stat){
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var shared = __webpack_require__(63)('keys')
@@ -368,7 +397,7 @@ module.exports = function(key){
 };
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports) {
 
 // 7.1.4 ToInteger
@@ -379,23 +408,23 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
 var IObject = __webpack_require__(58)
-  , defined = __webpack_require__(31);
+  , defined = __webpack_require__(32);
 module.exports = function(it){
   return IObject(defined(it));
 };
 
 /***/ }),
-/* 39 */,
 /* 40 */,
 /* 41 */,
 /* 42 */,
 /* 43 */,
-/* 44 */
+/* 44 */,
+/* 45 */
 /***/ (function(module, exports) {
 
 /*
@@ -647,36 +676,7 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 45 */,
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _assign = __webpack_require__(130);
-
-var _assign2 = _interopRequireDefault(_assign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _assign2.default || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-/***/ }),
+/* 46 */,
 /* 47 */
 /***/ (function(module, exports) {
 
@@ -839,27 +839,6 @@ function addStylesToDom (styles /* Array<StyleObject> */) {
   }
 }
 
-function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = { css: css, media: media, sourceMap: sourceMap }
-    if (!newStyles[id]) {
-      part.id = parentId + ':0'
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      part.id = parentId + ':' + newStyles[id].parts.length
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
 function createStyleElement () {
   var styleElement = document.createElement('style')
   styleElement.type = 'text/css'
@@ -870,12 +849,20 @@ function createStyleElement () {
 function addStyle (obj /* StyleObjectPart */) {
   var update, remove
   var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
-  var hasSSR = styleElement != null
 
-  // if in production mode and style is already provided by SSR,
-  // simply do nothing.
-  if (hasSSR && isProduction) {
-    return noop
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
   }
 
   if (isOldIE) {
@@ -886,16 +873,14 @@ function addStyle (obj /* StyleObjectPart */) {
     remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
   } else {
     // use multi-style-tag mode in all other cases
-    styleElement = styleElement || createStyleElement()
+    styleElement = createStyleElement()
     update = applyToTag.bind(null, styleElement)
     remove = function () {
       styleElement.parentNode.removeChild(styleElement)
     }
   }
 
-  if (!hasSSR) {
-    update(obj)
-  }
+  update(obj)
 
   return function updateStyle (newObj /* StyleObjectPart */) {
     if (newObj) {
@@ -1031,13 +1016,13 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 "use strict";
 
 var LIBRARY        = __webpack_require__(60)
-  , $export        = __webpack_require__(33)
+  , $export        = __webpack_require__(34)
   , redefine       = __webpack_require__(153)
   , hide           = __webpack_require__(10)
   , has            = __webpack_require__(19)
   , Iterators      = __webpack_require__(15)
   , $iterCreate    = __webpack_require__(141)
-  , setToStringTag = __webpack_require__(35)
+  , setToStringTag = __webpack_require__(36)
   , getPrototypeOf = __webpack_require__(149)
   , ITERATOR       = __webpack_require__(4)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
@@ -1149,7 +1134,7 @@ module.exports = function(key){
 var ctx                = __webpack_require__(18)
   , invoke             = __webpack_require__(138)
   , html               = __webpack_require__(57)
-  , cel                = __webpack_require__(32)
+  , cel                = __webpack_require__(33)
   , global             = __webpack_require__(5)
   , process            = global.process
   , setTask            = global.setImmediate
@@ -1227,7 +1212,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
-var toInteger = __webpack_require__(37)
+var toInteger = __webpack_require__(38)
   , min       = Math.min;
 module.exports = function(it){
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -1238,7 +1223,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
-var defined = __webpack_require__(31);
+var defined = __webpack_require__(32);
 module.exports = function(it){
   return Object(defined(it));
 };
@@ -1274,7 +1259,7 @@ var routes = [{
   path: '/',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(3).then((function () {
-      return resolve(__webpack_require__(200));
+      return resolve(__webpack_require__(199));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1313,7 +1298,7 @@ var routes = [{
   path: '/login',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(1).then((function () {
-      return resolve(__webpack_require__(199));
+      return resolve(__webpack_require__(198));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1329,7 +1314,7 @@ var routes = [{
   path: '/menu/index',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(2).then((function () {
-      return resolve(__webpack_require__(208));
+      return resolve(__webpack_require__(207));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1342,7 +1327,7 @@ var routes = [{
   path: '/fans/index',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(14).then((function () {
-      return resolve(__webpack_require__(204));
+      return resolve(__webpack_require__(203));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1355,7 +1340,7 @@ var routes = [{
   path: '/qrcode/index',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(10).then((function () {
-      return resolve(__webpack_require__(209));
+      return resolve(__webpack_require__(208));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1368,7 +1353,7 @@ var routes = [{
   path: '/reply/text',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(6).then((function () {
-      return resolve(__webpack_require__(213));
+      return resolve(__webpack_require__(212));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1381,7 +1366,7 @@ var routes = [{
   path: '/reply/news',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(8).then((function () {
-      return resolve(__webpack_require__(211));
+      return resolve(__webpack_require__(210));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1394,7 +1379,7 @@ var routes = [{
   path: '/reply/subscribe',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(7).then((function () {
-      return resolve(__webpack_require__(212));
+      return resolve(__webpack_require__(211));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1407,7 +1392,7 @@ var routes = [{
   path: '/reply/default',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(9).then((function () {
-      return resolve(__webpack_require__(210));
+      return resolve(__webpack_require__(209));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1420,7 +1405,7 @@ var routes = [{
   path: '/material/image',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(13).then((function () {
-      return resolve(__webpack_require__(205));
+      return resolve(__webpack_require__(204));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1433,7 +1418,7 @@ var routes = [{
   path: '/material/video',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(12).then((function () {
-      return resolve(__webpack_require__(206));
+      return resolve(__webpack_require__(205));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1446,7 +1431,7 @@ var routes = [{
   path: '/material/voice',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(11).then((function () {
-      return resolve(__webpack_require__(207));
+      return resolve(__webpack_require__(206));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1459,7 +1444,7 @@ var routes = [{
   path: '/document/lists',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(17).then((function () {
-      return resolve(__webpack_require__(201));
+      return resolve(__webpack_require__(200));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1472,7 +1457,7 @@ var routes = [{
   path: '/document/show/:id',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(16).then((function () {
-      return resolve(__webpack_require__(202));
+      return resolve(__webpack_require__(201));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1485,7 +1470,7 @@ var routes = [{
   path: '/profile',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(4).then((function () {
-      return resolve(__webpack_require__(215));
+      return resolve(__webpack_require__(214));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1498,7 +1483,7 @@ var routes = [{
   path: '/avatar',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(5).then((function () {
-      return resolve(__webpack_require__(214));
+      return resolve(__webpack_require__(213));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1511,7 +1496,7 @@ var routes = [{
   path: '*',
   component: function component(resolve) {
     __webpack_require__.e/* require.ensure */(15).then((function () {
-      return resolve(__webpack_require__(203));
+      return resolve(__webpack_require__(202));
     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
   },
   meta: {
@@ -1549,7 +1534,11 @@ var _mutations = __webpack_require__(126);
 
 var _mutations2 = _interopRequireDefault(_mutations);
 
-var _getters = __webpack_require__(124);
+var _actions = __webpack_require__(292);
+
+var _actions2 = _interopRequireDefault(_actions);
+
+var _getters = __webpack_require__(125);
 
 var _getters2 = _interopRequireDefault(_getters);
 
@@ -1562,7 +1551,7 @@ var debug = process.env.NODE_ENV !== 'production';
 exports.default = new _vuex2.default.Store({
   state: _state2.default,
   mutations: _mutations2.default,
-
+  actions: _actions2.default,
   getters: _getters2.default,
   modules: {},
   strict: debug
@@ -1586,7 +1575,7 @@ module.exports = { "default": __webpack_require__(132), __esModule: true };
 var content = __webpack_require__(166);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(44)(content, {});
+var update = __webpack_require__(45)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -1612,7 +1601,7 @@ if(false) {
 var content = __webpack_require__(167);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(44)(content, {});
+var update = __webpack_require__(45)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -1638,7 +1627,7 @@ if(false) {
 var content = __webpack_require__(168);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(44)(content, {});
+var update = __webpack_require__(45)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -1672,7 +1661,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\sidebar.vue"
+Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\sidebar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] sidebar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -1710,7 +1699,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\topmenu.vue"
+Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\topmenu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] topmenu.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -1777,6 +1766,224 @@ module.exports = Component.exports
 "use strict";
 
 
+var _extends2 = __webpack_require__(30);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _promise = __webpack_require__(77);
+
+var _promise2 = _interopRequireDefault(_promise);
+
+var _vue = __webpack_require__(2);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueRouter = __webpack_require__(27);
+
+var _vueRouter2 = _interopRequireDefault(_vueRouter);
+
+var _elementUi = __webpack_require__(25);
+
+var _elementUi2 = _interopRequireDefault(_elementUi);
+
+__webpack_require__(80);
+
+__webpack_require__(79);
+
+__webpack_require__(81);
+
+var _vuex = __webpack_require__(12);
+
+var _axios = __webpack_require__(24);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _vueAxios = __webpack_require__(26);
+
+var _vueAxios2 = _interopRequireDefault(_vueAxios);
+
+var _index = __webpack_require__(76);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _config = __webpack_require__(16);
+
+var _config2 = _interopRequireDefault(_config);
+
+var _routes = __webpack_require__(75);
+
+var _routes2 = _interopRequireDefault(_routes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vueRouter2.default);
+_vue2.default.use(_elementUi2.default);
+_vue2.default.use(_vueAxios2.default, _axios2.default);
+
+_axios2.default.defaults.baseURL = _config2.default.apiRoot;
+_axios2.default.defaults.timeout = _config2.default.timeout;
+
+var router = new _vueRouter2.default({
+  mode: 'history',
+  base: '/user/',
+  routes: _routes2.default
+});
+
+router.beforeEach(function (to, from, next) {
+  _index2.default.commit('UPDATE_LOADING', true);
+
+  _index2.default.commit('UPDATE_TOPMENU_VISIBLE', to.matched.some(function (record) {
+    return record.meta.topmenuVisible;
+  }));
+  _index2.default.commit('UPDATE_SIDEBAR_VISIBLE', to.matched.some(function (record) {
+    return record.meta.sidebarVisible;
+  }));
+
+  if (to.matched.some(function (record) {
+    return record.meta.requiresAuth;
+  }) && !window.localStorage.getItem(_config2.default.jwtTokenKey)) {
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    });
+  }
+
+  next();
+});
+
+router.afterEach(function (to, from) {
+  _index2.default.commit('UPDATE_LOADING', false);
+});
+
+_axios2.default.interceptors.request.use(function (config) {
+  _index2.default.commit('UPDATE_LOADING', true);
+
+  var token = window.localStorage.getItem(_config2.default.jwtTokenKey);
+  config.headers.Authorization = 'bearer ' + token;
+
+  var accountId = window.localStorage.getItem('willchat_account_id');
+  if (accountId) {
+    config.headers.AccountId = accountId;
+  }
+
+  return config;
+}, function (error) {
+  return _promise2.default.reject(error);
+});
+
+_axios2.default.interceptors.response.use(function (response) {
+  _index2.default.commit('UPDATE_LOADING', false);
+
+  var newToken = response.headers.authorization;
+  if (newToken) {
+    window.localStorage.setItem(_config2.default.jwtTokenKey, newToken.replace(/^bearer\s?/i, ''));
+  }
+
+  return response;
+}, function (error) {
+  _index2.default.commit('UPDATE_LOADING', false);
+
+  if (error.response) {
+    var newToken = error.response.headers.authorization;
+    if (newToken) {
+      window.localStorage.setItem(_config2.default.jwtTokenKey, newToken.replace(/^bearer\s?/i, ''));
+    }
+
+    if (error.response.status === 401) {
+      window.localStorage.removeItem(_config2.default.jwtTokenKey);
+
+      router.push('/login');
+    } else if (error.response.status === 403) {
+      app.error('无操作权限');
+      return;
+    } else {
+      app.error(error.response.data | '系统错误');
+      return;
+    }
+  } else {
+    if (error.code === 'ECONNABORTED') {
+      app.error('请求超时，请重试');
+    }
+  }
+
+  return _promise2.default.reject(error);
+});
+
+var app = new _vue2.default({
+  router: router,
+
+  store: _index2.default,
+
+  components: {
+    'topmenu': __webpack_require__(83),
+    'sidebar': __webpack_require__(82)
+  },
+
+  computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+    isLoading: function isLoading(state) {
+      return state.isLoading;
+    },
+    topmenuVisible: function topmenuVisible(state) {
+      return state.topmenuVisible;
+    },
+    sidebarVisible: function sidebarVisible(state) {
+      return state.sidebarVisible;
+    }
+  }), (0, _vuex.mapGetters)(['accounts', 'user'])),
+
+  data: {
+    loadingInstance: null
+  },
+
+  methods: {
+    success: function success(msg) {
+      this.$message({
+        message: msg,
+        type: 'success',
+        duration: 1000
+      });
+    },
+    warning: function warning(msg) {
+      this.$message({
+        message: msg,
+        type: 'warning',
+        duration: 1000
+      });
+    },
+    error: function error(msg) {
+      this.$message({
+        message: msg,
+        type: 'error',
+        duration: 2000
+      });
+    }
+  },
+
+  watch: {
+    'isLoading': function isLoading(value) {
+      if (value) {
+        this.loadingInstance = _elementUi.Loading.service({
+          text: 'Loading',
+          customClass: 'my-loading-mask'
+        });
+      } else {
+        this.loadingInstance && this.loadingInstance.close();
+      }
+    }
+  },
+
+  destroy: function destroy() {
+    this.loadingInstance = null;
+  }
+}).$mount('#app');
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1804,7 +2011,6 @@ var getters = {
 exports.default = getters;
 
 /***/ }),
-/* 125 */,
 /* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1967,7 +2173,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(46);
+var _extends2 = __webpack_require__(30);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -2041,7 +2247,7 @@ module.exports = function(it, Constructor, name, forbiddenField){
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(38)
+var toIObject = __webpack_require__(39)
   , toLength  = __webpack_require__(65)
   , toIndex   = __webpack_require__(157);
 module.exports = function(IS_INCLUDES){
@@ -2095,8 +2301,8 @@ exports.RETURN = RETURN;
 /* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(14) && !__webpack_require__(34)(function(){
-  return Object.defineProperty(__webpack_require__(32)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+module.exports = !__webpack_require__(14) && !__webpack_require__(35)(function(){
+  return Object.defineProperty(__webpack_require__(33)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 });
 
 /***/ }),
@@ -2158,7 +2364,7 @@ module.exports = function(iterator, fn, value, entries){
 
 var create         = __webpack_require__(146)
   , descriptor     = __webpack_require__(62)
-  , setToStringTag = __webpack_require__(35)
+  , setToStringTag = __webpack_require__(36)
   , IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
@@ -2291,7 +2497,7 @@ var getKeys  = __webpack_require__(61)
   , $assign  = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__(34)(function(){
+module.exports = !$assign || __webpack_require__(35)(function(){
   var A = {}
     , B = {}
     , S = Symbol()
@@ -2323,14 +2529,14 @@ module.exports = !$assign || __webpack_require__(34)(function(){
 var anObject    = __webpack_require__(9)
   , dPs         = __webpack_require__(147)
   , enumBugKeys = __webpack_require__(56)
-  , IE_PROTO    = __webpack_require__(36)('IE_PROTO')
+  , IE_PROTO    = __webpack_require__(37)('IE_PROTO')
   , Empty       = function(){ /* empty */ }
   , PROTOTYPE   = 'prototype';
 
 // Create object with fake `null` prototype: use iframe Object with cleared prototype
 var createDict = function(){
   // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(32)('iframe')
+  var iframe = __webpack_require__(33)('iframe')
     , i      = enumBugKeys.length
     , lt     = '<'
     , gt     = '>'
@@ -2393,7 +2599,7 @@ exports.f = Object.getOwnPropertySymbols;
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has         = __webpack_require__(19)
   , toObject    = __webpack_require__(66)
-  , IE_PROTO    = __webpack_require__(36)('IE_PROTO')
+  , IE_PROTO    = __webpack_require__(37)('IE_PROTO')
   , ObjectProto = Object.prototype;
 
 module.exports = Object.getPrototypeOf || function(O){
@@ -2409,9 +2615,9 @@ module.exports = Object.getPrototypeOf || function(O){
 /***/ (function(module, exports, __webpack_require__) {
 
 var has          = __webpack_require__(19)
-  , toIObject    = __webpack_require__(38)
+  , toIObject    = __webpack_require__(39)
   , arrayIndexOf = __webpack_require__(135)(false)
-  , IE_PROTO     = __webpack_require__(36)('IE_PROTO');
+  , IE_PROTO     = __webpack_require__(37)('IE_PROTO');
 
 module.exports = function(object, names){
   var O      = toIObject(object)
@@ -2476,7 +2682,7 @@ module.exports = function(KEY){
 
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject  = __webpack_require__(9)
-  , aFunction = __webpack_require__(30)
+  , aFunction = __webpack_require__(31)
   , SPECIES   = __webpack_require__(4)('species');
 module.exports = function(O, D){
   var C = anObject(O).constructor, S;
@@ -2487,8 +2693,8 @@ module.exports = function(O, D){
 /* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(37)
-  , defined   = __webpack_require__(31);
+var toInteger = __webpack_require__(38)
+  , defined   = __webpack_require__(32);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function(TO_STRING){
@@ -2509,7 +2715,7 @@ module.exports = function(TO_STRING){
 /* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(37)
+var toInteger = __webpack_require__(38)
   , max       = Math.max
   , min       = Math.min;
 module.exports = function(index, length){
@@ -2556,7 +2762,7 @@ module.exports = __webpack_require__(8).getIteratorMethod = function(it){
 var addToUnscopables = __webpack_require__(133)
   , step             = __webpack_require__(143)
   , Iterators        = __webpack_require__(15)
-  , toIObject        = __webpack_require__(38);
+  , toIObject        = __webpack_require__(39);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
@@ -2592,7 +2798,7 @@ addToUnscopables('entries');
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__(33);
+var $export = __webpack_require__(34);
 
 $export($export.S + $export.F, 'Object', {assign: __webpack_require__(145)});
 
@@ -2612,9 +2818,9 @@ var LIBRARY            = __webpack_require__(60)
   , global             = __webpack_require__(5)
   , ctx                = __webpack_require__(18)
   , classof            = __webpack_require__(55)
-  , $export            = __webpack_require__(33)
+  , $export            = __webpack_require__(34)
   , isObject           = __webpack_require__(20)
-  , aFunction          = __webpack_require__(30)
+  , aFunction          = __webpack_require__(31)
   , anInstance         = __webpack_require__(134)
   , forOf              = __webpack_require__(136)
   , speciesConstructor = __webpack_require__(155)
@@ -2837,7 +3043,7 @@ if(!USE_NATIVE){
 }
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
-__webpack_require__(35)($Promise, PROMISE);
+__webpack_require__(36)($Promise, PROMISE);
 __webpack_require__(154)(PROMISE);
 Wrapper = __webpack_require__(8)[PROMISE];
 
@@ -3228,224 +3434,145 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ }),
 /* 195 */,
-/* 196 */
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(216), __esModule: true };
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var core  = __webpack_require__(8)
+  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+  return $JSON.stringify.apply($JSON, arguments);
+};
+
+/***/ }),
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _extends2 = __webpack_require__(46);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _stringify = __webpack_require__(215);
 
-var _promise = __webpack_require__(77);
-
-var _promise2 = _interopRequireDefault(_promise);
-
-var _vue = __webpack_require__(2);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _vueRouter = __webpack_require__(27);
-
-var _vueRouter2 = _interopRequireDefault(_vueRouter);
-
-var _elementUi = __webpack_require__(25);
-
-var _elementUi2 = _interopRequireDefault(_elementUi);
-
-__webpack_require__(80);
-
-__webpack_require__(79);
-
-__webpack_require__(81);
-
-var _vuex = __webpack_require__(12);
-
-var _axios = __webpack_require__(24);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _vueAxios = __webpack_require__(26);
-
-var _vueAxios2 = _interopRequireDefault(_vueAxios);
-
-var _index = __webpack_require__(76);
-
-var _index2 = _interopRequireDefault(_index);
+var _stringify2 = _interopRequireDefault(_stringify);
 
 var _config = __webpack_require__(16);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _routes = __webpack_require__(75);
-
-var _routes2 = _interopRequireDefault(_routes);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_vue2.default.use(_vueRouter2.default);
-_vue2.default.use(_elementUi2.default);
-_vue2.default.use(_vueAxios2.default, _axios2.default);
+var actions = {
+  storeUserToLocal: function storeUserToLocal(_ref, user) {
+    var commit = _ref.commit;
 
-_axios2.default.defaults.baseURL = _config2.default.apiRoot;
-_axios2.default.defaults.timeout = _config2.default.timeout;
-
-var router = new _vueRouter2.default({
-  mode: 'history',
-  base: '/user/',
-  routes: _routes2.default
-});
-
-router.beforeEach(function (to, from, next) {
-  _index2.default.commit('UPDATE_LOADING', true);
-
-  _index2.default.commit('UPDATE_TOPMENU_VISIBLE', to.matched.some(function (record) {
-    return record.meta.topmenuVisible;
-  }));
-  _index2.default.commit('UPDATE_SIDEBAR_VISIBLE', to.matched.some(function (record) {
-    return record.meta.sidebarVisible;
-  }));
-
-  if (to.matched.some(function (record) {
-    return record.meta.requiresAuth;
-  }) && !window.localStorage.getItem(_config2.default.jwtTokenKey)) {
-    next({
-      path: '/login',
-      query: { redirect: to.fullPath }
-    });
+    localStorage.setItem(_config2.default.userKey, (0, _stringify2.default)(user));
   }
+};
 
-  next();
-});
-
-router.afterEach(function (to, from) {
-  _index2.default.commit('UPDATE_LOADING', false);
-});
-
-_axios2.default.interceptors.request.use(function (config) {
-  _index2.default.commit('UPDATE_LOADING', true);
-
-  var token = window.localStorage.getItem(_config2.default.jwtTokenKey);
-  config.headers.Authorization = 'bearer ' + token;
-
-  var accountId = window.localStorage.getItem('willchat_account_id');
-  if (accountId) {
-    config.headers.AccountId = accountId;
-  }
-
-  return config;
-}, function (error) {
-  return _promise2.default.reject(error);
-});
-
-_axios2.default.interceptors.response.use(function (response) {
-  _index2.default.commit('UPDATE_LOADING', false);
-
-  var newToken = response.headers.authorization;
-  if (newToken) {
-    window.localStorage.setItem(_config2.default.jwtTokenKey, newToken.replace(/^bearer\s?/i, ''));
-  }
-
-  return response;
-}, function (error) {
-  _index2.default.commit('UPDATE_LOADING', false);
-
-  if (error.response) {
-    if (error.response.status === 401) {
-      window.localStorage.removeItem(_config2.default.jwtTokenKey);
-
-      router.push('/login');
-    } else if (error.response.status === 403) {
-      app.error('无操作权限');
-      return;
-    } else {
-      app.error(error.response.data);
-      return;
-    }
-  } else {
-    if (error.code === 'ECONNABORTED') {
-      app.error('请求超时，请重试');
-    }
-  }
-
-  return _promise2.default.reject(error);
-});
-
-var app = new _vue2.default({
-  router: router,
-
-  store: _index2.default,
-
-  components: {
-    'topmenu': __webpack_require__(83),
-    'sidebar': __webpack_require__(82)
-  },
-
-  computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
-    isLoading: function isLoading(state) {
-      return state.isLoading;
-    },
-    topmenuVisible: function topmenuVisible(state) {
-      return state.topmenuVisible;
-    },
-    sidebarVisible: function sidebarVisible(state) {
-      return state.sidebarVisible;
-    }
-  }), (0, _vuex.mapGetters)(['accounts', 'user'])),
-
-  data: {
-    loadingInstance: null
-  },
-
-  methods: {
-    success: function success(msg) {
-      this.$message({
-        message: msg,
-        type: 'success',
-        duration: 1000
-      });
-    },
-    warning: function warning(msg) {
-      this.$message({
-        message: msg,
-        type: 'warning',
-        duration: 1000
-      });
-    },
-    info: function info(msg) {
-      this.$message({
-        message: msg,
-        type: 'info',
-        duration: 1000
-      });
-    },
-    error: function error(msg) {
-      this.$message({
-        message: msg,
-        type: 'error',
-        duration: 2000
-      });
-    }
-  },
-
-  watch: {
-    'isLoading': function isLoading(value) {
-      if (value) {
-        this.loadingInstance = _elementUi.Loading.service({
-          text: 'Loading',
-          customClass: 'my-loading-mask'
-        });
-      } else {
-        this.loadingInstance && this.loadingInstance.close();
-      }
-    }
-  },
-
-  destroy: function destroy() {
-    this.loadingInstance = null;
-  }
-}).$mount('#app');
+exports.default = actions;
 
 /***/ })
-],[196]);
+],[124]);

@@ -31,9 +31,9 @@ class UserController extends BaseController
     {
         $data = $request->only(['nickname', 'qq', 'mobile']);
 
-        $this->userRepository->update($data, Auth::id());
+        $user = $this->userRepository->update($data, Auth::id());
 
-        return response('保存成功', 200);
+        return response()->json(compact('user'));
     }
 
     /**
@@ -57,11 +57,11 @@ class UserController extends BaseController
 //            Image::make($file)->resize($data['width'], $data['height'])->crop($data['cropWidth'], $data['cropHeight'], $data['cropX'], $data['cropY'])->save(public_path($avatarUrl));
             Image::make($file)->save(public_path($avatarUrl));
 
-            $this->userRepository->update(['avatar' => $avatarUrl], $user->id);
+            $user = $this->userRepository->update(['avatar' => $avatarUrl], $user->id);
 
             $token = \JWTAuth::refresh(true);
 
-            return response()->json(['status' => 1, 'info' => '保存成功', 'token' => $token]);
+            return response()->json(['status' => 1, 'info' => '保存成功', 'token' => $token, 'user' => $user]);
         } else {
             $token = \JWTAuth::refresh(true);
 

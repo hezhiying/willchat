@@ -22,6 +22,7 @@
 
 <script>
   import userConfig from '../../config';
+  import {mapGetters, mapActions} from 'vuex';
 
   export default {
     data () {
@@ -38,13 +39,19 @@
     },
 
     methods: {
-      handleAvatarScucess (res, file) {
-        let token = res.token;
+      ...mapActions([
+        'storeUserToLocal'
+      ]),
 
-        localStorage.setItem(userConfig.jwtTokenKey, token);
+      handleAvatarScucess (res, file) {
+        localStorage.setItem(userConfig.jwtTokenKey, res.token);
+
+        if (res.user) {
+          this.storeUserToLocal(res.user);
+        }
 
         this.headers = {
-          Authorization: 'bearer ' + token
+          Authorization: 'bearer ' + res.token
         };
 
         this.imageUrl = URL.createObjectURL(file.raw);

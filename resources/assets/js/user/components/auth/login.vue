@@ -11,6 +11,7 @@
 
 <script>
   import userConfig from '../../config';
+  import {mapActions} from 'vuex';
 
   export default {
     data () {
@@ -23,10 +24,15 @@
     },
 
     methods: {
+      ...mapActions([
+        'storeUserToLocal'
+      ]),
+
       login () {
         this.axios.post('login', this.formData).then((response) => {
           localStorage.setItem(userConfig.jwtTokenKey, response.data.token);
-          localStorage.setItem(userConfig.userKey, JSON.stringify(response.data.user));
+
+          this.storeUserToLocal(response.data.user);
 
           this.$router.push('/');
         }).catch((error) => {

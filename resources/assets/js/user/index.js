@@ -78,6 +78,11 @@ axios.interceptors.response.use((response) => {
   store.commit('UPDATE_LOADING', false);
 
   if (error.response) {
+    const newToken = error.response.headers.authorization;
+    if (newToken) {
+      window.localStorage.setItem(userConfig.jwtTokenKey, newToken.replace(/^bearer\s?/i, ''));
+    }
+
     if (error.response.status === 401) {
       window.localStorage.removeItem(userConfig.jwtTokenKey);
 
@@ -88,7 +93,7 @@ axios.interceptors.response.use((response) => {
       return;
     } else {
       // 其它错误统一提示
-      app.error(error.response.data);
+      app.error(error.response.data | '系统错误');
       return;
     }
   } else {
@@ -143,14 +148,6 @@ const app = new Vue({
       this.$message({
         message: msg,
         type: 'warning',
-        duration: 1000
-      });
-    },
-
-    info (msg) {
-      this.$message({
-        message: msg,
-        type: 'info',
         duration: 1000
       });
     },

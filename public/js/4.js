@@ -1,23 +1,23 @@
 webpackJsonp([4],{
 
-/***/ 215:
+/***/ 214:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(283)
+__webpack_require__(282)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(235),
+  __webpack_require__(234),
   /* template */
-  __webpack_require__(265),
+  __webpack_require__(264),
   /* scopeId */
   "data-v-59f6fd45",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\user\\profile.vue"
+Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\user\\profile.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] profile.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -39,7 +39,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 235:
+/***/ 234:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49,7 +49,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(46);
+var _extends2 = __webpack_require__(30);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -65,21 +65,22 @@ exports.default = {
 
   computed: (0, _extends3.default)({}, (0, _vuex.mapGetters)(['user'])),
 
-  methods: {
+  methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['storeUserToLocal']), {
     save: function save() {
       var _this = this;
 
       this.axios.post('/user/profile', this.user).then(function (response) {
+        _this.storeUserToLocal(response.data.user);
 
         _this.$root.success('保存成功');
       });
     }
-  }
+  })
 };
 
 /***/ }),
 
-/***/ 244:
+/***/ 243:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
@@ -87,7 +88,7 @@ exports.push([module.i, "\n.avatar[data-v-59f6fd45] {\n  display: block;\n  widt
 
 /***/ }),
 
-/***/ 265:
+/***/ 264:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -264,13 +265,13 @@ if (false) {
 
 /***/ }),
 
-/***/ 283:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(244);
+var content = __webpack_require__(243);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
