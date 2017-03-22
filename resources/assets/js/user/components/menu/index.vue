@@ -119,18 +119,17 @@
       display: flex;
       position: absolute;
       width: 100%;
-      height: 80px;
+      height: 65px;
       background-image: url(../../../../img/bg_mobile_head.png);
       -webkit-background-size: 100%;
       background-size: 100%;
       background-repeat: no-repeat;
       justify-content: center;
+      align-items: flex-end;
 
       .account-name {
-        display: flex;
-        align-content: center;
-        justify-content: center;
         color: #fff;
+        margin-bottom: 10px;
       }
     }
 
@@ -145,8 +144,6 @@
       -webkit-background-size: 100%;
       background-size: 100%;
       background-repeat: no-repeat;
-
-
     }
   }
   

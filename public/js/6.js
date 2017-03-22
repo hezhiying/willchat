@@ -1,25 +1,25 @@
 webpackJsonp([6],{
 
-/***/ 212:
+/***/ 214:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(274)
+__webpack_require__(280)
 
 var Component = __webpack_require__(47)(
   /* script */
   __webpack_require__(232),
   /* template */
-  __webpack_require__(256),
+  __webpack_require__(262),
   /* scopeId */
-  "data-v-00cf82cc",
+  "data-v-2f70cf8c",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\reply\\text-lists.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\reply\\subscribe-form.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] text-lists.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] subscribe-form.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28,9 +28,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-00cf82cc", Component.options)
+    hotAPI.createRecord("data-v-2f70cf8c", Component.options)
   } else {
-    hotAPI.reload("data-v-00cf82cc", Component.options)
+    hotAPI.reload("data-v-2f70cf8c", Component.options)
   }
 })()}
 
@@ -51,232 +51,122 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   data: function data() {
     return {
-      fans: [],
-      searchForm: {
-        name: '',
-        sex: 'all'
+      reply: {
+        id: '',
+        content: '',
+        type: 'subscribe'
       }
     };
   },
   mounted: function mounted() {
-    this.loadData();
+    var _this = this;
+
+    this.axios.get('reply/subscribe').then(function (response) {
+      if (response.data.reply) {
+        _this.reply = response.data.reply;
+      }
+    });
   },
 
 
+  computed: {},
+
   methods: {
-    loadData: function loadData() {
-      var _this = this;
+    store: function store() {
+      var _this2 = this;
 
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.axios.post('reply/store', this.reply).then(function (response) {
+        _this2.reply = response.data.reply;
 
-      this.axios.get('reply/lists?type=text', {
-        params: {
-          keyword: this.searchForm.keyword,
-          sex: this.searchForm.sex,
-          page: page
-        }
-      }).then(function (response) {
-        _this.fans = response.data.fans;
+        _this2.$message({
+          message: '保存成功',
+          type: 'success'
+        });
       });
-    },
-    search: function search() {
-      this.loadData(1);
-    },
-    handleCurrentChange: function handleCurrentChange(page) {
-      this.loadData(page);
     }
   }
 };
 
 /***/ }),
 
-/***/ 235:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.right-main[data-v-2f70cf8c] {\n  display: block;\n  overflow: hidden;\n  background-color: #fff;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 256:
+/***/ 262:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "right-main"
-  }, [_c('div', {
-    staticClass: "table-tools"
   }, [_c('el-form', {
-    staticClass: "demo-form-inline",
+    ref: "form",
     attrs: {
-      "inline": true,
-      "model": _vm.searchForm
+      "model": _vm.reply,
+      "label-width": "150px"
     }
-  }, [_c('el-form-item', [_c('el-input', {
+  }, [_c('el-form-item', {
     attrs: {
-      "placeholder": "按昵称搜索"
-    },
-    nativeOn: {
-      "keyup": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-        _vm.loadData($event)
-      }
-    },
-    model: {
-      value: (_vm.searchForm.keyword),
-      callback: function($$v) {
-        _vm.searchForm.keyword = $$v
-      },
-      expression: "searchForm.keyword"
-    }
-  })], 1), _vm._v(" "), _c('el-form-item', [_c('el-select', {
-    attrs: {
-      "placeholder": "性别筛选"
-    },
-    on: {
-      "change": _vm.loadData
-    },
-    model: {
-      value: (_vm.searchForm.sex),
-      callback: function($$v) {
-        _vm.searchForm.sex = $$v
-      },
-      expression: "searchForm.sex"
-    }
-  }, [_c('el-option', {
-    attrs: {
-      "label": "全部",
-      "value": "all"
-    }
-  }), _vm._v(" "), _c('el-option', {
-    attrs: {
-      "label": "男",
-      "value": "0"
-    }
-  }), _vm._v(" "), _c('el-option', {
-    attrs: {
-      "label": "女",
-      "value": "1"
-    }
-  }), _vm._v(" "), _c('el-option', {
-    attrs: {
-      "label": "其它",
-      "value": "2"
-    }
-  })], 1)], 1), _vm._v(" "), _c('el-form-item', [_c('el-button', {
-    attrs: {
-      "type": "primary",
-      "icon": "search"
-    },
-    on: {
-      "click": _vm.search
-    }
-  }, [_vm._v("搜索")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
-    staticStyle: {
-      "width": "100%"
-    },
-    attrs: {
-      "data": _vm.fans.data,
-      "border": ""
-    }
-  }, [_c('el-table-column', {
-    attrs: {
-      "prop": "nickname",
-      "label": "触发关键词"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "sex",
       "label": "回复内容"
     }
-  }), _vm._v(" "), _c('el-table-column', {
+  }, [_c('el-input', {
     attrs: {
-      "prop": "location",
-      "label": "添加时间"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "tagid_list",
-      "label": "修改时间"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "prop": "remark",
-      "label": "命中次数"
-    }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "label": "操作"
+      "type": "textarea",
+      "rows": 10
     },
-    inlineTemplate: {
-      render: function() {
-        var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-          return _c('div', [_c('el-button', {
-            attrs: {
-              "size": "small",
-              "type": "primary"
-            },
-            nativeOn: {
-              "click": function($event) {
-                _vm.charge(_vm.row.id)
-              }
-            }
-          }, [_vm._v("修改")]), _vm._v(" "), _c('el-button', {
-            attrs: {
-              "size": "small",
-              "type": "danger"
-            },
-            nativeOn: {
-              "click": function($event) {
-                _vm.charge(_vm.row.id)
-              }
-            }
-          }, [_vm._v("删除")])], 1)
-        
+    model: {
+      value: (_vm.reply.content),
+      callback: function($$v) {
+        _vm.reply.content = $$v
       },
-      staticRenderFns: []
+      expression: "reply.content"
     }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "paginator"
-  }, [_c('el-pagination', {
+  })], 1), _vm._v(" "), _c('el-form-item', [_c('el-button', {
     attrs: {
-      "current-page": _vm.fans.current_page,
-      "page-size": _vm.fans.per_page,
-      "layout": "total, prev, pager, next, jumper",
-      "total": _vm.fans.tatal
+      "type": "primary"
     },
     on: {
-      "current-change": _vm.handleCurrentChange
+      "click": _vm.store
     }
-  })], 1)], 1)
+  }, [_vm._v("保存")]), _vm._v(" "), _c('el-button', {
+    nativeOn: {
+      "click": function($event) {
+        _vm.$router.back()
+      }
+    }
+  }, [_vm._v("取消")])], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-00cf82cc", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-2f70cf8c", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 274:
+/***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(235);
+var content = __webpack_require__(241);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("97838146", content, false);
+var update = __webpack_require__(48)("94cc8de6", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-00cf82cc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./text-lists.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-00cf82cc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./text-lists.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-2f70cf8c&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./subscribe-form.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-2f70cf8c&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./subscribe-form.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
