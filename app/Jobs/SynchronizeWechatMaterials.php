@@ -4,17 +4,17 @@ namespace App\Jobs;
 
 use App\Repositories\MaterialRepository;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class SynchronizeWechatMaterials implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * 分页拉取素材数据时时每次f次摘取的数量
+     * 分页拉取素材数据时时每次f次摘取的数量.
      */
     const PAGE_SIZE = 20;
 
@@ -53,7 +53,6 @@ class SynchronizeWechatMaterials implements ShouldQueue
 
             if ($materials['item_count']) {
                 foreach ($materials['item'] as $material) {
-
                     app(MaterialRepository::class)->updateOrCreate(['media_id' => $material['media_id']], array_merge($material, ['type' => $this->syncMaterialType]));
                 }
             }

@@ -49,7 +49,7 @@ class MaterialController extends BaseController
     }
 
     /**
-     * 上传素材
+     * 上传素材.
      *
      * @param Request $request
      */
@@ -93,7 +93,7 @@ class MaterialController extends BaseController
     }
 
     /**
-     * 将微信上的素材同步到随手编数据库
+     * 将微信上的素材同步到随手编数据库.
      *
      * @param Request $request
      *
@@ -109,7 +109,7 @@ class MaterialController extends BaseController
     }
 
     /**
-     * 删除
+     * 删除.
      *
      * @param Request $request
      *
