@@ -51,10 +51,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   data: function data() {
     return {
-      fans: [],
       searchForm: {
-        name: '',
-        sex: 'all'
+        keyword: ''
+      },
+      materials: [],
+      dialogFormVisible: false,
+      uploadFormData: {
+        description: ''
       }
     };
   },
@@ -69,18 +72,89 @@ exports.default = {
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-      this.axios.get('fans/lists', {
+      this.axios.get('material/lists?type=image', {
         params: {
           keyword: this.searchForm.keyword,
-          sex: this.searchForm.sex,
           page: page
         }
       }).then(function (response) {
-        _this.fans = response.data.fans;
+        _this.materials = response.data.materials;
+      }).catch(function (error) {
+        _this.$message({
+          message: error.response.data,
+          type: 'error'
+        });
       });
     },
-    syncWechatFans: function syncWechatFans() {
-      console.log('sync');
+    uploadImage: function uploadImage() {
+      var _this2 = this;
+
+      var imageFile = this.$refs.imageFileInput.$el.children[0].files[0];
+
+      if (typeof imageFile === 'undefined') {
+        this.$message({
+          message: '未选择上传的图片',
+          type: 'error'
+        });
+        return;
+      }
+
+      var myForm = new FormData();
+      myForm.append('file', imageFile);
+      myForm.append('description', this.uploadFormData.description);
+
+      this.axios.post('material/upload?type=image', myForm, { timeout: 20000 }).then(function (response) {
+        _this2.dialogFormVisible = false;
+        _this2.uploadFormData.description = '';
+
+        _this2.$message({
+          message: '上传成功',
+          type: 'success'
+        });
+
+        setTimeout(function () {
+          _this2.loadData(_this2.materials.current_page);
+        }, 1000);
+      }).catch(function (error) {
+        _this2.$message({
+          message: error.response.data,
+          type: 'error'
+        });
+      });
+    },
+    syncImage: function syncImage() {
+      var _this3 = this;
+
+      this.axios.get('material/sync?type=image', { timeout: 20000 }).then(function (response) {
+        _this3.loadData(1);
+      });
+    },
+    deleteMaterial: function deleteMaterial(material) {
+      var _this4 = this;
+
+      this.$confirm('删除素材后将不可恢复, 是否继续?', '操作确认', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'info'
+      }).then(function () {
+        _this4.axios.post('material/delete', material, { timeout: 20000 }).then(function (response) {
+          _this4.$message({
+            message: '删除成功',
+            type: 'success'
+          });
+
+          setTimeout(function () {
+            _this4.loadData(_this4.materials.current_page);
+          }, 1000);
+        }).catch(function (error) {
+          _this4.$message({
+            message: error.response.data,
+            type: 'error'
+          });
+        });
+      }).catch(function () {
+        console.log('canceled');
+      });
     },
     search: function search() {
       this.loadData(1);
@@ -97,7 +171,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.avatar[data-v-6842daca] {\n  display: block;\n  overflow: hidden;\n  margin: 10px 0;\n  width: 80px;\n  height: 80px;\n}\n", ""]);
+exports.push([module.i, "\n.main .material-img[data-v-6842daca] {\n  display: inline-block;\n  width: 200px;\n}\n", ""]);
 
 /***/ }),
 
@@ -156,14 +230,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "icon": "upload"
     },
     on: {
-      "click": _vm.syncvideo
+      "click": _vm.syncImage
     }
   }, [_vm._v("同步视频素材")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
     staticStyle: {
       "width": "100%"
     },
     attrs: {
-      "data": _vm.fans.data,
+      "data": _vm.materials.data,
       "border": ""
     }
   }, [_c('el-table-column', {
@@ -176,14 +250,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
       "prop": "name",
-      "label": "标题",
-      "align": "center"
+      "label": "标题"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
       "prop": "description",
-      "label": "描述",
-      "align": "center"
+      "label": "描述"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
@@ -227,15 +299,76 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "paginator"
   }, [_c('el-pagination', {
     attrs: {
-      "current-page": _vm.fans.current_page,
-      "page-size": _vm.fans.per_page,
+      "current-page": _vm.materials.current_page,
+      "page-sizes": [20, 30, 40, 50],
+      "page-size": _vm.materials.per_page,
       "layout": "total, prev, pager, next, jumper",
-      "total": _vm.fans.tatal
+      "total": _vm.materials.total
     },
     on: {
       "current-change": _vm.handleCurrentChange
     }
-  })], 1)], 1)
+  })], 1), _vm._v(" "), _c('el-dialog', {
+    attrs: {
+      "title": "上传素材"
+    },
+    model: {
+      value: (_vm.dialogFormVisible),
+      callback: function($$v) {
+        _vm.dialogFormVisible = $$v
+      },
+      expression: "dialogFormVisible"
+    }
+  }, [_c('el-form', {
+    attrs: {
+      "model": _vm.uploadFormData
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "图片文件",
+      "label-width": "120"
+    }
+  }, [_c('el-input', {
+    ref: "imageFileInput",
+    attrs: {
+      "type": "file",
+      "auto-complete": "off"
+    }
+  })], 1), _vm._v(" "), _c('el-form-item', {
+    attrs: {
+      "label": "图片说明",
+      "label-width": "120"
+    }
+  }, [_c('el-input', {
+    attrs: {
+      "auto-complete": "off"
+    },
+    model: {
+      value: (_vm.uploadFormData.description),
+      callback: function($$v) {
+        _vm.uploadFormData.description = $$v
+      },
+      expression: "uploadFormData.description"
+    }
+  })], 1)], 1), _vm._v(" "), _c('div', {
+    staticClass: "tips"
+  }, [_vm._v("支持 bmp/jpg/jpeg/png/gif 格式，大小在 2MB 以内")]), _vm._v(" "), _c('div', {
+    staticClass: "dialog-footer",
+    slot: "footer"
+  }, [_c('el-button', {
+    on: {
+      "click": function($event) {
+        _vm.dialogFormVisible = false
+      }
+    }
+  }, [_vm._v("取 消")]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "primary"
+    },
+    on: {
+      "click": _vm.uploadImage
+    }
+  }, [_vm._v("确 定")])], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

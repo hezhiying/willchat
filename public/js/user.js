@@ -3394,9 +3394,6 @@ _axios2.default.interceptors.response.use(function (response) {
     } else if (error.response.status === 403) {
       app.error('无操作权限');
       return;
-    } else {
-      app.error(error.response.data | '系统错误');
-      return;
     }
   } else {
     if (error.code === 'ECONNABORTED') {
