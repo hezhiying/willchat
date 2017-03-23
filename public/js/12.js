@@ -125,7 +125,7 @@ exports.default = {
     syncImage: function syncImage() {
       var _this3 = this;
 
-      this.axios.get('material/sync?type=image', { timeout: 20000 }).then(function (response) {
+      this.axios.get('material/sync?type=image', { timeout: 200000 }).then(function (response) {
         _this3.loadData(1);
       });
     },
@@ -249,6 +249,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
+      "label": "图片"
+    },
+    inlineTemplate: {
+      render: function() {
+        var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+          return _c('img', {
+            staticClass: "material-img",
+            attrs: {
+              "src": _vm.row.url + '?type=fuck',
+              "alt": ""
+            }
+          })
+        
+      },
+      staticRenderFns: []
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
       "prop": "name",
       "label": "标题"
     }
@@ -310,7 +328,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })], 1), _vm._v(" "), _c('el-dialog', {
     attrs: {
-      "title": "上传素材"
+      "title": "上传素材",
+      "modal": false
     },
     model: {
       value: (_vm.dialogFormVisible),

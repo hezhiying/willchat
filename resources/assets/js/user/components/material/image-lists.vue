@@ -17,9 +17,9 @@
       <!-- <el-table-column type="selection" width="55"></el-table-column>-->
       <el-table-column prop="media_id" label="MEDIA_ID" align="center" width="400">
       </el-table-column>
-      <!-- <el-table-column label="图片" inline-template>
+      <el-table-column label="图片" inline-template>
           <img class="material-img" :src="row.url + '?type=fuck'" alt="">
-      </el-table-column> -->
+      </el-table-column>
       <el-table-column prop="name" label="标题">
       </el-table-column>
       <el-table-column prop="description" label="描述">
@@ -46,7 +46,7 @@
       </el-pagination>
     </div>
 
-    <el-dialog title="上传素材" v-model="dialogFormVisible">
+    <el-dialog title="上传素材" v-model="dialogFormVisible" :modal="false">
       <el-form :model="uploadFormData">
         <el-form-item label="图片文件" label-width="120">
           <el-input type="file" ref="imageFileInput" auto-complete="off"></el-input>
@@ -138,7 +138,7 @@
       },
 
       syncImage () {
-        this.axios.get('material/sync?type=image', {timeout: 20000}).then((response) => {
+        this.axios.get('material/sync?type=image', {timeout: 200000}).then((response) => {
           this.loadData(1);
         });
       },

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\AccountRepository;
 use App\Services\User as UserService;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,6 +13,24 @@ class WillChatServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->singleton('easywechat', function () {
+            $accountId = \Request::header('AccountId');
+
+            $accountRepository = app(AccountRepository::class);
+
+            $account = $accountRepository->find($accountId);
+
+            return new \EasyWeChat\Foundation\Application([
+                'debug'  => true,
+                'app_id' => $account->app_id,
+                'secret' => $account->app_secret,
+                'token'  => $account->token,
+                'log'    => [
+                    'level' => \Monolog\Logger::DEBUG,
+                    'file'  => storage_path('logs/easywechat.log'),
+                ],
+            ]);
+        });
     }
 
     /**

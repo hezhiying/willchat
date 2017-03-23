@@ -40,7 +40,9 @@ class SynchronizeWechatMaterials implements ShouldQueue
      */
     public function handle()
     {
-        $materialService = app('wechat')->material;
+        $accountId = \Request::header('AccountId');
+
+        $materialService = app('easywechat')->material;
 
         $stats = $materialService->stats();
 
@@ -53,7 +55,7 @@ class SynchronizeWechatMaterials implements ShouldQueue
 
             if ($materials['item_count']) {
                 foreach ($materials['item'] as $material) {
-                    app(MaterialRepository::class)->updateOrCreate(['media_id' => $material['media_id']], array_merge($material, ['type' => $this->syncMaterialType]));
+                    app(MaterialRepository::class)->updateOrCreate(['media_id' => $material['media_id']], array_merge($material, ['type' => $this->syncMaterialType, 'account_id' => $accountId]));
                 }
             }
         }

@@ -24,9 +24,9 @@ class SyncWechatMenu implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Account $account)
+    public function __construct()
     {
-        $this->account = $account;
+//        $this->account = $account;
     }
 
     /**
@@ -36,20 +36,6 @@ class SyncWechatMenu implements ShouldQueue
      */
     public function handle()
     {
-        try {
-            $wechat = new EasywechatApplication([
-                'debug'  => true,
-                'app_id' => $this->account->app_id,
-                'secret' => $this->account->app_secret,
-                'token'  => $this->account->token,
-                'log'    => [
-                    'level' => \Monolog\Logger::DEBUG,
-                    'file'  => storage_path('logs/easywechat.log'),
-                ],
-            ]);
 
-            $menu = $wechat->menu->all();
-        } catch (\Exception $e) {
-        }
     }
 }

@@ -37,13 +37,17 @@ class MaterialController extends BaseController
 
         $type = $request->input('type');
 
-        $materials = $this->materialRepository->where('type', $type)->where(function ($query) use ($keyword) {
+        $materials = $this->materialRepository->scopeQuery(function ($query) use ($keyword, $type) {
+            $query->where('account_id', $this->currentAccountId);
+
             if ($keyword) {
-                $query->where('media_id', 'like', "%{$keyword}%")->orWhere('name', 'like', "%{$keyword}%");
+                $query->where('name', 'like', "%{$keyword}%")->orWhere('description', 'like', "%{$keyword}%")->orWhere('media_id', 'like', "%{$keyword}%");
             }
 
+            $query->where('type', $type);
+
             return $query;
-        })->orderBy('created_at', 'DESC')->paginate(30);
+        })->orderBy('updated_at', 'DESC')->orderBy('id', 'DESC')->paginate();
 
         return response()->json(compact('materials'));
     }
@@ -68,17 +72,25 @@ class MaterialController extends BaseController
 
                 if ($type === Material::TYPE_IMAGE) {
                     // 上传图片素材到微信
-                    $uploadResult = app('wechat')->material->uploadImage($localResult->getRealPath());
+                    $uploadResult = app('easywechat')->material->uploadImage($localResult->getRealPath());
                 } elseif ($type === Material::TYPE_VOICE) {
                     // 上传语音素材到微信
-                    $uploadResult = app('wechat')->material->uploadVoice($localResult->getRealPath());
+                    $uploadResult = app('easywechat')->material->uploadVoice($localResult->getRealPath());
                 } elseif ($type === Material::TYPE_VIDEO) {
                     // 上传视频素材到微信
-                    $uploadResult = app('wechat')->material->uploadVideo($localResult->getRealPath(), $request->input('name'), $description);
+                    $uploadResult = app('easywechat')->material->uploadVideo($localResult->getRealPath(), $request->input('name'), $description);
                 }
 
+                $data = array_merge($uploadResult->toArray(),
+                    [
+                        'account_id' => $this->currentAccountId,
+                        'type' => $type,
+                        'name' => $file->getClientOriginalName(),
+                        'description' => $description,
+                    ]);
+
                 // 添加数据库记录
-                $this->materialRepository->create(array_merge($uploadResult->toArray(), ['type' => $type, 'name' => $file->getClientOriginalName(), 'description' => $description]));
+                $this->materialRepository->create($data);
 
                 // 删除上传至本地的文件
                 unlink(public_path('material_temp/'.$file->getClientOriginalName()));
@@ -121,8 +133,8 @@ class MaterialController extends BaseController
         $media_id = $request->input('media_id');
 
         try {
-            // TODO：　删除微信上的素材
-//            app('wechat')->material->delete($media_id);
+            // 删除微信上的素材
+            app('easywechat')->material->delete($media_id);
 
             // 删除本地对应数据记录
             $this->materialRepository->delete($id);
