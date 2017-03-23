@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Account;
-use EasyWeChat\Foundation\Application as EasywechatApplication;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -26,7 +25,7 @@ class SyncWechatMenu implements ShouldQueue
      */
     public function __construct()
     {
-//        $this->account = $account;
+        //        $this->account = $account;
     }
 
     /**
@@ -36,6 +35,5 @@ class SyncWechatMenu implements ShouldQueue
      */
     public function handle()
     {
-
     }
 }

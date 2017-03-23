@@ -83,9 +83,9 @@ class MaterialController extends BaseController
 
                 $data = array_merge($uploadResult->toArray(),
                     [
-                        'account_id' => $this->currentAccountId,
-                        'type' => $type,
-                        'name' => $file->getClientOriginalName(),
+                        'account_id'  => $this->currentAccountId,
+                        'type'        => $type,
+                        'name'        => $file->getClientOriginalName(),
                         'description' => $description,
                     ]);
 
