@@ -186,7 +186,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.syncWechatFans
     }
-  }, [_vm._v("同步粉丝数据")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("从服务器粉丝数据")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
     staticStyle: {
       "width": "100%"
     },

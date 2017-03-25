@@ -244,8 +244,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "prop": "media_id",
       "label": "MEDIA_ID",
-      "align": "center",
-      "width": "400"
+      "align": "center"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {

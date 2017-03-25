@@ -15,7 +15,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="search" @click="search">搜索</el-button>
-          <el-button type="primary" icon="upload" @click="syncWechatFans">同步粉丝数据</el-button>
+          <el-button type="primary" icon="upload" @click="syncWechatFans">从服务器粉丝数据</el-button>
         </el-form-item>
       </el-form>
     </div>

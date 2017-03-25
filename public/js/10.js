@@ -51,10 +51,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   data: function data() {
     return {
-      fans: [],
       searchForm: {
-        name: '',
-        sex: 'all'
+        keyword: ''
+      },
+      materials: [],
+      dialogFormVisible: false,
+      uploadFormData: {
+        description: ''
       }
     };
   },
@@ -69,18 +72,89 @@ exports.default = {
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-      this.axios.get('fans/lists', {
+      this.axios.get('material/lists?type=mpvoice', {
         params: {
           keyword: this.searchForm.keyword,
-          sex: this.searchForm.sex,
           page: page
         }
       }).then(function (response) {
-        _this.fans = response.data.fans;
+        _this.materials = response.data.materials;
+      }).catch(function (error) {
+        _this.$message({
+          message: error.response.data,
+          type: 'error'
+        });
       });
     },
-    syncWechatFans: function syncWechatFans() {
-      console.log('sync');
+    uploadMpvoice: function uploadMpvoice() {
+      var _this2 = this;
+
+      var mpvoiceFile = this.$refs.mpvoiceFileInput.$el.children[0].files[0];
+
+      if (typeof mpvoiceFile === 'undefined') {
+        this.$message({
+          message: '未选择上传的语音',
+          type: 'error'
+        });
+        return;
+      }
+
+      var myForm = new FormData();
+      myForm.append('file', mpvoiceFile);
+      myForm.append('description', this.uploadFormData.description);
+
+      this.axios.post('material/upload?type=mpvoice', myForm, { timeout: 20000 }).then(function (response) {
+        _this2.dialogFormVisible = false;
+        _this2.uploadFormData.description = '';
+
+        _this2.$message({
+          message: '上传成功',
+          type: 'success'
+        });
+
+        setTimeout(function () {
+          _this2.loadData(_this2.materials.current_page);
+        }, 1000);
+      }).catch(function (error) {
+        _this2.$message({
+          message: error.response.data,
+          type: 'error'
+        });
+      });
+    },
+    sync: function sync() {
+      var _this3 = this;
+
+      this.axios.get('material/sync?type=mpvoice', { timeout: 200000 }).then(function (response) {
+        _this3.loadData(1);
+      });
+    },
+    deleteMaterial: function deleteMaterial(material) {
+      var _this4 = this;
+
+      this.$confirm('删除素材后将不可恢复, 是否继续?', '操作确认', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'info'
+      }).then(function () {
+        _this4.axios.post('material/delete', material, { timeout: 20000 }).then(function (response) {
+          _this4.$message({
+            message: '删除成功',
+            type: 'success'
+          });
+
+          setTimeout(function () {
+            _this4.loadData(_this4.materials.current_page);
+          }, 1000);
+        }).catch(function (error) {
+          _this4.$message({
+            message: error.response.data,
+            type: 'error'
+          });
+        });
+      }).catch(function () {
+        console.log('canceled');
+      });
     },
     search: function search() {
       this.loadData(1);
@@ -97,7 +171,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.avatar[data-v-751029b2] {\n  display: block;\n  overflow: hidden;\n  margin: 10px 0;\n  width: 80px;\n  height: 80px;\n}\n", ""]);
+exports.push([module.i, "", ""]);
 
 /***/ }),
 
@@ -150,28 +224,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.dialogFormVisible = true
       }
     }
-  }, [_vm._v("上传视频素材")]), _vm._v(" "), _c('el-button', {
+  }, [_vm._v("上传语音素材")]), _vm._v(" "), _c('el-button', {
     attrs: {
       "type": "primary",
       "icon": "upload"
     },
     on: {
-      "click": _vm.syncvideo
+      "click": _vm.sync
     }
-  }, [_vm._v("同步视频素材")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("同步语音素材")])], 1)], 1)], 1), _vm._v(" "), _c('el-table', {
     staticStyle: {
       "width": "100%"
     },
     attrs: {
-      "data": _vm.fans.data,
+      "data": _vm.materials.data,
       "border": ""
     }
   }, [_c('el-table-column', {
     attrs: {
       "prop": "media_id",
       "label": "MEDIA_ID",
-      "align": "center",
-      "width": "400"
+      "align": "center"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
@@ -227,10 +300,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "paginator"
   }, [_c('el-pagination', {
     attrs: {
-      "current-page": _vm.fans.current_page,
-      "page-size": _vm.fans.per_page,
+      "current-page": _vm.materials.current_page,
+      "page-size": _vm.materials.per_page,
       "layout": "total, prev, pager, next, jumper",
-      "total": _vm.fans.tatal
+      "total": _vm.materials.tatal
     },
     on: {
       "current-change": _vm.handleCurrentChange

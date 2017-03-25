@@ -14,8 +14,7 @@
     </div>
 
     <el-table :data="materials.data" border style="width: 100%">
-      <!-- <el-table-column type="selection" width="55"></el-table-column>-->
-      <el-table-column prop="media_id" label="MEDIA_ID" align="center" width="400">
+      <el-table-column prop="media_id" label="MEDIA_ID" align="center">
       </el-table-column>
       <el-table-column label="图片" inline-template>
           <img class="material-img" :src="row.url + '?type=fuck'" alt="">
