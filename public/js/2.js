@@ -17,7 +17,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\auth\\login.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\auth\\login.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] login.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -40,29 +40,22 @@ module.exports = Component.exports
 /***/ }),
 
 /***/ 219:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(9);
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 
-var _extends2 = __webpack_require__(28);
 
-var _extends3 = _interopRequireDefault(_extends2);
 
-var _config = __webpack_require__(14);
 
-var _config2 = _interopRequireDefault(_config);
-
-var _vuex = __webpack_require__(9);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  data: function data() {
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data() {
     return {
       formData: {
         name: '',
@@ -71,33 +64,31 @@ exports.default = {
     };
   },
 
+  methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["mapActions"])(['storeUserToLocal']), {
 
-  methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['storeUserToLocal']), {
-    login: function login() {
-      var _this = this;
+    login() {
+      this.axios.post('login', this.formData).then(response => {
+        localStorage.setItem(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].jwtTokenKey, response.data.token);
 
-      this.axios.post('login', this.formData).then(function (response) {
-        localStorage.setItem(_config2.default.jwtTokenKey, response.data.token);
+        this.storeUserToLocal(response.data.user);
 
-        _this.storeUserToLocal(response.data.user);
-
-        _this.$router.push('/');
-      }).catch(function (error) {
-        _this.$message({
+        this.$router.push('/');
+      }).catch(error => {
+        this.$message({
           message: error.response.data,
           type: 'error'
         });
       });
     }
   })
-};
+});
 
 /***/ }),
 
 /***/ 246:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)();
+exports = module.exports = __webpack_require__(14)();
 exports.push([module.i, "\n#login[data-v-6729d4bc] {\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url("+__webpack_require__(256)+");\n  background-size: cover;\n}\n#login .login-form[data-v-6729d4bc] {\n    display: block;\n    width: 360px;\n    background-color: #e0e6ed;\n    padding: 40px;\n    border-radius: 10px;\n}\n#login .login-form .title[data-v-6729d4bc] {\n      font-size: 2rem;\n      line-height: 2rem;\n      color: #4e4e4e;\n      text-align: center;\n      font-family: 'Microsoft Yahei';\n      font-weight: 400;\n}\n#login .login-form .el-input[data-v-6729d4bc] {\n      display: block;\n      margin: 1rem 0;\n}\n#login .login-form .btn-submit[data-v-6729d4bc] {\n      display: block;\n      overflow: hidden;\n      width: 100%;\n      margin-top: 3rem;\n}\n", ""]);
 
 /***/ }),
@@ -105,7 +96,7 @@ exports.push([module.i, "\n#login[data-v-6729d4bc] {\n  position: fixed;\n  disp
 /***/ 256:
 /***/ (function(module, exports) {
 
-module.exports = "/js/images/login-bg.jpg?90666d610bd3dd8f34a42d472f9b52f4";
+module.exports = "/js/images/login-bg.jpg?f4bc912b6a34d55bfe4a7e23080dab97";
 
 /***/ }),
 
@@ -190,13 +181,13 @@ var content = __webpack_require__(246);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("1ba8ce96", content, false);
+var update = __webpack_require__(48)("6f2089de", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6729d4bc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6729d4bc&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6729d4bc\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6729d4bc\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

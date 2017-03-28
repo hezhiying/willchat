@@ -1,7 +1,7 @@
 <template>
   <div class="main main-with-padding">
     <el-row :gutter="20" type="flex" justify="center">
-      <el-col :span="6" v-for="account in accounts" v-if="accounts.length > 0">
+      <el-col :span="6" v-for="account in accounts" :key="account.id" v-if="accounts.length > 0">
           <el-card class="box-card" @click.native="toManage(account.id)">
             <div slot="header" class="clearfix">
               <span style="line-height: 36px;">{{ account.name }}</span>

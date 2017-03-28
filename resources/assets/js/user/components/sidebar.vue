@@ -1,11 +1,9 @@
 <template>
   <div id="sidebar">
     <el-menu default-active="1" theme="dark" :router="true" :unique-opened="true" class="el-menu-vertical-demo">
-      <el-submenu :index="index.toString()" v-for="(item, index) in MenuConfig">
+      <el-submenu :index="index.toString()" v-for="(item, index) in MenuConfig" :key="item.index">
         <template slot="title"><i :class="'el-icon-' + item.icon"></i>{{ item.title }}</template>
-        <el-menu-item :index="subItem.route" v-for="subItem in item.subItems">{{ subItem.title }}
-
-        </el-menu-item>
+        <el-menu-item :index="subItem.route" v-for="subItem in item.subItems" v-text="subItem.title" :key="subItem.index"></el-menu-item>
       </el-submenu>
     </el-menu>
   </div>

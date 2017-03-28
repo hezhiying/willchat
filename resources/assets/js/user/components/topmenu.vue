@@ -5,7 +5,7 @@
       <el-menu-item index="/">首页</el-menu-item>
       <el-submenu index="">
         <template slot="title">公众号切换</template>
-        <el-menu-item index="" v-for="account in accounts" @click="changeAccount(account.id)">{{ account.name }}
+        <el-menu-item index="" v-for="account in accounts" :key="account.id" @click="changeAccount(account.id)">{{ account.name }}
         </el-menu-item>
       </el-submenu>
       <el-menu-item index="/document/lists">帮助中心</el-menu-item>

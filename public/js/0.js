@@ -1,16 +1,14 @@
 webpackJsonp([0],{
 
 /***/ 218:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  data: function data() {
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data() {
     return {
       account: {
         id: '',
@@ -27,55 +25,51 @@ exports.default = {
       }
     };
   },
-  mounted: function mounted() {
-    var _this = this;
 
-    var accountId = this.$route.params.id;
+  mounted() {
+    const accountId = this.$route.params.id;
 
     if (accountId) {
-      this.axios.get('account/show/' + accountId).then(function (response) {
-        _this.account = response.data.account;
+      this.axios.get(`account/show/${accountId}`).then(response => {
+        this.account = response.data.account;
       });
     }
   },
 
-
   computed: {},
 
   methods: {
-    store: function store() {
-      var _this2 = this;
-
-      this.axios.post('account/store', this.account).then(function (response) {
-        _this2.$message({
+    store() {
+      this.axios.post('account/store', this.account).then(response => {
+        this.$message({
           message: '添加成功',
           type: 'success'
         });
 
-        setTimeout(function () {
-          _this2.$router.push('/');
+        setTimeout(() => {
+          this.$router.push('/');
         }, 1000);
       });
     }
   },
 
   watch: {
-    'formData.province': function formDataProvince(val, oldVal) {
+    'formData.province': function (val, oldVal) {
       this.formData.city = this.cityList[0];
     },
 
-    'formData.city': function formDataCity(val, oldVal) {
+    'formData.city': function (val, oldVal) {
       this.formData.area = this.areaList[0];
     }
   }
-};
+});
 
 /***/ }),
 
 /***/ 253:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)();
+exports = module.exports = __webpack_require__(14)();
 exports.push([module.i, "", ""]);
 
 /***/ }),
@@ -225,13 +219,13 @@ var content = __webpack_require__(253);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("c2e3ca44", content, false);
+var update = __webpack_require__(48)("976a9ed6", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-c42af674&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-c42af674&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-c42af674\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-c42af674\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -259,7 +253,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\account\\form.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\account\\form.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] form.vue: functional components are not supported with templates, they should use render functions.")}
 

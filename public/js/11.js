@@ -17,7 +17,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\material\\video-lists.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\material\\video-lists.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] video-lists.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -40,16 +40,14 @@ module.exports = Component.exports
 /***/ }),
 
 /***/ 226:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  data: function data() {
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data() {
     return {
       searchForm: {
         keyword: ''
@@ -61,35 +59,30 @@ exports.default = {
       }
     };
   },
-  mounted: function mounted() {
+
+  mounted() {
     this.loadData();
   },
 
-
   methods: {
-    loadData: function loadData() {
-      var _this = this;
-
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
+    loadData(page = 1) {
       this.axios.get('material/lists?type=video', {
         params: {
           keyword: this.searchForm.keyword,
           page: page
         }
-      }).then(function (response) {
-        _this.materials = response.data.materials;
-      }).catch(function (error) {
-        _this.$message({
+      }).then(response => {
+        this.materials = response.data.materials;
+      }).catch(error => {
+        this.$message({
           message: error.response.data,
           type: 'error'
         });
       });
     },
-    upload: function upload() {
-      var _this2 = this;
 
-      var imageFile = this.$refs.imageFileInput.$el.children[0].files[0];
+    upload() {
+      let imageFile = this.$refs.imageFileInput.$el.children[0].files[0];
 
       if (typeof imageFile === 'undefined') {
         this.$message({
@@ -99,78 +92,78 @@ exports.default = {
         return;
       }
 
-      var myForm = new FormData();
+      let myForm = new FormData();
       myForm.append('file', imageFile);
       myForm.append('description', this.uploadFormData.description);
 
-      this.axios.post('material/upload?type=video', myForm, { timeout: 20000 }).then(function (response) {
-        _this2.dialogFormVisible = false;
-        _this2.uploadFormData.description = '';
+      this.axios.post('material/upload?type=video', myForm, { timeout: 20000 }).then(response => {
+        this.dialogFormVisible = false;
+        this.uploadFormData.description = '';
 
-        _this2.$message({
+        this.$message({
           message: '上传成功',
           type: 'success'
         });
 
-        setTimeout(function () {
-          _this2.loadData(_this2.materials.current_page);
+        setTimeout(() => {
+          this.loadData(this.materials.current_page);
         }, 1000);
-      }).catch(function (error) {
-        _this2.$message({
+      }).catch(error => {
+        this.$message({
           message: error.response.data,
           type: 'error'
         });
       });
     },
-    sync: function sync() {
-      var _this3 = this;
 
-      this.axios.get('material/sync?type=video', { timeout: 200000 }).then(function (response) {
-        _this3.loadData(1);
+    sync() {
+      this.axios.get('material/sync?type=video', { timeout: 200000 }).then(response => {
+        this.loadData(1);
       });
     },
-    deleteMaterial: function deleteMaterial(material) {
-      var _this4 = this;
 
+    deleteMaterial(material) {
       this.$confirm('删除素材后将不可恢复, 是否继续?', '操作确认', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'info'
-      }).then(function () {
-        _this4.axios.post('material/delete', material, { timeout: 20000 }).then(function (response) {
-          _this4.$message({
+      }).then(() => {
+        this.axios.post('material/delete', material, { timeout: 20000 }).then(response => {
+          this.$message({
             message: '删除成功',
             type: 'success'
           });
 
-          setTimeout(function () {
-            _this4.loadData(_this4.materials.current_page);
+          setTimeout(() => {
+            this.loadData(this.materials.current_page);
           }, 1000);
-        }).catch(function (error) {
-          _this4.$message({
+        }).catch(error => {
+          this.$message({
             message: error.response.data,
             type: 'error'
           });
         });
-      }).catch(function () {
+      }).catch(() => {
         console.log('canceled');
       });
     },
-    search: function search() {
+
+    search() {
       this.loadData(1);
     },
-    handleCurrentChange: function handleCurrentChange(page) {
+
+    handleCurrentChange(page) {
       this.loadData(page);
     }
   }
-};
+});
 
 /***/ }),
 
 /***/ 245:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)();
+exports = module.exports = __webpack_require__(14)();
 exports.push([module.i, "\n.main .material-img[data-v-61a095bb] {\n  display: inline-block;\n  width: 200px;\n}\n", ""]);
 
 /***/ }),
@@ -331,13 +324,13 @@ var content = __webpack_require__(245);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("5a5541c8", content, false);
+var update = __webpack_require__(48)("4d26079e", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-61a095bb&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./video-lists.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-61a095bb&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./video-lists.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-61a095bb\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./video-lists.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-61a095bb\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./video-lists.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

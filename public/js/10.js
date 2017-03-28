@@ -17,7 +17,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\material\\voice-lists.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\material\\voice-lists.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] voice-lists.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -40,16 +40,14 @@ module.exports = Component.exports
 /***/ }),
 
 /***/ 227:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  data: function data() {
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data() {
     return {
       searchForm: {
         keyword: ''
@@ -61,35 +59,30 @@ exports.default = {
       }
     };
   },
-  mounted: function mounted() {
+
+  mounted() {
     this.loadData();
   },
 
-
   methods: {
-    loadData: function loadData() {
-      var _this = this;
-
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
+    loadData(page = 1) {
       this.axios.get('material/lists?type=mpvoice', {
         params: {
           keyword: this.searchForm.keyword,
           page: page
         }
-      }).then(function (response) {
-        _this.materials = response.data.materials;
-      }).catch(function (error) {
-        _this.$message({
+      }).then(response => {
+        this.materials = response.data.materials;
+      }).catch(error => {
+        this.$message({
           message: error.response.data,
           type: 'error'
         });
       });
     },
-    uploadMpvoice: function uploadMpvoice() {
-      var _this2 = this;
 
-      var mpvoiceFile = this.$refs.mpvoiceFileInput.$el.children[0].files[0];
+    uploadMpvoice() {
+      let mpvoiceFile = this.$refs.mpvoiceFileInput.$el.children[0].files[0];
 
       if (typeof mpvoiceFile === 'undefined') {
         this.$message({
@@ -99,78 +92,78 @@ exports.default = {
         return;
       }
 
-      var myForm = new FormData();
+      let myForm = new FormData();
       myForm.append('file', mpvoiceFile);
       myForm.append('description', this.uploadFormData.description);
 
-      this.axios.post('material/upload?type=mpvoice', myForm, { timeout: 20000 }).then(function (response) {
-        _this2.dialogFormVisible = false;
-        _this2.uploadFormData.description = '';
+      this.axios.post('material/upload?type=mpvoice', myForm, { timeout: 20000 }).then(response => {
+        this.dialogFormVisible = false;
+        this.uploadFormData.description = '';
 
-        _this2.$message({
+        this.$message({
           message: '上传成功',
           type: 'success'
         });
 
-        setTimeout(function () {
-          _this2.loadData(_this2.materials.current_page);
+        setTimeout(() => {
+          this.loadData(this.materials.current_page);
         }, 1000);
-      }).catch(function (error) {
-        _this2.$message({
+      }).catch(error => {
+        this.$message({
           message: error.response.data,
           type: 'error'
         });
       });
     },
-    sync: function sync() {
-      var _this3 = this;
 
-      this.axios.get('material/sync?type=mpvoice', { timeout: 200000 }).then(function (response) {
-        _this3.loadData(1);
+    sync() {
+      this.axios.get('material/sync?type=mpvoice', { timeout: 200000 }).then(response => {
+        this.loadData(1);
       });
     },
-    deleteMaterial: function deleteMaterial(material) {
-      var _this4 = this;
 
+    deleteMaterial(material) {
       this.$confirm('删除素材后将不可恢复, 是否继续?', '操作确认', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'info'
-      }).then(function () {
-        _this4.axios.post('material/delete', material, { timeout: 20000 }).then(function (response) {
-          _this4.$message({
+      }).then(() => {
+        this.axios.post('material/delete', material, { timeout: 20000 }).then(response => {
+          this.$message({
             message: '删除成功',
             type: 'success'
           });
 
-          setTimeout(function () {
-            _this4.loadData(_this4.materials.current_page);
+          setTimeout(() => {
+            this.loadData(this.materials.current_page);
           }, 1000);
-        }).catch(function (error) {
-          _this4.$message({
+        }).catch(error => {
+          this.$message({
             message: error.response.data,
             type: 'error'
           });
         });
-      }).catch(function () {
+      }).catch(() => {
         console.log('canceled');
       });
     },
-    search: function search() {
+
+    search() {
       this.loadData(1);
     },
-    handleCurrentChange: function handleCurrentChange(page) {
+
+    handleCurrentChange(page) {
       this.loadData(page);
     }
   }
-};
+});
 
 /***/ }),
 
 /***/ 250:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)();
+exports = module.exports = __webpack_require__(14)();
 exports.push([module.i, "", ""]);
 
 /***/ }),
@@ -330,13 +323,13 @@ var content = __webpack_require__(250);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("babc0302", content, false);
+var update = __webpack_require__(48)("21cf00e8", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-751029b2&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./voice-lists.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-751029b2&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./voice-lists.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-751029b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./voice-lists.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-751029b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./voice-lists.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
