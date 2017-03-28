@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Jobs\SyncWechatFans;
 use App\Repositories\FanRepository;
 use Illuminate\Http\Request;
 
@@ -58,6 +59,8 @@ class FansController extends BaseController
      */
     public function syncFromWechatServer(Request $request)
     {
+        $this->dispatch(new SyncWechatFans());
+
         return response('同步成功', 200);
     }
 }

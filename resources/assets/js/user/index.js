@@ -91,11 +91,13 @@ axios.interceptors.response.use((response) => {
       // 无权限时统一提示
       app.error('无操作权限');
       return;
-    } else {
-      // 其它错误统一提示
-      app.error(error.response.data | '系统错误');
-      return;
     }
+    // else {
+    //   // 其它错误统一提示
+    //   console.log(error.response);
+    //   // app.error(error.response.data | '系统错误');
+    //   return;
+    // }
   } else {
     // 请求超时提示
     if (error.code === 'ECONNABORTED') {

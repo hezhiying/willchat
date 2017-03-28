@@ -7,15 +7,14 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="search" @click="search">搜索</el-button>
-          <el-button type="primary" icon="plus" @click="dialogFormVisible = true">上传视频素材</el-button>
-          <el-button type="primary" icon="upload" @click="syncvideo">同步视频素材</el-button>
+          <el-button type="primary" icon="plus" @click="dialogFormVisible = true">上传语音素材</el-button>
+          <el-button type="primary" icon="upload" @click="sync">同步语音素材</el-button>
         </el-form-item>
       </el-form>
     </div>
 
-    <el-table :data="fans.data" border style="width: 100%">
-      <!-- <el-table-column type="selection" width="55"></el-table-column>-->
-      <el-table-column prop="media_id" label="MEDIA_ID" align="center" width="400">
+    <el-table :data="materials.data" border style="width: 100%">
+      <el-table-column prop="media_id" label="MEDIA_ID" align="center">
       </el-table-column>
       <el-table-column prop="name" label="标题" align="center">
       </el-table-column>
@@ -35,10 +34,10 @@
     <div class="paginator">
       <el-pagination
               @current-change="handleCurrentChange"
-              :current-page="fans.current_page"
-              :page-size="fans.per_page"
+              :current-page="materials.current_page"
+              :page-size="materials.per_page"
               layout="total, prev, pager, next, jumper"
-              :total="fans.tatal">
+              :total="materials.tatal">
       </el-pagination>
     </div>
   </div>
@@ -48,10 +47,13 @@
   export default {
     data () {
       return {
-        fans: [],
         searchForm: {
-          name: '',
-          sex: 'all'
+          keyword: ''
+        },
+        materials: [],
+        dialogFormVisible: false,
+        uploadFormData: {
+          description: ''
         }
       }
     },
@@ -62,20 +64,89 @@
 
     methods: {
       loadData (page = 1) {
-        this.axios.get('fans/lists', {
+        this.axios.get('material/lists?type=mpvoice', {
           params: {
             keyword: this.searchForm.keyword,
-            sex: this.searchForm.sex,
             page: page
           }
         }).then((response) => {
-          this.fans = response.data.fans;
+          this.materials = response.data.materials;
+        }).catch((error) => {
+          this.$message({
+            message: error.response.data,
+            type: 'error'
+          });
+        })
+      },
+
+      // 上传素材
+      uploadMpvoice () {
+        let mpvoiceFile = this.$refs.mpvoiceFileInput.$el.children[0].files[0];
+
+        if (typeof mpvoiceFile === 'undefined') {
+          this.$message({
+            message: '未选择上传的语音',
+            type: 'error'
+          });
+          return;
+        }
+
+        let myForm = new FormData();
+        myForm.append('file', mpvoiceFile);
+        myForm.append('description', this.uploadFormData.description);
+
+        // 上传
+        this.axios.post('material/upload?type=mpvoice', myForm, {timeout: 20000}).then((response) => {
+          this.dialogFormVisible = false;
+          this.uploadFormData.description = '';
+
+          this.$message({
+            message: '上传成功',
+            type: 'success'
+          });
+
+          setTimeout(() => {
+            this.loadData(this.materials.current_page);
+          }, 1000);
+        }).catch((error) => {
+          this.$message({
+            message: error.response.data,
+            type: 'error'
+          });
+        })
+      },
+
+      sync () {
+        this.axios.get('material/sync?type=mpvoice', {timeout: 200000}).then((response) => {
+          this.loadData(1);
         });
       },
 
-      syncWechatFans () {
-        // TODO: 同步粉丝数据
-        console.log('sync');
+      // 删除素材
+      deleteMaterial (material) {
+        this.$confirm('删除素材后将不可恢复, 是否继续?', '操作确认', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'info'
+        }).then(() => {
+          this.axios.post('material/delete', material, {timeout: 20000}).then((response) => {
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+
+            setTimeout(() => {
+              this.loadData(this.materials.current_page);
+            }, 1000);
+          }).catch((error) => {
+            this.$message({
+              message: error.response.data,
+              type: 'error'
+            });
+          })
+        }).catch(() => {
+          console.log('canceled');
+        });
       },
 
       // 搜索
@@ -91,11 +162,4 @@
 </script>
 
 <style scoped lang="scss">
-  .avatar {
-    display: block;
-    overflow: hidden;
-    margin: 10px 0;
-    width: 80px;
-    height: 80px;
-  }
 </style>

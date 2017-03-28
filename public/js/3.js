@@ -1,25 +1,25 @@
 webpackJsonp([3],{
 
-/***/ 199:
+/***/ 217:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(277)
+__webpack_require__(283)
 
 var Component = __webpack_require__(47)(
   /* script */
-  __webpack_require__(219),
+  __webpack_require__(235),
   /* template */
-  __webpack_require__(259),
+  __webpack_require__(265),
   /* scopeId */
-  "data-v-25790b38",
+  "data-v-59f6fd45",
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\dashboard.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\user\\profile.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] dashboard.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] profile.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28,9 +28,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-25790b38", Component.options)
+    hotAPI.createRecord("data-v-59f6fd45", Component.options)
   } else {
-    hotAPI.reload("data-v-25790b38", Component.options)
+    hotAPI.reload("data-v-59f6fd45", Component.options)
   }
 })()}
 
@@ -39,7 +39,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 219:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49,57 +49,46 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = __webpack_require__(215);
+var _extends2 = __webpack_require__(28);
 
-var _stringify2 = _interopRequireDefault(_stringify);
+var _extends3 = _interopRequireDefault(_extends2);
 
-var _config = __webpack_require__(16);
-
-var _config2 = _interopRequireDefault(_config);
+var _vuex = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
   data: function data() {
-    return {
-      accounts: []
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.axios.get('account/lists').then(function (response) {
-      _this.accounts = response.data.accounts;
-      window.localStorage.setItem(_config2.default.accountsKey, (0, _stringify2.default)(response.data.accounts));
-    }).catch(function (error) {
-      console.log(error);
-    });
+    return {};
   },
 
 
-  methods: {
-    toManage: function toManage(id) {
-      window.localStorage.setItem('willchat_account_id', id);
+  computed: (0, _extends3.default)({}, (0, _vuex.mapGetters)(['user'])),
 
-      this.$router.push('manage/' + id);
-    },
-    toEdit: function toEdit(id) {
-      this.$router.push('account/edit/' + id);
+  methods: (0, _extends3.default)({}, (0, _vuex.mapActions)(['storeUserToLocal']), {
+    save: function save() {
+      var _this = this;
+
+      this.axios.post('/user/profile', this.user).then(function (response) {
+        _this.storeUserToLocal(response.data.user);
+
+        _this.$root.success('保存成功');
+      });
     }
-  }
+  })
 };
 
 /***/ }),
 
-/***/ 238:
+/***/ 244:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n.setting-icon[data-v-25790b38] {\n  color: #777;\n  cursor: pointer;\n}\n.plus-card[data-v-25790b38] {\n  display: block;\n  overflow: hidden;\n  background-color: #fff;\n  height: 100%;\n  position: relative;\n}\n.plus-card i[data-v-25790b38] {\n    position: absolute;\n    font-size: 3rem;\n    color: lightgray;\n    top: 50%;\n    left: 50%;\n    margin-top: -1.5rem;\n    margin-left: -1.5rem;\n}\n", ""]);
+exports.push([module.i, "\n.avatar[data-v-59f6fd45] {\n  display: block;\n  width: 250px;\n  height: 250px;\n  overflow: hidden;\n  margin: 0 auto;\n}\n.user-profile[data-v-59f6fd45] {\n  display: block;\n  overflow: hidden;\n  background-color: #fff;\n  padding: 20px 25px;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 259:
+/***/ 265:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -107,82 +96,192 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "main main-with-padding"
   }, [_c('el-row', {
     attrs: {
-      "gutter": 20,
+      "gutter": 20
+    }
+  }, [_c('el-col', {
+    attrs: {
+      "span": 8
+    }
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/avatar"
+    }
+  }, [_c('img', {
+    staticClass: "avatar",
+    attrs: {
+      "src": _vm.user.avatar,
+      "alt": ""
+    }
+  })])], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 16
+    }
+  }, [_c('div', {
+    staticClass: "user-profile"
+  }, [_c('el-form', {
+    attrs: {
+      "label-position": "top",
+      "label-width": "120px",
+      "model": _vm.user
+    }
+  }, [_c('el-row', {
+    attrs: {
+      "gutter": 20
+    }
+  }, [_c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "用户名"
+    }
+  }, [_c('el-input', {
+    attrs: {
+      "readonly": ""
+    },
+    model: {
+      value: (_vm.user.name),
+      callback: function($$v) {
+        _vm.user.name = $$v
+      },
+      expression: "user.name"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "昵称"
+    }
+  }, [_c('el-input', {
+    model: {
+      value: (_vm.user.nickname),
+      callback: function($$v) {
+        _vm.user.nickname = $$v
+      },
+      expression: "user.nickname"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "Email"
+    }
+  }, [_c('el-input', {
+    attrs: {
+      "readonly": ""
+    },
+    model: {
+      value: (_vm.user.email),
+      callback: function($$v) {
+        _vm.user.email = $$v
+      },
+      expression: "user.email"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "手机"
+    }
+  }, [_c('el-input', {
+    model: {
+      value: (_vm.user.mobile),
+      callback: function($$v) {
+        _vm.user.mobile = $$v
+      },
+      expression: "user.mobile"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "QQ"
+    }
+  }, [_c('el-input', {
+    model: {
+      value: (_vm.user.qq),
+      callback: function($$v) {
+        _vm.user.qq = $$v
+      },
+      expression: "user.qq"
+    }
+  })], 1)], 1), _vm._v(" "), _c('el-col', {
+    attrs: {
+      "span": 12
+    }
+  }, [_c('el-form-item', {
+    attrs: {
+      "label": "最后登录时间"
+    }
+  }, [_c('el-input', {
+    model: {
+      value: (_vm.user.last_login_at),
+      callback: function($$v) {
+        _vm.user.last_login_at = $$v
+      },
+      expression: "user.last_login_at"
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c('el-row', {
+    attrs: {
       "type": "flex",
       "justify": "center"
     }
-  }, [_vm._l((_vm.accounts), function(account) {
-    return (_vm.accounts.length > 0) ? _c('el-col', {
-      attrs: {
-        "span": 6
-      }
-    }, [_c('el-card', {
-      staticClass: "box-card",
-      nativeOn: {
-        "click": function($event) {
-          _vm.toManage(account.id)
-        }
-      }
-    }, [_c('div', {
-      staticClass: "clearfix",
-      slot: "header"
-    }, [_c('span', {
-      staticStyle: {
-        "line-height": "36px"
-      }
-    }, [_vm._v(_vm._s(account.name))]), _vm._v(" "), _c('i', {
-      staticClass: "setting-icon el-icon-setting",
-      staticStyle: {
-        "float": "right"
-      },
-      on: {
-        "click": function($event) {
-          $event.stopPropagation();
-          $event.preventDefault();
-          _vm.toEdit(account.id)
-        }
-      }
-    })]), _vm._v(" "), _c('div', [_vm._v("\n            " + _vm._s(account.name) + "\n            " + _vm._s(account.type) + "\n            " + _vm._s(account.created_at) + "\n          ")])])], 1) : _vm._e()
-  }), _vm._v(" "), _c('el-col', {
+  }, [_c('el-button', {
     attrs: {
-      "span": 6
+      "type": "primary"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.save($event)
+      }
     }
-  }, [_c('router-link', {
-    staticClass: "plus-card el-card",
+  }, [_vm._v("保存")]), _vm._v(" "), _c('el-button', {
     attrs: {
-      "to": "/account/add"
+      "type": "default"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.$router.back()
+      }
     }
-  }, [_c('i', {
-    staticClass: "el-icon-plus"
-  })])], 1)], 2)], 1)
+  }, [_vm._v("取消")])], 1)], 1)], 1)])], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-25790b38", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-59f6fd45", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 277:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(238);
+var content = __webpack_require__(244);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("32450f59", content, false);
+var update = __webpack_require__(48)("1a14e4e2", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-25790b38&scoped=true!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./dashboard.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-25790b38&scoped=true!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./dashboard.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-59f6fd45&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-59f6fd45&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
