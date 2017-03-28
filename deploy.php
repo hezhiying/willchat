@@ -1,5 +1,7 @@
 <?php
+
 namespace Deployer;
+
 require 'recipe/laravel.php';
 
 // Configuration
@@ -21,7 +23,6 @@ server('production', 'willchat.wang')
     ->identityFile()
     ->set('deploy_path', '/home/www/willchat')
     ->pty(true);
-
 
 // Tasks
 
