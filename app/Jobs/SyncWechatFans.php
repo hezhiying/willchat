@@ -39,24 +39,25 @@ class SyncWechatFans implements ShouldQueue
     {
         $accountId = \Request::header('AccountId');
 
-        $materialService = app('easywechat')->material;
-
-        $stats = $materialService->stats();
-
-        $totalCount = $stats[$this->syncMaterialType.'_count'];
-
-        $totalPage = $totalCount / self::PAGE_SIZE;
+        $wechatFansService = app('easywechat')->user;
 
         $this->fanRepository = app(FanRepository::class);
 
-        for ($i = 0; $i < $totalPage; $i++) {
-            $materials = $materialService->lists($this->syncMaterialType, $i, self::PAGE_SIZE);
+        $nextOpenid = null;
+        do {
+            $lists = $wechatFansService->lists($nextOpenid);
 
-            if ($materials['item_count']) {
-                foreach ($materials['item'] as $material) {
-                    app(MaterialRepository::class)->updateOrCreate(['media_id' => $material['media_id']], array_merge($material, ['type' => $this->syncMaterialType, 'account_id' => $accountId]));
+            if ($openids = $lists['data']['openid'] ?? []) {
+                $batchResult = $wechatFansService->batchGet($lists['data']['openid']);
+
+                foreach ($batchResult['user_info_list'] as $key => $fan) {
+                    $this->fanRepository->updateOrCreate(['account_id' => $accountId, 'openid' => $fan['openid']], array_merge(['account_id' => $accountId], $fan));
                 }
             }
-        }
+
+            $nextOpenid = $lists['next_openid'];
+        } while ($lists['next_openid']);
+
+        // TODO: 删除本地库中存在但微信服务器上不存在的粉丝数据，即已经取关的粉丝
     }
 }
