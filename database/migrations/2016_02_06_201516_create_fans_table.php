@@ -32,7 +32,6 @@ class CreateFansTable extends Migration
             $table->string('tagid_list', 50)->default('')->comment('微信用户标签ID列表');
             $table->timestamp('last_online_at')->nullable()->comment('最后一次在线时间');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('account_id')->references('id')->on('accounts')->unUpdate('cascade')->onDelete('cascade');
         });

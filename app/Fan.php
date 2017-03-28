@@ -4,12 +4,9 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fan extends Model
 {
-    use SoftDeletes;
-
     /**
      * 字段白名单.
      *
