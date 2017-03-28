@@ -19,7 +19,7 @@ add('writable_dirs', []);
 // Servers
 
 server('production', 'willchat.wang')
-    ->user('username')
+    ->user('root')
     ->identityFile()
     ->set('deploy_path', '/home/www/willchat')
     ->pty(true);

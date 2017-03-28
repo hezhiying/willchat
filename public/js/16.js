@@ -17,7 +17,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\document\\index.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\document\\index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -40,16 +40,14 @@ module.exports = Component.exports
 /***/ }),
 
 /***/ 221:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  data: function data() {
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data() {
     return {
       posts: [],
       searchForm: {
@@ -58,47 +56,45 @@ exports.default = {
       }
     };
   },
-  mounted: function mounted() {
+
+  mounted() {
     this.loadData();
   },
 
-
   methods: {
-    loadData: function loadData() {
-      var _this = this;
-
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
+    loadData(page = 1) {
       this.axios.get('document/lists', {
         params: {
           name: this.searchForm.name,
           level: this.searchForm.level,
           page: page
         }
-      }).then(function (response) {
-        _this.posts = response.data.posts;
-      }).catch(function (error) {
-        _this.$message({
+      }).then(response => {
+        this.posts = response.data.posts;
+      }).catch(error => {
+        this.$message({
           message: error.response.data,
           type: 'error'
         });
       });
     },
-    search: function search() {
+
+    search() {
       this.loadData(1);
     },
-    handleCurrentChange: function handleCurrentChange(page) {
+
+    handleCurrentChange(page) {
       this.loadData(page);
     }
   }
-};
+});
 
 /***/ }),
 
 /***/ 248:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)();
+exports = module.exports = __webpack_require__(14)();
 exports.push([module.i, "\n.main .post-list[data-v-6cf5ce3e] {\n  display: block;\n  background-color: #fff;\n  overflow: hidden;\n  padding: 3rem;\n}\n.main .post-list li[data-v-6cf5ce3e] {\n    display: block;\n    padding: .2em 0;\n    font-size: 16px;\n    line-height: 1.5em;\n}\n.main .post-list li[data-v-6cf5ce3e]:hover {\n      background-color: rgba(255, 0, 0, 0.2);\n}\n.main .post-list li a[data-v-6cf5ce3e] {\n      display: block;\n      color: #555;\n}\n.main .post-list li a[data-v-6cf5ce3e]:visited {\n        color: red;\n}\n", ""]);
 
 /***/ }),
@@ -151,13 +147,13 @@ var content = __webpack_require__(248);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("ea05477a", content, false);
+var update = __webpack_require__(48)("3977316c", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6cf5ce3e&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6cf5ce3e&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6cf5ce3e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6cf5ce3e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

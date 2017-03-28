@@ -17,7 +17,7 @@ var Component = __webpack_require__(47)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\UPUPW_NG7.0\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\reply\\subscribe-form.vue"
+Component.options.__file = "D:\\UPUPW\\vhosts\\willchat\\resources\\assets\\js\\user\\components\\reply\\subscribe-form.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] subscribe-form.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -40,16 +40,14 @@ module.exports = Component.exports
 /***/ }),
 
 /***/ 232:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  data: function data() {
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data() {
     return {
       reply: {
         id: '',
@@ -58,41 +56,37 @@ exports.default = {
       }
     };
   },
-  mounted: function mounted() {
-    var _this = this;
 
-    this.axios.get('reply/subscribe').then(function (response) {
+  mounted() {
+    this.axios.get(`reply/subscribe`).then(response => {
       if (response.data.reply) {
-        _this.reply = response.data.reply;
+        this.reply = response.data.reply;
       }
     });
   },
 
-
   computed: {},
 
   methods: {
-    store: function store() {
-      var _this2 = this;
+    store() {
+      this.axios.post('reply/store', this.reply).then(response => {
+        this.reply = response.data.reply;
 
-      this.axios.post('reply/store', this.reply).then(function (response) {
-        _this2.reply = response.data.reply;
-
-        _this2.$message({
+        this.$message({
           message: '保存成功',
           type: 'success'
         });
       });
     }
   }
-};
+});
 
 /***/ }),
 
 /***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)();
+exports = module.exports = __webpack_require__(14)();
 exports.push([module.i, "\n.right-main[data-v-2f70cf8c] {\n  display: block;\n  overflow: hidden;\n  background-color: #fff;\n}\n", ""]);
 
 /***/ }),
@@ -160,13 +154,13 @@ var content = __webpack_require__(241);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(48)("94cc8de6", content, false);
+var update = __webpack_require__(48)("a6e8e3f8", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-2f70cf8c&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./subscribe-form.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-2f70cf8c&scoped=true!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./subscribe-form.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2f70cf8c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./subscribe-form.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2f70cf8c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./subscribe-form.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
